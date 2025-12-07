@@ -3,10 +3,10 @@
 public class Knife : MonoBehaviour
 {
     [Header("Knife Settings")]
-    public float speed = 15f;
+    public float speed = 25f;
     public float curveStrength = 2f;
-    public float upwardForce = 4f;     
-    public float gravity = 2f;       
+    public float upwardForce = 5.5f;     
+    public float gravity = 2.2f;       
     public float lifeTime = 5f;
     public int damage = 1;
     public float angleOffset = 20f;
