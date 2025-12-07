@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -29,7 +29,7 @@ public class Boss : MonoBehaviour
     public float ThrowDelay = 4f;  
     private bool isAttacking = false;
 
-    [Header("Movement Settings (Elite ¹æ½Ä)")]
+    [Header("Movement Settings (Elite ë°©ì‹)")]
     private float minX = 3.5f;
     private float maxX = 7.0f;
     private float minY = -2.0f;
@@ -57,7 +57,7 @@ public class Boss : MonoBehaviour
             StartCoroutine(BurstPattern());
         }
 
-        // Ä® ÆĞÅÏ
+        // ì¹¼ íŒ¨í„´
         if (knifeTimer >= ThrowDelay)
         {
             knifeTimer = 0f;
@@ -70,6 +70,7 @@ public class Boss : MonoBehaviour
         {
             yield return StartCoroutine(ThrowKnifePattern());
             yield return new WaitForSeconds(ThrowDelay);
+            Debug.Log("í•œê¸€ ê¹¨ì§ ì˜¤ë¥˜ ê¹ƒí—ˆë¸Œìš© í…ŒìŠ¤íŠ¸ ì½”ë“œ");
             
         }
     }
@@ -117,7 +118,7 @@ public class Boss : MonoBehaviour
         if (isDead) 
             return;
         Hp -= dmg;
-        Debug.Log($"º¸½º ³²Àº HP : {Hp}");
+        Debug.Log($"ë³´ìŠ¤ ë‚¨ì€ HP : {Hp}");
         if (Hp <= 0)
             Die();
     }
