@@ -320,7 +320,7 @@ MonoBehaviour:
   spaceX2: 1.4
   delayTime: 0.3
   checkTime: 0
-  brustDelay: 0.3
+  brustDelay: 0.001
   isNutStormMode: 0
 --- !u!114 &2651273649043453030
 MonoBehaviour:

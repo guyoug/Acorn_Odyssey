@@ -21,12 +21,25 @@ public class Enemy : MonoBehaviour
 
     [Header("References")]
     private GameManager gameManager;
+    
+    [Header("Death Sprite")]
+    public Sprite deadSprite;       
+    private SpriteRenderer sr;
+
     void Start()
     {
         gameManager = GameManager.Instance;
         if (gameManager == null)
             Debug.Log("GameManager가 null입니다.");
         Destroy(gameObject, deleteTime);
+        sr = GetComponent<SpriteRenderer>();
+    }
+    private void Update()
+    {
+        if(Hp <= 0)
+        {
+            Die();
+        }
     }
     void FixedUpdate()
     {
@@ -35,10 +48,13 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
-            Die();
+        {
+            Hp--;
+        }
         else if (collision.CompareTag("Outline"))
             Destroy(gameObject);
     }
+    
     public void Die()
     {
         if (isDead)
@@ -47,7 +63,13 @@ public class Enemy : MonoBehaviour
         gameManager.OnNormalEnemyKilled(); // 킬 계산
         TryDropItem(); // 속성 아이템
         TryDropGagueItem();// 게이지 아이템
-        Destroy(gameObject);
+        sr.sprite = deadSprite;
+  
+        GetComponent<Collider2D>().enabled = false;
+        maxspeed = 0;
+
+   
+        Destroy(gameObject, 0.1f);
     }   
     private void TryDropItem()
     {

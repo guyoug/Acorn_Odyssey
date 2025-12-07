@@ -18,7 +18,7 @@ public class PlayerShoot : MonoBehaviour
     [Header("Timing Settings")]
     public float delayTime = 0.3f; // 샷 딜레이
     public float checkTime = 0.0f;
-    public float brustDelay = 0.3f; // 넛스톰 연사 간격
+    public float brustDelay = 0.05f; // 넛스톰 연사 간격
 
     [Header("NutStorm Mode")]
     public bool isNutStormMode = false;
@@ -53,6 +53,7 @@ public class PlayerShoot : MonoBehaviour
                 Debug.Log("넛스톰 점사 시작!");
                 isBurstRunning = true;
                 StartCoroutine(NutStormBurst());
+
             }
 
             if (upgrade != null)
@@ -123,6 +124,15 @@ public class PlayerShoot : MonoBehaviour
             Instantiate(bulletPrefabs, firePoint.position + offset, firePoint.rotation);
         }
     }
+    //void NutStormBurst()
+    //{
+    //    for (int i = 0; i < burstCount; i++)
+    //    {
+    //        NutStormMoreShot();
+           
+    //    }
+    //    isBurstRunning = false;
+    //}
     IEnumerator NutStormBurst()
     {
         for (int i = 0; i < burstCount; i++)

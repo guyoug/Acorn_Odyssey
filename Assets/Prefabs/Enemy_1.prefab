@@ -104,13 +104,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4631a3350fab94684968fc30507f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hp: 5
+  maxspeed: 3
   dropItems:
   - {fileID: 7479479294581569970, guid: 5613830ff38c08e42907d8e2850c8caf, type: 3}
   - {fileID: 5967642582716743412, guid: a279bbf78d6038c448230f9d4b8a5ecf, type: 3}
   - {fileID: 5153587646109670503, guid: cde32f50a8008fc44ac3d1d39aada91f, type: 3}
   gaugePrefabs: {fileID: 3584423131887629857, guid: 1c45008bcb762584f862bdf55077d94c, type: 3}
-  Hp: 3
-  maxspeed: 3
+  deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
 --- !u!50 &2056965471598021705
 Rigidbody2D:
   serializedVersion: 5
@@ -196,10 +197,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5977d3ac19dc64e45be0b7d620184341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefabs: {fileID: 5729960478150443666, guid: d05cfa7a9c6d7154a8e9c87668c9b3d4, type: 3}
-  firePoint: {fileID: 6103037700671648143}
   delayTime: 3
   checkTime: 0
+  bulletPrefabs: {fileID: 5729960478150443666, guid: d05cfa7a9c6d7154a8e9c87668c9b3d4, type: 3}
+  firePoint: {fileID: 6103037700671648143}
 --- !u!1 &6410289823338467293
 GameObject:
   m_ObjectHideFlags: 0
