@@ -2632,7 +2632,7 @@ GameObject:
   - component: {fileID: 975221031}
   - component: {fileID: 975221030}
   m_Layer: 5
-  m_Name: StageClear_Panel
+  m_Name: StageClearPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4001,7 +4001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1358510660}
   m_Layer: 0
-  m_Name: Boss_Spawn
+  m_Name: BossSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4470,7 +4470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1545266103}
   m_Layer: 0
-  m_Name: Elite_Spawn
+  m_Name: EliteSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

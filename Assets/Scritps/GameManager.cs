@@ -55,6 +55,7 @@ private void Awake() //싱글턴
     {
         Debug.Log($"씬 변경 감지: {scene.name}");
 
+
         // 1) stageClearPanel 재할당
         stageClearPanel = GameObject.Find("StageClearPanel");
 
@@ -95,7 +96,7 @@ private void Awake() //싱글턴
 
         if (Input.GetKeyDown(KeyCode.F4)) // 스테이지 넘기는 치트
         {
-            OnBossEnemyKilled();
+            StartCoroutine(killboss());
         }
         if(Input.GetKeyDown(KeyCode.F5)) // 보스 소환하는 차트
         {
@@ -173,9 +174,15 @@ private void Awake() //싱글턴
 
     IEnumerator killboss() //보스 죽으면 
     {
-        stageClearPanel.SetActive(true);
+        if (stageClearPanel == null)
+            stageClearPanel = GameObject.Find("StageClearPanel");
+        Debug.Log("killboss 시작, stageClearPanel = " + stageClearPanel);
+        if (stageClearPanel != null)
+            stageClearPanel.SetActive(true);
         yield return new WaitForSeconds(bossinterval);
-        stageClearPanel.SetActive(false);
+
+        if (stageClearPanel != null)
+            stageClearPanel.SetActive(false);
 
         string currentScene = SceneManager.GetActiveScene().name;
 
