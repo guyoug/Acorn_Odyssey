@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Boss : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class Boss : MonoBehaviour
         {
             yield return StartCoroutine(ThrowKnifePattern());
             yield return new WaitForSeconds(ThrowDelay);
-            Debug.Log("À¯´ÏÆ¼");
+            
         }
     }
 
