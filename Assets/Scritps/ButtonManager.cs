@@ -61,6 +61,7 @@ public class ButtonManager : MonoBehaviour
     public void Quit()
     {
         Time.timeScale = 1f;
+        pausePanel.SetActive(false);
         SceneManager.LoadScene("Game_Start");
     }
 

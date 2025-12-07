@@ -42,6 +42,36 @@ private void Awake() //싱글턴
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log($"씬 변경 감지: {scene.name}");
+
+        // 1) stageClearPanel 재할당
+        stageClearPanel = GameObject.Find("StageClearPanel");
+
+        // 2) 새 씬의 스폰 포인트 재할당
+        eliteSpawnPoint = GameObject.Find("EliteSpawnPoint")?.transform;
+        bossSpawnPoint = GameObject.Find("BossSpawnPoint")?.transform;
+
+        // 3) EnemySpawn 참조 재설정
+        GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
+        if (spawnObj != null)
+        {
+            EnemySpawn spawner = spawnObj.GetComponent<EnemySpawn>();
+            // 필요하면 spawner.StartSpawn() 가능
+        }
+
+        Debug.Log("씬 전환 후 GameManager 레퍼런스 갱신 완료");
+    }
     void Start()
     {
         StartWave(currentWave);
@@ -146,6 +176,22 @@ private void Awake() //싱글턴
         stageClearPanel.SetActive(true);
         yield return new WaitForSeconds(bossinterval);
         stageClearPanel.SetActive(false);
-        SceneManager.LoadScene("Game_Play_stage2");
+
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        switch (currentScene)
+        {
+            case "Game_Play_stage1":
+                SceneManager.LoadScene("Game_Play_stage2");
+                break;
+
+            case "Game_Play_stage2":
+                SceneManager.LoadScene("Game_Play_stage3");
+                break;
+
+            //case "Game_Play_stage3":
+            //    SceneManager.LoadScene("EndingScene");
+            //    break;
+        }
     }
 }
