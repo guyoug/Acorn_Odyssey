@@ -26,6 +26,7 @@ public class Elite_2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player")?.transform;
+        StopAllEnemySpawn();
     }
     private void Update()
     {
