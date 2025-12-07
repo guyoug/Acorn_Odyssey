@@ -65,11 +65,7 @@ private void Awake() //싱글턴
 
         // 3) EnemySpawn 참조 재설정
         GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
-        if (spawnObj != null)
-        {
-            EnemySpawn spawner = spawnObj.GetComponent<EnemySpawn>();
-            // 필요하면 spawner.StartSpawn() 가능
-        }
+     
 
         Debug.Log("씬 전환 후 GameManager 레퍼런스 갱신 완료");
     }
@@ -168,7 +164,7 @@ private void Awake() //싱글턴
     void StopAllEnemySpawn() //스폰시 enemy 스폰 X
     {
         GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
-        EnemySpawn spawner = spawnObj.GetComponent<EnemySpawn>();
+        EnemySpawn1 spawner = spawnObj.GetComponent<EnemySpawn1>();
         spawner.StopSpawn();
     }
 

@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class EnemySpawn1 : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    public GameObject enemyPrefabs;
+    public GameObject enemy1Prefabs;
     public float interval = 1.0f;
 
     [Header("Spawn Range (Y Axis)")]
@@ -31,7 +31,7 @@ public class EnemySpawn : MonoBehaviour
         {
             yield return new WaitForSeconds(interval);
             Vector3 position = new Vector3(transform.position.x, Random.Range(minY, maxY), transform.position.z);
-            Instantiate(enemyPrefabs, position, transform.rotation);
+            Instantiate(enemy1Prefabs, position, transform.rotation);
         }
     }
 }

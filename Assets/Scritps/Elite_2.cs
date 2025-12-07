@@ -26,7 +26,7 @@ public class Elite_2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player")?.transform;
-        StopAllEnemySpawn();
+  
     }
     private void Update()
     {
@@ -38,6 +38,11 @@ public class Elite_2 : MonoBehaviour
             shootEnemy();
         }
 
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            StopAllEnemySpawn();
+            //몸통 박치기 이후에 그거 코루틴 끝나면 실행하는걸로
+        }
     }
     void shootEnemy()
     {
@@ -91,7 +96,7 @@ public class Elite_2 : MonoBehaviour
     void StopAllEnemySpawn() //스폰시 enemy 스폰 X
     {
         GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
-        EnemySpawn spawner = spawnObj.GetComponent<EnemySpawn>();
+        EnemySpawn2 spawner = spawnObj.GetComponent<EnemySpawn2>();
         spawner.StopSpawn();
     }
 

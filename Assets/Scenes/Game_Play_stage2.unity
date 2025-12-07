@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 800149735}
   m_Layer: 0
   m_Name: Enemy_Spawn_Manager
-  m_TagString: Untagged
+  m_TagString: Enemy_Spawn_Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -399,10 +399,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 800149733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e816a589b338b49a1587e5bce930e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 566b1ff904d5dba4bbf66729d4d28a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs: {fileID: 3567399046413335669, guid: 499aa7594577ce44e854ca90039a4ff3, type: 3}
+  enemy1Prefabs: {fileID: 3567399046413335669, guid: 499aa7594577ce44e854ca90039a4ff3, type: 3}
   interval: 1
   maxY: 3.3
   minY: -3.1
