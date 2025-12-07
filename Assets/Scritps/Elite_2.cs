@@ -57,10 +57,6 @@ public class Elite_2 : MonoBehaviour
             Debug.LogError("enemyPrefabs∞° NULL¿”!!!");
             return;
         }
-        Vector3 dir = (player.position - firePoint.position).normalized;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-        firePoint.rotation = Quaternion.Euler(0, 0, angle+ 180f);
 
         Instantiate(enemyPrefabs, firePoint.position, firePoint.rotation);
     }
