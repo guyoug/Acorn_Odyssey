@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -68,6 +69,7 @@ public class Boss : MonoBehaviour
         {
             yield return StartCoroutine(ThrowKnifePattern());
             yield return new WaitForSeconds(ThrowDelay);
+            Debug.Log("À¯´ÏÆ¼");
         }
     }
 
