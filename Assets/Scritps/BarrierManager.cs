@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
@@ -13,32 +13,32 @@ public class BarrierManager : MonoBehaviour
     public List<BarrierUnit> barrierList = new List<BarrierUnit>(); 
     void Update()
     {
-        RotateAllBarriers(); // ¹ã¼ÛÀÌ È¸Àü
+        RotateAllBarriers(); // ë°¤ì†¡ì´ íšŒì „
     }
     void RotateAllBarriers()
     {
         if (barrierList.Count == 0) 
             return;
-        globalAngle += rotateSpeed * Time.deltaTime; // ¿ø È¸Àü
-        float angleStep = 360f / barrierList.Count; //°¹¼ö¿¡ µû¶ó ±ÕµîÇÑ °¢µµ
+        globalAngle += rotateSpeed * Time.deltaTime; // ì› íšŒì „
+        float angleStep = 360f / barrierList.Count; //ê°¯ìˆ˜ì— ë”°ë¼ ê· ë“±í•œ ê°ë„
         for (int i = 0; i < barrierList.Count; i++)
         { 
-            barrierList[i].UpdatePosition(globalAngle + angleStep * i); //¹ã¼ÛÀÌ °¢µµ ¾÷µ¥ÀÌÆ®
+            barrierList[i].UpdatePosition(globalAngle + angleStep * i); //ë°¤ì†¡ì´ ê°ë„ ì—…ë°ì´íŠ¸
         }
     }
-    public void AddBarrier() //¹ã¼ÛÀÌ Ãß°¡
+    public void AddBarrier() //ë°¤ì†¡ì´ ì¶”ê°€
     {
         if (barrierList.Count >= 3)
         {
-            Debug.Log("¹ã¼ÛÀÌ´Â ÃÖ´ë 3°³±îÁö »ı¼ºµË´Ï´Ù.");
+            Debug.Log("ë°¤ì†¡ì´ëŠ” ìµœëŒ€ 3ê°œê¹Œì§€ ìƒì„±ë©ë‹ˆë‹¤.");
             return;
         }
-        GameObject obj = Instantiate(barrierPrefab); //À§Ä¡
+        GameObject obj = Instantiate(barrierPrefab); //ìœ„ì¹˜
         obj.transform.SetParent(transform);
-        BarrierUnit unit = obj.GetComponent<BarrierUnit>();        // BarrierUnit ½ºÅ©¸³Æ®¸¦ °¡Á®¿Í ¸®½ºÆ®¿¡ Ãß°¡
+        BarrierUnit unit = obj.GetComponent<BarrierUnit>();        // BarrierUnit ìŠ¤í¬ë¦½íŠ¸ë¥¼ ê°€ì ¸ì™€ ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€
         barrierList.Add(unit);
     }
-    public void RemoveBarrier(BarrierUnit unit)  // ¹ã¼ÛÀÌ Á¦°Å
+    public void RemoveBarrier(BarrierUnit unit)  // ë°¤ì†¡ì´ ì œê±°
     {
         barrierList.Remove(unit);
     }

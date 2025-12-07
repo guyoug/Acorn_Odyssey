@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     {
         gameManager = GameManager.Instance;
         if (gameManager == null)
-            Debug.Log("GameManager°¡ nullÀÔ´Ï´Ù.");
+            Debug.Log("GameManagerê°€ nullì…ë‹ˆë‹¤.");
         Destroy(gameObject, deleteTime);
     }
     void FixedUpdate()
@@ -44,19 +44,19 @@ public class Enemy : MonoBehaviour
         if (isDead)
            return;
         isDead = true;
-        gameManager.OnNormalEnemyKilled(); // Å³ °è»ê
-        TryDropItem(); // ¼Ó¼º ¾ÆÀÌÅÛ
-        TryDropGagueItem();// °ÔÀÌÁö ¾ÆÀÌÅÛ
+        gameManager.OnNormalEnemyKilled(); // í‚¬ ê³„ì‚°
+        TryDropItem(); // ì†ì„± ì•„ì´í…œ
+        TryDropGagueItem();// ê²Œì´ì§€ ì•„ì´í…œ
         Destroy(gameObject);
     }   
     private void TryDropItem()
     {
         if (dropItems == null)
         {
-            Debug.Log("dropItems ¹è¿­ÀÌ nullÀÔ´Ï´Ù.");
+            Debug.Log("dropItems ë°°ì—´ì´ nullì…ë‹ˆë‹¤.");
             return;
         }
-        if (Random.value <= dropItem) //5ÆÛ
+        if (Random.value <= dropItem) //5í¼
         {
             int idx = Random.Range(0, dropItems.Length);
             Instantiate(dropItems[idx], transform.position, Quaternion.identity);
@@ -66,10 +66,10 @@ public class Enemy : MonoBehaviour
     {
         if (gaugePrefabs == null)
         {
-            Debug.Log("gaugePrefabs°¡ nullÀÔ´Ï´Ù.");
+            Debug.Log("gaugePrefabsê°€ nullì…ë‹ˆë‹¤.");
             return;
         }
-        if (Random.value <= dropGauge) //25ÆÛ
+        if (Random.value <= dropGauge) //25í¼
             Instantiate(gaugePrefabs, transform.position, Quaternion.identity);
     }
 }

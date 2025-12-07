@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -9,9 +9,9 @@ public class PlayerItem : MonoBehaviour
     [Header("Item Settings")]
     private float itv = 0.3f;
     private int currentItem = 0;
-    public bool hasItem1 = false; // ½ã´õ³Ó º¸À¯ ¿©ºÎ
-    public bool hasItem2 = false; // µ¥½º³Ó ¼Ò½º º¸À¯ ¿©ºÎ
-    public bool hasItem3 = false; // Ã»·® Åº»ê¼ö µµÅä¸® Çâ º¸À¯ ¿©ºÎ
+    public bool hasItem1 = false; // ì¬ë”ë„› ë³´ìœ  ì—¬ë¶€
+    public bool hasItem2 = false; // ë°ìŠ¤ë„› ì†ŒìŠ¤ ë³´ìœ  ì—¬ë¶€
+    public bool hasItem3 = false; // ì²­ëŸ‰ íƒ„ì‚°ìˆ˜ ë„í† ë¦¬ í–¥ ë³´ìœ  ì—¬ë¶€
 
     [Header("Attack Prefabs")]
     public GameObject conePrefab;
@@ -44,7 +44,7 @@ public class PlayerItem : MonoBehaviour
         }
 
 
-        //Ä¡Æ®
+        //ì¹˜íŠ¸
         if (Input.GetKeyDown(KeyCode.F1))
             PickItem(1);  
 
@@ -84,8 +84,8 @@ public class PlayerItem : MonoBehaviour
         {
             case 1:
                 hasItem1 = true;
-                itemUI1.SetActive(true);    // º¸À¯ UI
-                attrUI1.SetActive(true);    // ¼Ó¼º UI
+                itemUI1.SetActive(true);    // ë³´ìœ  UI
+                attrUI1.SetActive(true);    // ì†ì„± UI
                 break;
 
             case 2:
@@ -101,13 +101,13 @@ public class PlayerItem : MonoBehaviour
                 break;
         }
 
-        Debug.Log($"¾ÆÀÌÅÛ {type}¹ø È¹µæ! (±âÁ¸ ¾ÆÀÌÅÛ »èÁ¦ + ¼Ó¼º UI Àû¿ë)");
+        Debug.Log($"ì•„ì´í…œ {type}ë²ˆ íšë“! (ê¸°ì¡´ ì•„ì´í…œ ì‚­ì œ + ì†ì„± UI ì ìš©)");
     }
-    // 1¹ø ¾ÆÀÌÅÛ: ½ã´õ³Ó ¡æ È­¸éÀÇ ¸ğµç EnemyBullet Á¦°Å
+    // 1ë²ˆ ì•„ì´í…œ: ì¬ë”ë„› â†’ í™”ë©´ì˜ ëª¨ë“  EnemyBullet ì œê±°
     void UseItem1()
     {
         StartCoroutine(ShowItem1());
-        Debug.Log("1¹ø ¾ÆÀÌÅÛ ¹ßµ¿");
+        Debug.Log("1ë²ˆ ì•„ì´í…œ ë°œë™");
         foreach (var bullet in GameObject.FindGameObjectsWithTag("EnemyBullet"))
             Destroy(bullet);
         hasItem1 = false;
@@ -115,22 +115,22 @@ public class PlayerItem : MonoBehaviour
         attrUI1.SetActive(false);
         currentItem = 0;
     }
-    // 2¹ø ¾ÆÀÌÅÛ: µ¥½º³Ó ¡æ cone ¹ß»ç
+    // 2ë²ˆ ì•„ì´í…œ: ë°ìŠ¤ë„› â†’ cone ë°œì‚¬
     void UseItem2()
     {
         StartCoroutine(ShowItem2());
-        Debug.Log("2¹ø ¾ÆÀÌÅÛ ¹ßµ¿");
+        Debug.Log("2ë²ˆ ì•„ì´í…œ ë°œë™");
         FireCone();
         hasItem2 = false;
         itemUI2.SetActive(false);
         attrUI2.SetActive(false);
         currentItem = 0;
     }
-    // 3¹ø ¾ÆÀÌÅÛ: Åº»ê µµÅä¸® ¡æ ·¹ÀÌÀú ¹ß»ç
+    // 3ë²ˆ ì•„ì´í…œ: íƒ„ì‚° ë„í† ë¦¬ â†’ ë ˆì´ì € ë°œì‚¬
     void UseItem3()
     {
         StartCoroutine(ShowItem3());
-        Debug.Log("3¹ø ¾ÆÀÌÅÛ ¹ßµ¿");
+        Debug.Log("3ë²ˆ ì•„ì´í…œ ë°œë™");
         WaterLaser();
         hasItem3 = false;
         itemUI3.SetActive(false);

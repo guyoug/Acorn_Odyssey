@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class EliteBullet : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class EliteBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Transform player = GameObject.FindWithTag("Player").transform;
         if (player != null)
-            shootDirection = (player.position - transform.position).normalized; // ¹æÇâ º¤ÅÍ Á¤±ÔÈ­ (°Å¸®¿Í »ó°ü¾øÀÌ ¹æÇâ¸¸ À¯Áö)
+            shootDirection = (player.position - transform.position).normalized; // ë°©í–¥ ë²¡í„° ì •ê·œí™” (ê±°ë¦¬ì™€ ìƒê´€ì—†ì´ ë°©í–¥ë§Œ ìœ ì§€)
         Destroy(gameObject, deleteTime);
     }
     void FixedUpdate()

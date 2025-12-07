@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,7 +32,7 @@ public class ButtonManager : MonoBehaviour
     public void GameQuit()
     {
         Application.Quit();
-        Debug.Log("°ÔÀÓÁ¾·á");//À§ ÄÚµå À¯´ÏÆ¼ ¿¡µğÅÍ¿¡¼± µ¿ÀÛ X > µğ¹ö±×·Î È®ÀÎ
+        Debug.Log("ê²Œì„ì¢…ë£Œ");//ìœ„ ì½”ë“œ ìœ ë‹ˆí‹° ì—ë””í„°ì—ì„  ë™ì‘ X > ë””ë²„ê·¸ë¡œ í™•ì¸
     }
     public void Pause() 
     {

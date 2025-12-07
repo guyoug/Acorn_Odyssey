@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerUpgrade : MonoBehaviour
@@ -38,7 +38,7 @@ public class PlayerUpgrade : MonoBehaviour
         }
         else
         {
-            Debug.Log("½ºÇÇµå ÃÖ´ë ½ºÅÃ!");
+            Debug.Log("ìŠ¤í”¼ë“œ ìµœëŒ€ ìŠ¤íƒ!");
         }
     
     }
@@ -47,32 +47,32 @@ public class PlayerUpgrade : MonoBehaviour
         if (moreStack < maxMoreStack)
         {
             moreStack++;
-            Debug.Log($"MORE °­È­! ÇöÀç ½ºÅÃ: {moreStack}");
+            Debug.Log($"MORE ê°•í™”! í˜„ì¬ ìŠ¤íƒ: {moreStack}");
 
         }
         else
         {
-            Debug.Log("MORE ÃÖ´ë ½ºÅÃ!");
+            Debug.Log("MORE ìµœëŒ€ ìŠ¤íƒ!");
         }
-        int multiShotCount = basicShotCount + moreStack * 1; //ÃÑ¾Ë ¼ö = ±âº» 1¹ß + ½ºÅÃ´ç 1¹ß
+        int multiShotCount = basicShotCount + moreStack * 1; //ì´ì•Œ ìˆ˜ = ê¸°ë³¸ 1ë°œ + ìŠ¤íƒë‹¹ 1ë°œ
         if (shoot != null)
             shoot.multiShot = multiShotCount;
     }
-    public void ActivateNutStorm() //³Ó½ºÅè
+    public void ActivateNutStorm() //ë„›ìŠ¤í†°
     {
 
         shoot.burstCount = 3 + nutStack * 3;
         shoot.isNutStormMode = true;
 
-        // ³ªÁß¿¡ ½ºÅÃ Áõ°¡
+        // ë‚˜ì¤‘ì— ìŠ¤íƒ ì¦ê°€
         if (nutStack < maxNutStack)
             nutStack++;
     
 
     } 
-    public void ActivateBarrier() //¹ã¼ÛÀÌ
+    public void ActivateBarrier() //ë°¤ì†¡ì´
     {
-        Debug.Log("¹ã¼ÛÀÌ Ãß°¡!");
+        Debug.Log("ë°¤ì†¡ì´ ì¶”ê°€!");
         barrierManager.AddBarrier();
 
     }
@@ -81,7 +81,7 @@ public class PlayerUpgrade : MonoBehaviour
     {
         if (tailList.Count >= maxTailCount)
         {
-            Debug.Log("Tail ÃÖ´ë ¼ö(4±â) µµ´Ş");
+            Debug.Log("Tail ìµœëŒ€ ìˆ˜(4ê¸°) ë„ë‹¬");
             return;
         }
         GameObject newTail = Instantiate(tailPrefab);
@@ -97,7 +97,7 @@ public class PlayerUpgrade : MonoBehaviour
 
         tailList.Add(newTail);
 
-        Debug.Log($"Tail »ı¼º ¿Ï·á! ÇöÀç Tail ¼ö: {tailList.Count}");
+        Debug.Log($"Tail ìƒì„± ì™„ë£Œ! í˜„ì¬ Tail ìˆ˜: {tailList.Count}");
     }
 }
 

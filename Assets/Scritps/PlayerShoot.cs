@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
@@ -11,14 +11,14 @@ public class PlayerShoot : MonoBehaviour
 
     [Header("Shot Parameters")]
     public int burstCount = 1;
-    public int multiShot = 1; // more ¼ö
-    public float space = 0.7f; // °£°İ
-    public float spaceX2 = 1.4f; // °£°İ 4¹øÂ° ¶§ »ç¿ë
+    public int multiShot = 1; // more ìˆ˜
+    public float space = 0.7f; // ê°„ê²©
+    public float spaceX2 = 1.4f; // ê°„ê²© 4ë²ˆì§¸ ë•Œ ì‚¬ìš©
 
     [Header("Timing Settings")]
-    public float delayTime = 0.3f; // ¼¦ µô·¹ÀÌ
+    public float delayTime = 0.3f; // ìƒ· ë”œë ˆì´
     public float checkTime = 0.0f;
-    public float brustDelay = 0.3f; // ³Ó½ºÅè ¿¬»ç °£°İ
+    public float brustDelay = 0.3f; // ë„›ìŠ¤í†° ì—°ì‚¬ ê°„ê²©
 
     [Header("NutStorm Mode")]
     public bool isNutStormMode = false;
@@ -36,7 +36,7 @@ public class PlayerShoot : MonoBehaviour
                 checkTime = 0f;
             }
 
-            return;   // <<<<<< ÀÌ ÇÑ ÁÙÀÌ ÇÙ½É
+            return;   // <<<<<< ì´ í•œ ì¤„ì´ í•µì‹¬
         }
     }
 
@@ -45,12 +45,12 @@ public class PlayerShoot : MonoBehaviour
     {
         PlayerUpgrade upgrade = GetComponent<PlayerUpgrade>();
 
-        // ³Ó½ºÅè ¸ğµåÀÏ ¶§
+        // ë„›ìŠ¤í†° ëª¨ë“œì¼ ë•Œ
         if (isNutStormMode)
         {
             if (!isBurstRunning)
             {
-                Debug.Log("³Ó½ºÅè Á¡»ç ½ÃÀÛ!");
+                Debug.Log("ë„›ìŠ¤í†° ì ì‚¬ ì‹œì‘!");
                 isBurstRunning = true;
                 StartCoroutine(NutStormBurst());
             }
@@ -87,11 +87,11 @@ public class PlayerShoot : MonoBehaviour
         for (int i = 0; i < multiShot; i++)
         {
             Vector3 offset = Vector3.zero;
-            //ÃÑ¾Ë ¹èÄ¡
+            //ì´ì•Œ ë°°ì¹˜
             if (multiShot == 1)
                 offset = Vector3.zero;
 
-            else if (multiShot == 2) // À§ °¡¿îµ¥ 
+            else if (multiShot == 2) // ìœ„ ê°€ìš´ë° 
             {
                 if (i == 0)
                     offset = new Vector3(0, space, 0);
@@ -99,7 +99,7 @@ public class PlayerShoot : MonoBehaviour
                     offset = Vector3.zero;
             }
 
-            else if (multiShot == 3) //À§ °¡¿îµ¥ ¾Æ·¡
+            else if (multiShot == 3) //ìœ„ ê°€ìš´ë° ì•„ë˜
             {
                 if (i == 0)
                     offset = new Vector3(0, space, 0);
@@ -109,7 +109,7 @@ public class PlayerShoot : MonoBehaviour
                     offset = new Vector3(0, -space, 0);
             }
 
-            else if (multiShot == 4) //À§x2 À§ °¡¿îµ¥ ¾Æ·¡
+            else if (multiShot == 4) //ìœ„x2 ìœ„ ê°€ìš´ë° ì•„ë˜
             {
                 if (i == 0)
                     offset = new Vector3(0, spaceX2, 0);
@@ -133,7 +133,7 @@ public class PlayerShoot : MonoBehaviour
         }
         isBurstRunning = false;
     }
-    void NutStormMoreShot() //³Ó½ºÅè ¸ÖÆ¼¼¦
+    void NutStormMoreShot() //ë„›ìŠ¤í†° ë©€í‹°ìƒ·
     {
         for (int i = 0; i < multiShot; i++)
         {

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 3;
     private int currentHealth;
     private bool isDead = false;
-    public bool isInvincible = false; // ¹«Àû ¿©ºÎ
+    public bool isInvincible = false; // ë¬´ì  ì—¬ë¶€
 
     [Header("UI Elements")]
     public Image[] Player_HP;
@@ -15,14 +15,14 @@ public class PlayerHealth : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);   // ¡Ú Player À¯Áö
+        DontDestroyOnLoad(gameObject);   // â˜… Player ìœ ì§€
     }
     void Start()
     {
         Health();
         UpdateUI();
     }
-    void Health() // ÃÖ´ëÄ¡
+    void Health() // ìµœëŒ€ì¹˜
     {
         currentHealth = maxHealth;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // 0 ~ maxHealth 
@@ -31,13 +31,13 @@ public class PlayerHealth : MonoBehaviour
     void UpdateUI()
     {
         for (int i = 0; i < Player_HP.Length; i++)
-            Player_HP[i].enabled = i < currentHealth; // Ã¼·Â ui
+            Player_HP[i].enabled = i < currentHealth; // ì²´ë ¥ ui
     }
 
     public void TakeDamage(int damage)
     {
         if (isInvincible)
-            return; //¹«ÀûÀÌ¸é ¹«½Ã
+            return; //ë¬´ì ì´ë©´ ë¬´ì‹œ
 
         if (isDead)
            return;

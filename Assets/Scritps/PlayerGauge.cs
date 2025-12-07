@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerGauge : MonoBehaviour
@@ -26,7 +26,7 @@ public class PlayerGauge : MonoBehaviour
     }
 
     void Update()
-    {   // G ´©¸£¸é °ÔÀÌÁö °ª¸¸Å­ ´É·Â ¹ßµ¿
+    {   // G ëˆ„ë¥´ë©´ ê²Œì´ì§€ ê°’ë§Œí¼ ëŠ¥ë ¥ ë°œë™
         if (Input.GetKeyDown(KeyCode.K))
         {
             Activate();
@@ -44,11 +44,11 @@ public class PlayerGauge : MonoBehaviour
 
         if (gauge <= maxGauge)
         {
-            Debug.Log($"°ÔÀÌÁö È¹µæ ¡æ ÇöÀç: {gauge}");
+            Debug.Log($"ê²Œì´ì§€ íšë“ â†’ í˜„ì¬: {gauge}");
         }
         if (gauge > maxGauge)
         {
-            Debug.Log("°ÔÀÌÁö ÃÊ°ú! HP È¸º¹ ÈÄ ÃÊ±âÈ­!");
+            Debug.Log("ê²Œì´ì§€ ì´ˆê³¼! HP íšŒë³µ í›„ ì´ˆê¸°í™”!");
             health.Heal(1);
             gauge = 0;
         }
@@ -75,31 +75,31 @@ public class PlayerGauge : MonoBehaviour
     {
         if (gauge == 0)
         {
-            Debug.Log("°ÔÀÌÁö°¡ ºÎÁ·ÇÕ´Ï´Ù");
+            Debug.Log("ê²Œì´ì§€ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤");
             return;
         }
-        Debug.Log("G ¹öÆ° ¡æ °ÔÀÌÁö ¹ßµ¿: " + gauge);
+        Debug.Log("G ë²„íŠ¼ â†’ ê²Œì´ì§€ ë°œë™: " + gauge);
 
         switch (gauge)
         {
             case 1:
-                upgrade.ActivateSpeedUp(); // ¼Óµµ Áõ°¡ 
+                upgrade.ActivateSpeedUp(); // ì†ë„ ì¦ê°€ 
                 break;
 
             case 2:
-                upgrade.ActivateMore(); // ÃÑ¾Ë ¼ö Áõ°¡ (À§¾Æ·¡)
+                upgrade.ActivateMore(); // ì´ì•Œ ìˆ˜ ì¦ê°€ (ìœ„ì•„ë˜)
                 break;
 
             case 3:
-                upgrade.ActivateNutStorm();  // ¿¬»ç
+                upgrade.ActivateNutStorm();  // ì—°ì‚¬
                 break;
 
             case 4:
-                upgrade.ActivateBarrier(); // ½Çµå(¹ã¼ÛÀÌ) »ı¼º
+                upgrade.ActivateBarrier(); // ì‹¤ë“œ(ë°¤ì†¡ì´) ìƒì„±
                 break;
 
             case 5:
-                upgrade.ActivateTail(); //Å×ÀÏ(¾ÆÁ÷¹Ì±¸Çö)
+                upgrade.ActivateTail(); //í…Œì¼(ì•„ì§ë¯¸êµ¬í˜„)
                 break;
         }
         gauge = 0;
@@ -107,11 +107,11 @@ public class PlayerGauge : MonoBehaviour
     }
     void SpawnGaugeCheat()
     {
-        // ÇÃ·¹ÀÌ¾î ¹Ù·Î ¾Õ¿¡ »ı¼º
+        // í”Œë ˆì´ì–´ ë°”ë¡œ ì•ì— ìƒì„±
         Vector3 pos = transform.position + new Vector3(1f, 0f, 0f);
 
         Instantiate(gaugePrefab, pos, Quaternion.identity);
-        Debug.Log("Ä¡Æ®: °ÔÀÌÁö ¾ÆÀÌÅÛ »ı¼º!");
+        Debug.Log("ì¹˜íŠ¸: ê²Œì´ì§€ ì•„ì´í…œ ìƒì„±!");
     }
 }
 

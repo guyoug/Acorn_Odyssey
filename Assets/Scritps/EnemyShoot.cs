@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
@@ -18,12 +18,12 @@ public class EnemyShoot : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         if (firePoint == null)
         {
-            Debug.Log("firePointÀÌ nullÀÔ´Ï´Ù.");
+            Debug.Log("firePointì´ nullì…ë‹ˆë‹¤.");
             return;
         }
         if (bulletPrefabs == null)
         {
-            Debug.Log("bulletPrefabsÀÌ nullÀÔ´Ï´Ù.");
+            Debug.Log("bulletPrefabsì´ nullì…ë‹ˆë‹¤.");
             return;
         }
            
@@ -41,12 +41,12 @@ public class EnemyShoot : MonoBehaviour
     {
         if (player == null)
         {
-           Debug.Log ("player°¡ nullÀÔ´Ï´Ù.");
+           Debug.Log ("playerê°€ nullì…ë‹ˆë‹¤.");
             return;
         }
-        Vector3 dir = (player.position - firePoint.position).normalized; // ¹æÇâ °è»ê
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg; // Atan2¸¦ ÀÌ¿ëÇØ È¸Àü °¢µµ °è»ê
-        firePoint.rotation = Quaternion.Euler(0, 0, angle+ +180f);    // ½ÇÁ¦ ¹ß»ç ¹æÇâÀ¸·Î firePoint È¸Àü (¿©±â¼­ +180f´Â ÅºÈ¯ prefabÀÇ ±âº» ¹æÇâ º¸Á¤)
+        Vector3 dir = (player.position - firePoint.position).normalized; // ë°©í–¥ ê³„ì‚°
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg; // Atan2ë¥¼ ì´ìš©í•´ íšŒì „ ê°ë„ ê³„ì‚°
+        firePoint.rotation = Quaternion.Euler(0, 0, angle+ +180f);    // ì‹¤ì œ ë°œì‚¬ ë°©í–¥ìœ¼ë¡œ firePoint íšŒì „ (ì—¬ê¸°ì„œ +180fëŠ” íƒ„í™˜ prefabì˜ ê¸°ë³¸ ë°©í–¥ ë³´ì •)
         Instantiate(bulletPrefabs, firePoint.position, firePoint.rotation);
     }
 }

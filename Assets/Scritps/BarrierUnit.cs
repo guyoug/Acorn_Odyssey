@@ -1,4 +1,4 @@
-using System.Threading;
+ï»¿using System.Threading;
 using UnityEngine;
 
 public class BarrierUnit : MonoBehaviour
@@ -18,10 +18,10 @@ public class BarrierUnit : MonoBehaviour
         manager = transform.parent.GetComponent<BarrierManager>();
     }
 
-    public void UpdatePosition(float angle)  // BarrierManager°¡ ¸Å ÇÁ·¹ÀÓ È£Ãâ ¡æ Àü´ŞµÈ angle¿¡ µû¶ó À§Ä¡¸¦ °è»êÇØ¼­ ÀÌµ¿
+    public void UpdatePosition(float angle)  // BarrierManagerê°€ ë§¤ í”„ë ˆì„ í˜¸ì¶œ â†’ ì „ë‹¬ëœ angleì— ë”°ë¼ ìœ„ì¹˜ë¥¼ ê³„ì‚°í•´ì„œ ì´ë™
     {
-        float rad = angle * Mathf.Deg2Rad; // °¢µµ¸¦ ¶óµğ¾ÈÀ¸·Î º¯È¯
-        transform.position = player.position + new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * radius;     // ÇÃ·¹ÀÌ¾î ±âÁØ ¿øÇü ±Ëµµ¿¡¼­ À§Ä¡ °è»ê
+        float rad = angle * Mathf.Deg2Rad; // ê°ë„ë¥¼ ë¼ë””ì•ˆìœ¼ë¡œ ë³€í™˜
+        transform.position = player.position + new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * radius;     // í”Œë ˆì´ì–´ ê¸°ì¤€ ì›í˜• ê¶¤ë„ì—ì„œ ìœ„ì¹˜ ê³„ì‚°
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,7 +43,7 @@ public class BarrierUnit : MonoBehaviour
     void hitBarrier()
     {
         hp--;
-        Debug.Log($"¹ã¼ÛÀÌ ÇÇ°İ! ³²Àº HP = {hp}"); ;
+        Debug.Log($"ë°¤ì†¡ì´ í”¼ê²©! ë‚¨ì€ HP = {hp}"); ;
         if (hp <= 0)
         {
             manager.RemoveBarrier(this);

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
 
-private void Awake() //½Ì±ÛÅÏ
+private void Awake() //ì‹±ê¸€í„´
     {
         if (Instance != null && Instance != this)
         {
@@ -49,7 +49,7 @@ private void Awake() //½Ì±ÛÅÏ
 
     void Update()
     {
-        switch (currentWave) //¿¤¸®Æ® ½ºÆù
+        switch (currentWave) //ì—˜ë¦¬íŠ¸ ìŠ¤í°
         {
             case 2:
                 if (currentWave == 2 && normalKilled == 8 && spawnedCount == 0) 
@@ -63,41 +63,41 @@ private void Awake() //½Ì±ÛÅÏ
 
         }
 
-        if (Input.GetKeyDown(KeyCode.F4)) // ½ºÅ×ÀÌÁö ³Ñ±â´Â Ä¡Æ®
+        if (Input.GetKeyDown(KeyCode.F4)) // ìŠ¤í…Œì´ì§€ ë„˜ê¸°ëŠ” ì¹˜íŠ¸
         {
             OnBossEnemyKilled();
         }
-        if(Input.GetKeyDown(KeyCode.F5)) // º¸½º ¼ÒÈ¯ÇÏ´Â Â÷Æ®
+        if(Input.GetKeyDown(KeyCode.F5)) // ë³´ìŠ¤ ì†Œí™˜í•˜ëŠ” ì°¨íŠ¸
         {
             SpawnBoss();
         }
     }
 
-    public void OnNormalEnemyKilled() //±âº» Å³  È®ÀÎ
+    public void OnNormalEnemyKilled() //ê¸°ë³¸ í‚¬  í™•ì¸
     {
         normalKilled++;
-        Debug.Log("±âº» ¸ó½ºÅÍ  Á¦°Å : " + normalKilled);
+        Debug.Log("ê¸°ë³¸ ëª¬ìŠ¤í„°  ì œê±° : " + normalKilled);
         CheckWave();
     }
-    public void OnEliteEnemyKilled() //¿¤¸®Æ® Å³ È®ÀÎ
+    public void OnEliteEnemyKilled() //ì—˜ë¦¬íŠ¸ í‚¬ í™•ì¸
     {
         eliteKilled++;
-        Debug.Log("¿¤¸®Æ® ¸ó½ºÅÍ Á¦°Å : " + eliteKilled);
+        Debug.Log("ì—˜ë¦¬íŠ¸ ëª¬ìŠ¤í„° ì œê±° : " + eliteKilled);
         CheckWave();
     }
-    public void OnBossEnemyKilled() // º¸½º Å³ È®ÀÎ
+    public void OnBossEnemyKilled() // ë³´ìŠ¤ í‚¬ í™•ì¸
     {
         bossKilled++;
-        Debug.Log("º¸½º Á¦°Å : " + bossKilled);
+        Debug.Log("ë³´ìŠ¤ ì œê±° : " + bossKilled);
         StartCoroutine(killboss());
       
     }
-    public void SpawnElite() // ¿¤¸®Æ® ½ºÆù
+    public void SpawnElite() // ì—˜ë¦¬íŠ¸ ìŠ¤í°
     {
         Instantiate(elitePrefabs, eliteSpawnPoint.transform.position, eliteSpawnPoint.transform.rotation);
         spawnedCount++;
     }
-    public void CheckWave() // ¿şÀÌºê ³Ñ±â±â
+    public void CheckWave() // ì›¨ì´ë¸Œ ë„˜ê¸°ê¸°
     {
         if (currentWave == 1 && normalKilled >= 12)
         {
@@ -112,7 +112,7 @@ private void Awake() //½Ì±ÛÅÏ
             SpawnBoss();
         }
     }
-    public void StartNextWave() //¿şÀÌºê ½ÃÃÊ±âÈ­
+    public void StartNextWave() //ì›¨ì´ë¸Œ ì‹œì´ˆê¸°í™”
     {
         currentWave++;
         normalKilled = 0;
@@ -123,10 +123,10 @@ private void Awake() //½Ì±ÛÅÏ
     }
     void StartWave(int wave)
     {
-        Debug.Log($"Wave {wave} ½ÃÀÛ!");
+        Debug.Log($"Wave {wave} ì‹œì‘!");
         
     }
-    void SpawnBoss() // º¸½º ½ºÆù
+    void SpawnBoss() // ë³´ìŠ¤ ìŠ¤í°
     {
         if (bossSpawned)
             return;
@@ -134,14 +134,14 @@ private void Awake() //½Ì±ÛÅÏ
         bossSpawned = true;
         StopAllEnemySpawn();
     }
-    void StopAllEnemySpawn() //½ºÆù½Ã enemy ½ºÆù X
+    void StopAllEnemySpawn() //ìŠ¤í°ì‹œ enemy ìŠ¤í° X
     {
         GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
         EnemySpawn spawner = spawnObj.GetComponent<EnemySpawn>();
         spawner.StopSpawn();
     }
 
-    IEnumerator killboss() //º¸½º Á×À¸¸é 
+    IEnumerator killboss() //ë³´ìŠ¤ ì£½ìœ¼ë©´ 
     {
         stageClearPanel.SetActive(true);
         yield return new WaitForSeconds(bossinterval);

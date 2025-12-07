@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ItemGauge : MonoBehaviour
 {
@@ -8,7 +8,7 @@ public class ItemGauge : MonoBehaviour
         {
             PlayerGauge gauge = collision.GetComponent<PlayerGauge>();
             gauge.AddGauge();
-            Debug.Log($"°ÔÀÌÁö Áõ°¡!{gauge.gauge}");
+            Debug.Log($"ê²Œì´ì§€ ì¦ê°€!{gauge.gauge}");
             Destroy(gameObject);
         }
     }
