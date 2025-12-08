@@ -41,26 +41,16 @@ public class Elite_2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F12))
         {
             StopAllEnemySpawn();
-            //몸통 박치기 이후에 그거 코루틴 끝나면 실행하는걸로
+            
         }
     }
     void shootEnemy()
     {
-        Debug.Log("shootEnemy 실행됨");
+        Debug.Log("shootEnemy");
 
         if (player == null)
         {
-            Debug.LogError("player가 NULL임!!!");
-            return;
-        }
-        if (firePoint == null)
-        {
-            Debug.LogError("firePoint가 NULL임!!!");
-            return;
-        }
-        if (enemyPrefabs == null)
-        {
-            Debug.LogError("enemyPrefabs가 NULL임!!!");
+            Debug.LogError("player null");
             return;
         }
 
@@ -93,7 +83,7 @@ public class Elite_2 : MonoBehaviour
 
         transform.position = pos;
     }
-    void StopAllEnemySpawn() //스폰시 enemy 스폰 X
+    void StopAllEnemySpawn()
     {
         GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
         EnemySpawn2 spawner = spawnObj.GetComponent<EnemySpawn2>();

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -11,21 +12,67 @@ public class ButtonManager : MonoBehaviour
     [Header("UI Panels")]
     public GameObject pausePanel;
     public GameObject gameOverPanel;
+    public GameObject settingsPanel;
+
+    [Header("Sound UI")]
+    public Slider bgmSlider;
+  
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);  
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        if (pausePanel == null)
+            pausePanel = GameObject.Find("PausePanel");
+
+        if (settingsPanel == null)
+            settingsPanel = GameObject.Find("SettingsPanel");
+
+        if (gameOverPanel == null)
+            gameOverPanel = GameObject.Find("GameOverPanel");
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+
+        var canvas = GameObject.Find("Canvas");
+        if (canvas != null)
+        {
+            pausePanel = canvas.transform.Find("PausePanel")?.gameObject;
+            settingsPanel = canvas.transform.Find("SettingsPanel")?.gameObject;
+            gameOverPanel = canvas.transform.Find("GameOverPanel")?.gameObject;
+        }
     }
     void Update()
     {
-       
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if(settingsPanel.activeSelf)
+            {
+                CloseSettings();
+                return;
+            }
+
             if (!isPaused)
+            {
                 Pause();
-           
+                return;
+            }
         }
     }
-    public void GameStart() 
+    public void GameStart()
     {
         SceneManager.LoadScene("Game_Play_stage1");
     }
@@ -34,11 +81,13 @@ public class ButtonManager : MonoBehaviour
         Application.Quit();
         Debug.Log("게임종료");//위 코드 유니티 에디터에선 동작 X > 디버그로 확인
     }
-    public void Pause() 
+    public void Pause()
     {
+        Debug.Log("pausePanel = " + pausePanel);
+
         if (isPaused)
             return;
-        isPaused = true; 
+        isPaused = true;
         Time.timeScale = 0f;
         if (pausePanel != null)
             pausePanel.SetActive(true);
@@ -52,7 +101,7 @@ public class ButtonManager : MonoBehaviour
     private IEnumerator resume()
     {
         if (pausePanel != null)
-            pausePanel.SetActive(false);    
+            pausePanel.SetActive(false);
         isPaused = false;
         yield return new WaitForSecondsRealtime(interval);
         Time.timeScale = 1f;
@@ -71,5 +120,35 @@ public class ButtonManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("Game_Play_stage1");
     }
+    public void OpenSettings()
+    {
+
+        if (settingsPanel != null)
+            settingsPanel.SetActive(true);
+
+        
+        if (SoundManager.Instance != null)
+        {
+            if (bgmSlider != null && SoundManager.Instance.bgmSource != null)
+                bgmSlider.value = SoundManager.Instance.bgmSource.volume;
+
+        }
+    }
+    public void OnBGMSliderChanged(float value)
+    {
+        if (SoundManager.Instance == null || SoundManager.Instance.bgmSource == null)
+        {
+            Debug.LogWarning("SoundManager 또는 BGM Source가 없습니다!");
+            return;
+        }
+
+        SoundManager.Instance.bgmSource.volume = value;
+    }
+    public void CloseSettings()
+    {
+        settingsPanel.SetActive(false);
+        pausePanel.SetActive(true);
+    }
+  
 }
 

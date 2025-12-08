@@ -1196,7 +1196,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 334073389}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: OnBGMSliderChanged
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &334073388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1228,6 +1240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1700358920}
   gameOverPanel: {fileID: 245614722}
+  settingsPanel: {fileID: 1784058692}
+  bgmSlider: {fileID: 314791221}
 --- !u!4 &334073390
 Transform:
   m_ObjectHideFlags: 0
@@ -1236,7 +1250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334073388}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 963.4392, y: 693.3655, z: -2.5129461}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3455,7 +3469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12, y: -307}
+  m_AnchoredPosition: {x: 12, y: -239}
   m_SizeDelta: {x: 290, y: 98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1099185012
@@ -4156,7 +4170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12, y: -110}
+  m_AnchoredPosition: {x: 12, y: -81}
   m_SizeDelta: {x: 290, y: 98}
   m_Pivot: {x: 0.4999997, y: 0.36035487}
 --- !u!114 &1232848040
@@ -4205,7 +4219,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 334073389}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OpenSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4361,7 +4375,7 @@ RectTransform:
   m_Father: {fileID: 2086210215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5201,7 +5215,7 @@ GameObject:
   - component: {fileID: 1700358923}
   - component: {fileID: 1700358922}
   m_Layer: 5
-  m_Name: Pause_Panel
+  m_Name: PausePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5692,12 +5706,12 @@ GameObject:
   - component: {fileID: 1784058695}
   - component: {fileID: 1784058694}
   m_Layer: 5
-  m_Name: SettingPanel
+  m_Name: SettingsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1784058693
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6380,12 +6394,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1700358921}
   - {fileID: 2093712315}
   - {fileID: 1816429039}
   - {fileID: 1358904848}
   - {fileID: 255471725}
   - {fileID: 796205919}
-  - {fileID: 1700358921}
   - {fileID: 245614723}
   - {fileID: 975221029}
   - {fileID: 125037639}
@@ -6571,7 +6585,7 @@ RectTransform:
   m_Father: {fileID: 503049121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
