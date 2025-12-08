@@ -164,21 +164,37 @@ private void Awake() //싱글턴
     void StopAllEnemySpawn() //스폰시 enemy 스폰 X
     {
         GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
-        EnemySpawn1 spawner = spawnObj.GetComponent<EnemySpawn1>();
+        EnemySpawn1  spawner = spawnObj.GetComponent<EnemySpawn1>();
         spawner.StopSpawn();
     }
 
-    IEnumerator killboss() //보스 죽으면 
+    IEnumerator killboss()
     {
-        if (stageClearPanel == null)
-            stageClearPanel = GameObject.Find("StageClearPanel");
+        var canvas = GameObject.Find("Canvas");
+        if (canvas != null)
+        {
+            stageClearPanel = canvas.transform.Find("StageClearPanel")?.gameObject;
+        }
+
         Debug.Log("killboss 시작, stageClearPanel = " + stageClearPanel);
+       
         if (stageClearPanel != null)
             stageClearPanel.SetActive(true);
-        yield return new WaitForSeconds(bossinterval);
+
+        PlayerGauge gauge = GameObject.FindWithTag("Player").GetComponent<PlayerGauge>();
+        if (gauge != null)
+            gauge.ShowGaugeUI(false); // 스테이지 클리어 시 UI 숨김
+
+     
+
+        // timeScale = 0이어도 기다리기 위해 Realtime 사용
+        yield return new WaitForSecondsRealtime(bossinterval);
 
         if (stageClearPanel != null)
             stageClearPanel.SetActive(false);
+
+        if (gauge != null)
+            gauge.ShowGaugeUI(true);
 
         string currentScene = SceneManager.GetActiveScene().name;
 
@@ -191,10 +207,10 @@ private void Awake() //싱글턴
             case "Game_Play_stage2":
                 SceneManager.LoadScene("Game_Play_stage3");
                 break;
-
-            //case "Game_Play_stage3":
-            //    SceneManager.LoadScene("EndingScene");
-            //    break;
         }
+
+        //case "Game_Play_stage3":
+        //    SceneManager.LoadScene("EndingScene");
+        //    break;
     }
 }

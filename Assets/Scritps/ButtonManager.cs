@@ -117,6 +117,9 @@ public class ButtonManager : MonoBehaviour
     public void restart()
     {
         gameOverPanel.SetActive(false);
+        PlayerGauge gauge = GameObject.FindWithTag("Player").GetComponent<PlayerGauge>();
+        if (gauge != null)
+           gauge.ShowGaugeUI(true); // 다시 시작 시 UI 활성화
         Time.timeScale = 1f;
         SceneManager.LoadScene("Game_Play_stage1");
     }

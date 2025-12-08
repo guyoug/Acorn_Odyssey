@@ -15,8 +15,9 @@ public class PlayerGauge : MonoBehaviour
     public Image[] offSlots;
     public Image[] onSlots;
 
-    [Header("Gauge Prefabs")]
+    [Header("Gauge")]
     public GameObject gaugePrefab;
+    public GameObject gaugeUIRoot;
 
     void Awake()
     {
@@ -24,7 +25,13 @@ public class PlayerGauge : MonoBehaviour
         health = GetComponent<PlayerHealth>();
         UpdateGaugeUI();
     }
+ 
 
+    public void ShowGaugeUI(bool show)
+    {
+        if (gaugeUIRoot != null)
+            gaugeUIRoot.SetActive(show);
+    }
     void Update()
     {   // G 누르면 게이지 값만큼 능력 발동
         if (Input.GetKeyDown(KeyCode.K))

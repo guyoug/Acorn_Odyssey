@@ -52,6 +52,9 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
         Debug.Log("Game Over");
+        PlayerGauge gauge = GetComponent<PlayerGauge>();
+        if (gauge != null)
+            gauge.ShowGaugeUI(false); 
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
     }
