@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Elite_2 : MonoBehaviour
@@ -15,6 +16,7 @@ public class Elite_2 : MonoBehaviour
     public GameObject enemyPrefabs;
     public Transform firePoint;
     public Transform player;
+    public EliteWarningBlink warningUI;
 
     [Header("Fire Timing")]
 
@@ -35,14 +37,23 @@ public class Elite_2 : MonoBehaviour
         if (timer >= fireDelay)
         {
             timer = 0f;
-            shootEnemy();
+            StartCoroutine(ShootWithWarning());
         }
 
-        if (Input.GetKeyDown(KeyCode.F12))
-        {
-            StopAllEnemySpawn();
+        //if (Input.GetKeyDown(KeyCode.F12))
+        //{
+        //    StopAllEnemySpawn();
             
-        }
+        //}
+    }
+    IEnumerator ShootWithWarning()
+    {
+        // 🔥 먼저 경고 UI 깜빡이기
+        if (warningUI != null)
+            yield return StartCoroutine(warningUI.Blink());
+
+        // 🔥 깜빡임 끝나면 총알 발사
+        shootEnemy();
     }
     void shootEnemy()
     {

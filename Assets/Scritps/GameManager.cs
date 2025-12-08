@@ -4,10 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Wave Settings")]
+    [Header("GAME Settings")]
     public int currentWave = 1;
     public int bossinterval = 5;      
-    public int spawnedCount = 0;     
+    public int spawnedCount = 0;
+    public int currentStage = 1;
 
     [Header("Kill Count")]
     public int normalKilled = 0;
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
 
-private void Awake() //싱글턴
+    private void Awake() //싱글턴
     {
         if (Instance != null && Instance != this)
         {
@@ -72,24 +73,28 @@ private void Awake() //싱글턴
     void Start()
     {
         StartWave(currentWave);
+        DetectStage();
+
+    }
+    void DetectStage()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        // 예: "Game_Play_stage2" → 마지막 숫자 뽑기
+        for (int i = sceneName.Length - 1; i >= 0; i--)
+        {
+            if (char.IsDigit(sceneName[i]))
+            {
+                currentStage = (int)char.GetNumericValue(sceneName[i]);
+                break;
+            }
+        }
+
+        Debug.Log("현재 스테이지 = " + currentStage);
     }
 
     void Update()
     {
-        switch (currentWave) //엘리트 스폰
-        {
-            case 2:
-                if (currentWave == 2 && normalKilled == 8 && spawnedCount == 0) 
-                    SpawnElite();
-                break;
-
-            case 3:
-                if (currentWave == 3 && normalKilled >= 11 && spawnedCount == 0 || (currentWave == 3 && normalKilled >= 22 && spawnedCount == 1))
-                    SpawnElite();
-                break;
-
-        }
-
         if (Input.GetKeyDown(KeyCode.F4)) // 스테이지 넘기는 치트
         {
             StartCoroutine(killboss());
@@ -99,18 +104,86 @@ private void Awake() //싱글턴
             SpawnBoss();
         }
     }
+    void StageWaveLogic()
+    {
+        switch (currentStage)
+        {
+            case 1: Stage1Logic(); break;
+            case 2: Stage2Logic(); break;
+            case 3: Stage3Logic(); break;
+        }
+    }
+    void Stage1Logic()
+    {
+        // 엘리트 스폰 규칙
+        if (currentWave == 2 && normalKilled >= 8 && spawnedCount == 0)
+            SpawnElite();
 
+        if (currentWave == 3 && normalKilled >= 11 && spawnedCount == 0)
+            SpawnElite();
+
+        // 웨이브 넘기기 조건
+        if (currentWave == 1 && normalKilled >= 12)
+            StartNextWave();
+
+        if (currentWave == 2 && normalKilled >= 16 && eliteKilled >= 1)
+            StartNextWave();
+
+        if (currentWave == 3 && normalKilled >= 22 && eliteKilled >= 2)
+            SpawnBoss();
+    }
+    void Stage2Logic()
+    {
+        
+        if (currentWave == 1 && normalKilled >= 10 && spawnedCount == 0)
+            SpawnElite();
+
+        if (currentWave == 2 && normalKilled >= 20 && spawnedCount == 1)
+            SpawnElite();
+
+        // 웨이브 조건
+        if (currentWave == 1 && normalKilled >= 15)
+            StartNextWave();
+
+        if (currentWave == 2 && normalKilled >= 25 && eliteKilled >= 1)
+            StartNextWave();
+
+        if (currentWave == 3 && normalKilled >= 30 && eliteKilled >= 2)
+        {
+            //SpawnBoss();
+        }
+
+    }
+
+    void Stage3Logic()
+    {
+        if (currentWave == 1 && normalKilled >= 12 && spawnedCount == 0)
+            SpawnElite();
+
+        if (currentWave == 2 && normalKilled >= 18 && spawnedCount == 1)
+            SpawnElite();
+
+        if (currentWave == 3 && normalKilled >= 30 && eliteKilled >= 2)
+            //SpawnBoss();
+
+        if (currentWave == 1 && normalKilled >= 15)
+            StartNextWave();
+
+        if (currentWave == 2 && normalKilled >= 25)
+            StartNextWave();
+    }
     public void OnNormalEnemyKilled() //기본 킬  확인
     {
         normalKilled++;
         Debug.Log("기본 몬스터  제거 : " + normalKilled);
-        CheckWave();
+        StageWaveLogic();
     }
     public void OnEliteEnemyKilled() //엘리트 킬 확인
     {
         eliteKilled++;
         Debug.Log("엘리트 몬스터 제거 : " + eliteKilled);
-        CheckWave();
+        StageWaveLogic();
+
     }
     public void OnBossEnemyKilled() // 보스 킬 확인
     {
@@ -124,21 +197,7 @@ private void Awake() //싱글턴
         Instantiate(elitePrefabs, eliteSpawnPoint.transform.position, eliteSpawnPoint.transform.rotation);
         spawnedCount++;
     }
-    public void CheckWave() // 웨이브 넘기기
-    {
-        if (currentWave == 1 && normalKilled >= 12)
-        {
-            StartNextWave();
-        }
-        if (currentWave == 2 && normalKilled >= 16 && eliteKilled >= 1)
-        {
-            StartNextWave();
-        }
-        if (currentWave == 3 && normalKilled >= 22 && eliteKilled >= 2)
-        {
-            SpawnBoss();
-        }
-    }
+   
     public void StartNextWave() //웨이브 시초기화
     {
         currentWave++;
@@ -146,6 +205,7 @@ private void Awake() //싱글턴
         eliteKilled = 0;
         bossKilled = 0;
         spawnedCount = 0;
+        bossSpawned = false;
         StartWave(currentWave);
     }
     void StartWave(int wave)
