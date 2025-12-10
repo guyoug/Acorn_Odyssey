@@ -158,10 +158,9 @@ public class PlayerItem : MonoBehaviour
     void FireCone()
     {
         GameObject obj = Instantiate(conePrefab, firePoint.position, firePoint.rotation);
-
         FireCone cone = obj.GetComponent<FireCone>();
         cone.target = this.transform;
-        Instantiate(conePrefab, firePoint.position, firePoint.rotation);
+    
     }
 
     void WaterLaser()

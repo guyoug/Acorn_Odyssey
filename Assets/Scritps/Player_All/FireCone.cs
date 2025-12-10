@@ -13,19 +13,24 @@ public class FireCone : MonoBehaviour
 
     void Start()
     {
-        angle = Mathf.Sin(Time.time * speed) * angleRange;
+      
         baseAngle = transform.eulerAngles.z;
         Destroy(gameObject, lifeTime);
      
     }
     void Update()
     {
+       FireConeDamage();    
+    }
+    private void FireConeDamage()
+    {
         Vector3 pos = target.position;
         pos.z = 0;
+        pos.x += 0.6f;
         transform.position = pos;
+        angle = Mathf.Sin(Time.time * speed) * angleRange;
         transform.rotation = Quaternion.Euler(0, 0, baseAngle + angle);
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
