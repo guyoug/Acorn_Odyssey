@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
-    [Header("Pause Settings")]
+    [Header("Settings")]
     private float interval = 1.0f;
     private bool isPaused = false;
+    private bool isMuted = false;
+    private float prevVolume = 1f; 
 
     [Header("UI Panels")]
     public GameObject pausePanel;
     public GameObject gameOverPanel;
     public GameObject settingsPanel;
+
 
     [Header("Sound UI")]
     public Slider bgmSlider;
@@ -155,6 +158,32 @@ public class ButtonManager : MonoBehaviour
         settingsPanel.SetActive(false);
         pausePanel.SetActive(true);
     }
-  
+    public void Mute()
+    {
+        if (SoundManager.Instance == null || SoundManager.Instance.bgmSource == null)
+            return;
+
+        var bgm = SoundManager.Instance.bgmSource;
+
+        if (!isMuted)
+        {
+            // 현재 볼륨 저장하고 0으로
+            prevVolume = bgm.volume;
+            bgm.volume = 0f;
+
+            // 슬라이더도 0으로 내려가도록
+            bgmSlider.value = 0f;
+            isMuted = true;
+        }
+        else
+        {
+            // 이전 볼륨 복원
+            bgm.volume = prevVolume;
+
+            // 슬라이더도 원래대로 복원
+            bgmSlider.value = prevVolume;
+            isMuted = false;
+        }
+    }
 }
 
