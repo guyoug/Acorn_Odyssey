@@ -103,6 +103,10 @@ public class GameManager : MonoBehaviour
         {
             SpawnBoss();
         }
+        if(Input.GetKeyDown (KeyCode.F7))
+        {
+            SpawnElite();
+        }
     }
     void StageWaveLogic()
     {

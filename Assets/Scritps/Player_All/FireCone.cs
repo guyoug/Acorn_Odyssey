@@ -6,20 +6,23 @@ public class FireCone : MonoBehaviour
     public float angleRange = 30f;
     public float speed = 3f;
     public float lifeTime = 2f;
-
+    private float angle;
     [Header("Runtime")]
     private float baseAngle;
-
+    public Transform target;
 
     void Start()
     {
+        angle = Mathf.Sin(Time.time * speed) * angleRange;
         baseAngle = transform.eulerAngles.z;
         Destroy(gameObject, lifeTime);
      
     }
     void Update()
     {
-        float angle = Mathf.Sin(Time.time * speed) * angleRange;
+        Vector3 pos = target.position;
+        pos.z = 0;
+        transform.position = pos;
         transform.rotation = Quaternion.Euler(0, 0, baseAngle + angle);
     }
 

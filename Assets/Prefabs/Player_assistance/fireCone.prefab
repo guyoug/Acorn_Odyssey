@@ -104,6 +104,7 @@ MonoBehaviour:
   angleRange: 30
   speed: 3
   lifeTime: 2
+  target: {fileID: 2920152261575186229, guid: 19e321547e7abfd4bbff9645c5da5f96, type: 3}
 --- !u!60 &1536970318953725503
 PolygonCollider2D:
   m_ObjectHideFlags: 0

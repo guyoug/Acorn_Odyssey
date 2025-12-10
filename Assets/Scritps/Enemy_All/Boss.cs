@@ -23,6 +23,7 @@ public class Boss : MonoBehaviour
     public float burstDelay = 0.15f; 
     public float burstGroupDelay = 0.5f;
     public float knifeDelay = 0.7f;
+    public float GroupDelay = 0.5f;
 
     [Header("Movement Settings (Elite 방식)")]
     private float minX = 3.5f;
@@ -37,12 +38,12 @@ public class Boss : MonoBehaviour
         SetNewTarget();
         StartCoroutine(PattenLoop());
     }
-    void Update()
+    private void FixedUpdate()
     {
         MoveRandom();
-
-     
+        
     }
+
     IEnumerator PattenLoop()
     {
         while (true)
@@ -52,6 +53,7 @@ public class Boss : MonoBehaviour
 
             yield return StartCoroutine(BurstPattern());
             yield return StartCoroutine(KnifePattern());
+            yield return new WaitForSeconds(GroupDelay);
         }
     }
     IEnumerator BurstPattern()

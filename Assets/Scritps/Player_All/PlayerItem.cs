@@ -46,13 +46,13 @@ public class PlayerItem : MonoBehaviour
 
         //치트
         if (Input.GetKeyDown(KeyCode.F1))
-            PickItem(1);  
+            PickItem(1);
 
         if (Input.GetKeyDown(KeyCode.F2))
-            PickItem(2); 
+            PickItem(2);
 
         if (Input.GetKeyDown(KeyCode.F3))
-            PickItem(3);  
+            PickItem(3);
 
     }
 
@@ -157,11 +157,16 @@ public class PlayerItem : MonoBehaviour
     }
     void FireCone()
     {
+        GameObject obj = Instantiate(conePrefab, firePoint.position, firePoint.rotation);
+
+        FireCone cone = obj.GetComponent<FireCone>();
+        cone.target = this.transform;
         Instantiate(conePrefab, firePoint.position, firePoint.rotation);
     }
- 
+
     void WaterLaser()
     {
+        Vector3 pos = new Vector3(0f, firePoint.position.y, firePoint.position.z);
         Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
     }
 }
