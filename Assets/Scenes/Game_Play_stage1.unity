@@ -1928,8 +1928,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -39}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -892.1, y: -463.39984}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -890.9, y: -468}
+  m_SizeDelta: {x: 101.3845, y: 128.6127}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &556609699
 MonoBehaviour:
@@ -1951,7 +1951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6edcbe5bf929aad4caf4582f914fdb1d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 173ee08b270e08f46bebcdc5f3013713, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4076,6 +4076,7 @@ MonoBehaviour:
   currentWave: 1
   bossinterval: 1
   spawnedCount: 0
+  currentStage: 1
   normalKilled: 0
   eliteKilled: 0
   bossKilled: 0
