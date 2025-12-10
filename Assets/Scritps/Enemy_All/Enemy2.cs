@@ -21,6 +21,7 @@ public class Enemy2 : MonoBehaviour
     private void Start()
     {
         Destroy(gameObject, deleteTime);
+        gameManager = GameManager.Instance;
     }
     void FixedUpdate()
     {

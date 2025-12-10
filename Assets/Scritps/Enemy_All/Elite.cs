@@ -7,13 +7,11 @@ public class Elite : MonoBehaviour
     [Header("Status")]
     public int Hp = 15;
     public int moveSpeed = 3;
-    public float attackDelay = 2.5f;
-    public float movelength = 1.5f; 
-    public float burstDelay = 0.12f; 
+    public float burstDelay = 0.12f;   
+    public float knifeDelay = 0.7f;   
+    private float GroupDelay = 0.5f;
     private bool isDead = false;
-    private float attackTimer = 0f;
-    public float knifeInterval = 5f;  
-    private float knifeTimer = 0f;
+  
 
     [Header("Movement Range")]
     private float minX = 3.5f;
@@ -41,40 +39,43 @@ public class Elite : MonoBehaviour
         gameManager = GameManager.Instance;
         rb = GetComponent<Rigidbody2D>();
         SetNewTarget();  // 시작 시 최초 목표 위치 설정
+        StartCoroutine(PattenLoop());
     }
-    public void Update()
+    IEnumerator PattenLoop()
     {
-        BristttackUpdate();
-        KnifeAttackUpdate();
-    }
-    void BristttackUpdate()   //  일정 시간마다 공격
-    {
-        attackTimer += Time.deltaTime;
+        if (isDead)
+            yield break;
 
-        if (attackTimer >= attackDelay)
+        // 총 패턴
+        yield return StartCoroutine(BrustAttack());
+
+        // 칼 패턴
+        yield return StartCoroutine(KnifeAttack());
+
+        // 패턴 그룹 종료 후 대기
+        yield return new WaitForSeconds(GroupDelay);
+    }
+
+
+    IEnumerator BrustAttack()
+    {
+        for (int i = 0; i < 3; i++)
         {
-            attackTimer = 0f;
-            StartCoroutine(brustShoot());
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            yield return new WaitForSeconds(burstDelay);
         }
     }
-    void KnifeAttackUpdate()
+       
+    IEnumerator KnifeAttack()
     {
-        knifeTimer += Time.deltaTime;
-
-        if (knifeTimer >= knifeInterval)
-        {
-            knifeTimer = 0f;
-            ThrowKnife();   
-        }
+        Instantiate(knifePrefab, throwPoint.position, throwPoint.rotation);
+        yield return new WaitForSeconds(knifeDelay);
     }
     private void FixedUpdate()
     {
         MoveRandom();
     }
-    void ThrowKnife()
-    {
-        Instantiate(knifePrefab, throwPoint.position, throwPoint.rotation);
-    }
+
     void MoveRandom()
     {
         if (rb == null)
@@ -86,22 +87,12 @@ public class Elite : MonoBehaviour
         if (Vector2.Distance(rb.position, targetPos) < 0.1f)
             SetNewTarget();
     }
-   
+
     void SetNewTarget()    // 새로운 랜덤 이동 목표 설정
     {
         float x = Random.Range(minX, maxX);
         float y = Random.Range(minY, maxY);
         targetPos = new Vector3(x, y, transform.position.z);
-    }
-
-    // 3연사 공격 코루틴
-    IEnumerator brustShoot()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            yield return new WaitForSeconds(burstDelay);
-        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
