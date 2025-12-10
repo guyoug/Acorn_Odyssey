@@ -11,6 +11,9 @@ public class Knife : MonoBehaviour
     public int damage = 1;
     public float angleOffset = 20f;
 
+    [Header("Rotation Settings")]
+    public float spinSpeed = 720f;
+
     [Header("Runtime")]
     private Rigidbody2D rb;
     private Vector2 horizontalDir;
@@ -48,6 +51,8 @@ public class Knife : MonoBehaviour
             + new Vector3(0, verticalVelocity * Time.deltaTime, 0);
 
         transform.position += move;
+
+        transform.Rotate(0f, 0f, spinSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

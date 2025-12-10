@@ -1475,8 +1475,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmSource: {fileID: 1277603170}
-  mainBGM: {fileID: 0}
-  stage1BGM: {fileID: 0}
+  mainBGM: {fileID: 8300000, guid: 90fadc29d9c9b0d4fa5507745626b7cb, type: 3}
+  stage1BGM: {fileID: 8300000, guid: ff315ebc48cee3d40b51ad994d9961b9, type: 3}
   stage2BGM: {fileID: 8300000, guid: ff315ebc48cee3d40b51ad994d9961b9, type: 3}
   stage3BGM: {fileID: 8300000, guid: 90fadc29d9c9b0d4fa5507745626b7cb, type: 3}
 --- !u!4 &1277603172

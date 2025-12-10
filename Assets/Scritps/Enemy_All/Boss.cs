@@ -23,7 +23,7 @@ public class Boss : MonoBehaviour
     public float burstDelay = 0.15f; 
     public float burstGroupDelay = 0.5f;
     public float knifeDelay = 0.7f;
-    public float GroupDelay = 0.5f;
+    public float GroupDelay = 0.8f;
 
     [Header("Movement Settings (Elite 방식)")]
     private float minX = 3.5f;

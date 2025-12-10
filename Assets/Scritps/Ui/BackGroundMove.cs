@@ -4,45 +4,35 @@ public class BackGroundMove : MonoBehaviour
 {
     public float speed = 2f;
 
-    private Transform bg1;
-    private Transform bg2;
-    private float width;
+    public float scrollSpeed = 2f;   // 배경 이동 속도
+    public Transform bg1;
+    public Transform bg2;
+
+    private float bgWidth;  // 배경 한 장의 가로 길이
 
     void Start()
     {
-        // 첫 번째 배경 = 현재 오브젝트
-        bg1 = transform;
-
-        // 배경의 가로 길이 계산
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        width = sr.bounds.size.x;
-
-        // 두 번째 배경 자동 생성 + 오른쪽에 붙이기
-        bg2 = Instantiate(bg1, new Vector3(bg1.position.x - width, bg1.position.y, bg1.position.z), Quaternion.identity);
-
-        // BG2만 180도 플립 (Y축 반전)
-        bg2.localScale = new Vector3(bg2.localScale.x, -bg2.localScale.y, bg2.localScale.z);
-
-        bg1.name = "BG1";
-        bg2.name = "BG2_Flipped";
+        // 배경 한 장의 실제 너비 계산 (SpriteRenderer 기준)
+        SpriteRenderer sr = bg1.GetComponent<SpriteRenderer>();
+        bgWidth = sr.bounds.size.x;
     }
 
     void Update()
     {
-        // 오른쪽으로 이동
-        bg1.Translate(Vector3.right * speed * Time.deltaTime);
-        bg2.Translate(Vector3.right * speed * Time.deltaTime);
+        // 배경 이동 (왼쪽으로 흐르는 연출)
+        bg1.position += Vector3.left * scrollSpeed * Time.deltaTime;
+        bg2.position += Vector3.left * scrollSpeed * Time.deltaTime;
 
-        // BG1이 오른쪽 화면을 벗어나면 BG2 왼쪽 뒤로
-        if (bg1.position.x >= width)
+        // bg1이 완전히 화면 왼쪽으로 벗어났으면 bg2 뒤로 이동
+        if (bg1.position.x <= -bgWidth)
         {
-            bg1.position = new Vector3(bg2.position.x - width, bg1.position.y, bg1.position.z);
+            bg1.position = new Vector3(bg2.position.x + bgWidth, bg1.position.y, bg1.position.z);
         }
 
-        // BG2도 동일하게 처리
-        if (bg2.position.x >= width)
+        // bg2가 완전히 화면 왼쪽으로 벗어났으면 bg1 뒤로 이동
+        if (bg2.position.x <= -bgWidth)
         {
-            bg2.position = new Vector3(bg1.position.x - width, bg2.position.y, bg2.position.z);
+            bg2.position = new Vector3(bg1.position.x + bgWidth, bg2.position.y, bg2.position.z);
         }
     }
 }

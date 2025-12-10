@@ -25,6 +25,7 @@ public class SoundManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+        bgmSource.volume = 0.6f;
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

@@ -9,7 +9,7 @@ public class Elite : MonoBehaviour
     public int moveSpeed = 3;
     public float burstDelay = 0.12f;   
     public float knifeDelay = 0.7f;   
-    private float GroupDelay = 0.5f;
+    private float GroupDelay = 1.2f;
     private bool isDead = false;
   
 
@@ -43,17 +43,18 @@ public class Elite : MonoBehaviour
     }
     IEnumerator PattenLoop()
     {
-        if (isDead)
-            yield break;
+        while (true)
+        {
+            if (isDead)
+                yield break;
+           
+            yield return StartCoroutine(BrustAttack());
 
-        // 총 패턴
-        yield return StartCoroutine(BrustAttack());
+            yield return StartCoroutine(KnifeAttack());
 
-        // 칼 패턴
-        yield return StartCoroutine(KnifeAttack());
-
-        // 패턴 그룹 종료 후 대기
-        yield return new WaitForSeconds(GroupDelay);
+            yield return new WaitForSeconds(GroupDelay);
+        }
+           
     }
 
 

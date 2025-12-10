@@ -132,11 +132,14 @@ public class ButtonManager : MonoBehaviour
         
         if (SoundManager.Instance != null)
         {
-            if (bgmSlider != null && SoundManager.Instance.bgmSource != null)
-                bgmSlider.value = SoundManager.Instance.bgmSource.volume;
+            bgmSlider.onValueChanged.RemoveListener(OnBGMSliderChanged);
 
+            bgmSlider.value = SoundManager.Instance.bgmSource.volume;
+
+            bgmSlider.onValueChanged.AddListener(OnBGMSliderChanged);
         }
     }
+    
     public void OnBGMSliderChanged(float value)
     {
         if (SoundManager.Instance == null || SoundManager.Instance.bgmSource == null)
