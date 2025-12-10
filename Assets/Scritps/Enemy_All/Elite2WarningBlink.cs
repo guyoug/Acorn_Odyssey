@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EliteWarningBlink : MonoBehaviour
+public class Elite2WarningBlink : MonoBehaviour
 {
     public Image warnImg;        // 깜빡일 이미지
     public float blinkTime = 0.2f;   // 1회 깜빡이는 시간
