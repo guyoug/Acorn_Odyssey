@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: ca7ff3766d7aabf459a763428ed99300
+guid: acdb56adcb4d7934e83db3b5908aebcc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 234003355604573201
-    second: wateritem_eft_0
+      213: 2742591491602073328
+    second: wateritem.effect_2_0
   - first:
-      213: 8817629023699807125
-    second: wateritem_eft_1
+      213: -8754020572684269331
+    second: wateritem.effect_2_1
+  - first:
+      213: 1728674516715664122
+    second: wateritem.effect_2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,8 +57,8 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 6, y: 6, z: 0, w: 0}
+  spritePixelsToUnits: 36
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -103,45 +106,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wateritem_eft_0
+      name: wateritem.effect_2_0
       rect:
         serializedVersion: 2
-        x: 75
-        y: 140
-        width: 921
-        height: 266
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        x: 0
+        y: 0
+        width: 699
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 11c5f07efc85f3300800000000000000
-      internalID: 234003355604573201
+      spriteID: 0f643f44e64af0620800000000000000
+      internalID: 2742591491602073328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wateritem_eft_1
+      name: wateritem.effect_2_1
       rect:
         serializedVersion: 2
-        x: 964
-        y: 378
-        width: 27
-        height: 33
+        x: 657
+        y: 116
+        width: 17
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 59b2dc611e28e5a70800000000000000
-      internalID: 8817629023699807125
+      spriteID: de841b08ba8738680800000000000000
+      internalID: -8754020572684269331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wateritem.effect_2_2
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 27
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af27b15605c7df710800000000000000
+      internalID: 1728674516715664122
       vertices: []
       indices: 
       edges: []
@@ -150,8 +175,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fae9e3719296c4843a8827974671ccaa
-    internalID: -633191671
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -160,8 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      wateritem_eft_0: 234003355604573201
-      wateritem_eft_1: 8817629023699807125
+      wateritem.effect_2_0: 2742591491602073328
+      wateritem.effect_2_1: -8754020572684269331
+      wateritem.effect_2_2: 1728674516715664122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

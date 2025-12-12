@@ -165,7 +165,17 @@ public class PlayerItem : MonoBehaviour
 
     void WaterLaser()
     {
-        Vector3 pos = new Vector3(0f, firePoint.position.y, firePoint.position.z);
+        Camera cam = Camera.main;
+        // 화면 맨 왼쪽 (Viewport x = 0)
+        Vector3 viewportPos = new Vector3(0f, 0.5f, cam.nearClipPlane);
+        Vector3 worldPos = cam.ViewportToWorldPoint(viewportPos);
+
+        // Y값만 플레이어 위치로 교체
+        worldPos.y = firePoint.position.y;
+
+        // 2D 게임이므로 Z 고정
+        worldPos.z = 0f;
+
         Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
     }
 }

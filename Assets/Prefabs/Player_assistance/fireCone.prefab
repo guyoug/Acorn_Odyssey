@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7130602307744782387}
   - component: {fileID: -3353064297221167564}
   - component: {fileID: 1536970318953725503}
+  - component: {fileID: 6325826460059784404}
   m_Layer: 0
   m_Name: fireCone
   m_TagString: Untagged
@@ -440,3 +441,25 @@ PolygonCollider2D:
       - {x: 7.06, y: 1.4649999}
       - {x: 7.0299997, y: 1.485}
   m_UseDelaunayMesh: 0
+--- !u!95 &6325826460059784404
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6978787999989164416}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cf7fb04480268a7499d8d9fb79acf481, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

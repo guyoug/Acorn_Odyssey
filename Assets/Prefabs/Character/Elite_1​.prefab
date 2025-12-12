@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2043076274484464010}
   - component: {fileID: 2943460256032998452}
   - component: {fileID: 7645322987070653783}
+  - component: {fileID: -461928599600074790}
   m_Layer: 0
   m_Name: "Elite_1\u200B"
   m_TagString: Elite
@@ -133,10 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 15
   moveSpeed: 3
-  attackDelay: 2.5
-  movelength: 1.5
   burstDelay: 0.12
-  knifeInterval: 5
+  knifeDelay: 0.7
   knifePrefab: {fileID: 7633541267755210430, guid: 3e4d6bbe7971d914dbbfc9fd4c9a34c4, type: 3}
   bulletPrefab: {fileID: 2474956306608283955, guid: b0feb1bcaf1f2dd479eef5d8d2752235, type: 3}
   dropItems:
@@ -181,6 +180,28 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.5, y: -0.1}
   m_Radius: 2.3258398
+--- !u!95 &-461928599600074790
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805941214016920703}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c209f7d671706ff4c8d2a95b85b7279c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3894916574968564837
 GameObject:
   m_ObjectHideFlags: 0

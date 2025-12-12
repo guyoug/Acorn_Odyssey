@@ -42,7 +42,7 @@ public class WaterLaser : MonoBehaviour
         if (collision.CompareTag("Boss"))
         {
             Boss boss = collision.GetComponent<Boss>();
-            boss.TakeDamage(5);
+            boss.TakeDamage(5); 
         }
 
     }

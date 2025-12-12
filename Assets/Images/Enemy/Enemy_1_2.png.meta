@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: ca7ff3766d7aabf459a763428ed99300
+guid: cb0c09f8b42ccd448bb0e29a22816857
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 234003355604573201
-    second: wateritem_eft_0
-  - first:
-      213: 8817629023699807125
-    second: wateritem_eft_1
+      213: 3742559510735488931
+    second: Enemy_1_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +52,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 6, y: 6, z: 0, w: 0}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -103,45 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wateritem_eft_0
+      name: Enemy_1_2_0
       rect:
         serializedVersion: 2
-        x: 75
-        y: 140
-        width: 921
-        height: 266
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 11c5f07efc85f3300800000000000000
-      internalID: 234003355604573201
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: wateritem_eft_1
-      rect:
-        serializedVersion: 2
-        x: 964
-        y: 378
-        width: 27
-        height: 33
+        x: 122
+        y: 118
+        width: 811
+        height: 796
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 59b2dc611e28e5a70800000000000000
-      internalID: 8817629023699807125
+      spriteID: 3a7062ccb0e30f330800000000000000
+      internalID: 3742559510735488931
       vertices: []
       indices: 
       edges: []
@@ -150,8 +125,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fae9e3719296c4843a8827974671ccaa
-    internalID: -633191671
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      wateritem_eft_0: 234003355604573201
-      wateritem_eft_1: 8817629023699807125
+      Enemy_1_2_0: 3742559510735488931
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
