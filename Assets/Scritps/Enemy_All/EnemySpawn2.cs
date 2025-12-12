@@ -4,8 +4,8 @@ using UnityEngine;
 public class EnemySpawn2 : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    public GameObject enemy1Prefabs;
-    public float interval = 1.0f;
+    public GameObject enemy2Prefabs;
+    public float interval = 2.0f;
 
     [Header("Spawn Range (Y Axis)")]
     public float maxY = 3.3f;
@@ -15,7 +15,11 @@ public class EnemySpawn2 : MonoBehaviour
     private Coroutine spawnRoutine;
     void Start()
     {
-        spawnRoutine = StartCoroutine(spawnEnemy());
+        Debug.Log("EnemySpawn2 Start 호출됨 : " + gameObject.name);
+
+        if (spawnRoutine == null)
+            spawnRoutine = StartCoroutine(spawnEnemy());
+  
     }
     public void StopSpawn()
     {
@@ -29,9 +33,9 @@ public class EnemySpawn2 : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(interval);
             Vector3 position = new Vector3(transform.position.x, Random.Range(minY, maxY), transform.position.z);
-            Instantiate(enemy1Prefabs, position, transform.rotation);
+            Instantiate(enemy2Prefabs, position, transform.rotation);
+            yield return new WaitForSeconds(interval);
         }
     }
 }

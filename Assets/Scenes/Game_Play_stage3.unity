@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e816a589b338b49a1587e5bce930e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy1Prefabs: {fileID: 0}
+  enemy1Prefabs: {fileID: 9138349320036121175, guid: b3f4a355632751f46b0d77693eb7bb2e, type: 3}
   interval: 1
   maxY: 3.3
   minY: -3.1

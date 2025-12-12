@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Elite_2 : MonoBehaviour
+public class Stage2_Elite : MonoBehaviour
 {
     [Header("Settings")]
     public int Hp = 15;
@@ -13,42 +13,59 @@ public class Elite_2 : MonoBehaviour
     private float minY = -2.0f;
     private float maxY = 3.3f;
 
-    [Header("References")]
+    [Header("Attack Settings")]
+    public float fireDelay = 1.5f;
+    private float fireTimer = 0f;
+    private bool isPatternRunning = false;
 
+    [Header("References")]
     public GameObject enemyPrefabs;
     public Transform firePoint;
-    public Transform player;
     public Elite2WarningBlink warningUI;
     private GameManager gameManager;
     public GameObject[] dropItems;
 
-
-    [Header("Fire Timing")]
-
-    public float fireDelay = 1.5f;
+    [Header("Dash Pattern")]
+    public float dashSpeed = 8f;
+    public float returnSpeed = 4f;
+    public GameObject exclamationUI;  
+    private Vector3 spawnPosition;
 
 
     void Start()
     {
-        player = GameObject.FindWithTag("Player")?.transform;
         gameManager = GameManager.Instance;
-        StartCoroutine(SpawnSequence());
+   
 
     }
-
-    IEnumerator SpawnSequence()
+    void Update()
     {
-        while (true)
+        if (isDead || isPatternRunning)
+            return;
+
+        fireTimer += Time.deltaTime;
+
+        if (fireTimer >= fireDelay)
         {
-            if (isDead)
-                yield break;
-            if (warningUI != null)
-                yield return StartCoroutine(warningUI.Blink());
-            shootEnemy();
-            yield return new WaitForSeconds(1.0f);
+            fireTimer = 0f;
+            StartCoroutine(ShootPatternWithWarning());
         }
     }
-    void shootEnemy()
+
+    IEnumerator ShootPatternWithWarning()
+    {
+        isPatternRunning = true;
+
+        if (warningUI != null)
+            yield return StartCoroutine(warningUI.Blink());
+
+        ShootEnemy();
+
+        isPatternRunning = false;
+    }
+
+
+void ShootEnemy()
     {
         Debug.Log("shootEnemy");
 
@@ -114,11 +131,5 @@ public class Elite_2 : MonoBehaviour
     }
 
 }
-    //void StopAllEnemySpawn()
-    //{
-    //    GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
-    //    EnemySpawn2 spawner = spawnObj.GetComponent<EnemySpawn2>();
-    //    spawner.StopSpawn();
-    //}
 
 

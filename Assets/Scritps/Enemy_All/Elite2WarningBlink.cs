@@ -2,19 +2,26 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
 public class Elite2WarningBlink : MonoBehaviour
 {
-    public Image warnImg;        // 깜빡일 이미지
-    public float blinkTime = 0.2f;   // 1회 깜빡이는 시간
-    public int blinkCount = 3;       // 총 몇 번 깜빡일지
+    [Header("Warning Image")]
+    public Image warnImg;
+
+    [Header("Blink Settings")]
+    public float blinkTime = 0.2f;
+    public int blinkCount = 3;
 
     public IEnumerator Blink()
     {
         if (warnImg == null)
+        {
+            Debug.LogError("warnImg가 연결되지 않았습니다.");
             yield break;
+        }
 
-        // 이미지 켜둔다
-        warnImg.gameObject.SetActive(true);
+        gameObject.SetActive(true);
 
         for (int i = 0; i < blinkCount; i++)
         {
@@ -25,7 +32,6 @@ public class Elite2WarningBlink : MonoBehaviour
             yield return new WaitForSeconds(blinkTime);
         }
 
-        warnImg.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
-    
