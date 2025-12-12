@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class Stage2_Elite : MonoBehaviour
 {
-    [Header("Settings")]
+    [Header("Status")]
     public int Hp = 15;
     private bool isDead = false;
+    private bool isPatternRunning = false;
 
     [Header("Movement Settings")]
     public float moveSpeed = 2f;
@@ -13,73 +14,151 @@ public class Stage2_Elite : MonoBehaviour
     private float minY = -2.0f;
     private float maxY = 3.3f;
 
-    [Header("Attack Settings")]
-    public float fireDelay = 1.5f;
-    private float fireTimer = 0f;
-    private bool isPatternRunning = false;
-
-    [Header("References")]
+    [Header("Shoot Pattern")]
     public GameObject enemyPrefabs;
     public Transform firePoint;
-    public Elite2WarningBlink warningUI;
-    private GameManager gameManager;
-    public GameObject[] dropItems;
 
     [Header("Dash Pattern")]
     public float dashSpeed = 8f;
+    public float dashDistance = 6f; 
     public float returnSpeed = 4f;
-    public GameObject exclamationUI;  
+    public float returnDuration = 0.6f;
+    public GameObject exclamationUI;
+
+    [Header("Warning UI")]
+    public Elite2WarningBlink warningUI;
+
+    [Header("Drop Items")]
+    public GameObject[] dropItems;
+
+    [Header("References")]
+    private GameManager gameManager;
+    private Transform player;
+
     private Vector3 spawnPosition;
 
+    void Awake()
+    {
+        gameManager = GameManager.Instance;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+        if (firePoint == null)
+            firePoint = transform.Find("FirePoint");
+
+        if (warningUI == null)
+            warningUI = GetComponentInChildren<Elite2WarningBlink>(true);
+
+        if (exclamationUI == null)
+            exclamationUI = transform.Find("ExclamationUI")?.gameObject;
+
+        if (exclamationUI != null)
+            exclamationUI.SetActive(false);
+
+        spawnPosition = transform.position;
+    }
 
     void Start()
     {
-        gameManager = GameManager.Instance;
-   
-
+        StartCoroutine(PatternLoop());
     }
-    void Update()
+
+    void FixedUpdate()
     {
-        if (isDead || isPatternRunning)
-            return;
-
-        fireTimer += Time.deltaTime;
-
-        if (fireTimer >= fireDelay)
+        if (!isPatternRunning && !isDead)
+            Move();
+    }
+ 
+    IEnumerator PatternLoop()
+    {
+        yield return new WaitForSeconds(3f); 
+        while (!isDead)
         {
-            fireTimer = 0f;
-            StartCoroutine(ShootPatternWithWarning());
+            spawnPosition = transform.position;
+            if (warningUI != null)
+                yield return StartCoroutine(warningUI.Blink());
+            // 1️ Shoot
+            ShootEnemy();
+            isPatternRunning = true;
+            // 2️ 2초 대기
+            yield return new WaitForSeconds(1f);
+
+            // 3 느낌표 표시
+            yield return StartCoroutine(ShowExclamation());
+
+            // 4️ Dash
+            yield return StartCoroutine(DashAttack());
+
+            // 5️ 원위치 복귀
+            yield return StartCoroutine(ReturnToSpawn());
+
+            // 6️ 1초 휴식
+            yield return new WaitForSeconds(1f);
+
+            isPatternRunning = false;
         }
     }
 
-    IEnumerator ShootPatternWithWarning()
+    void ShootEnemy()
     {
-        isPatternRunning = true;
-
-        if (warningUI != null)
-            yield return StartCoroutine(warningUI.Blink());
-
-        ShootEnemy();
-
-        isPatternRunning = false;
-    }
-
-
-void ShootEnemy()
-    {
-        Debug.Log("shootEnemy");
-
         Instantiate(enemyPrefabs, firePoint.position, firePoint.rotation);
-    }
-    private void FixedUpdate()
-    {
-        Move();
+        Debug.Log("Shoot Enemy");
     }
 
+  
+    IEnumerator ShowExclamation()
+    {
+        if (exclamationUI != null)
+        {
+            exclamationUI.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            exclamationUI.SetActive(false);
+        }
+    }
+
+    IEnumerator DashAttack()
+    {
+        if (player == null)
+            yield break;
+
+        Vector3 dir = (player.position - transform.position).normalized;
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = startPos + dir * dashDistance;
+
+        while (Vector3.Distance(transform.position, targetPos) > 0.05f)
+        {
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                targetPos,
+                dashSpeed * Time.deltaTime
+            );
+            yield return null;
+        }
+    }
+
+   
+    IEnumerator ReturnToSpawn()
+    {
+        Vector3 startPos = transform.position;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / returnDuration;
+
+            float easedT = Mathf.SmoothStep(0f, 1f, t);
+
+            transform.position = Vector3.Lerp(startPos, spawnPosition, easedT);
+            yield return null;
+        }
+
+        transform.position = spawnPosition;
+    }
+
+
+   
     void Move()
     {
         Vector3 pos = transform.position;
-
 
         if (movingUp)
         {
@@ -87,7 +166,6 @@ void ShootEnemy()
             if (pos.y >= maxY)
                 movingUp = false;
         }
-
         else
         {
             pos.y -= moveSpeed * Time.deltaTime;
@@ -97,6 +175,8 @@ void ShootEnemy()
 
         transform.position = pos;
     }
+
+  
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
@@ -105,31 +185,38 @@ void ShootEnemy()
             Destroy(collision.gameObject);
         }
     }
+
     public void TakeDamage(int dmg)
     {
         if (isDead)
             return;
+
         Hp -= dmg;
-        Debug.Log($"엘리트 남은 HP : {Hp}");
+        Debug.Log($"엘리트 HP: {Hp}");
+
         if (Hp <= 0)
             Die();
     }
-    public void Die()
+
+    void Die()
     {
         if (isDead)
             return;
+
         isDead = true;
+        StopAllCoroutines();
+
         gameManager.OnEliteEnemyKilled();
         DropItem();
         Destroy(gameObject);
     }
-    // 아이템 드롭 처리 (무작위 1개)
-    private void DropItem()
+
+    void DropItem()
     {
+        if (dropItems.Length == 0)
+            return;
+
         int idx = Random.Range(0, dropItems.Length);
         Instantiate(dropItems[idx], transform.position, Quaternion.identity);
     }
-
 }
-
-
