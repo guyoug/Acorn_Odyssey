@@ -21,10 +21,14 @@ public class GameManager : MonoBehaviour
     [Header("Enemy Prefabs")]
     public GameObject elitePrefabs;
     public GameObject bossPrefabs;
+    public GameObject elite2Prefabs;
+    public GameObject boss2Prefabs;
+    public GameObject elite3Prefabs;
+    public GameObject boss3Prefabs;
 
-    [Header("Spawn Points")]
-    public Transform eliteSpawnPoint;
-    public Transform bossSpawnPoint;
+    [Header("Current Spawn Points")]
+    private Transform currentEliteSpawnPoint;
+    private Transform currentBossSpawnPoint;
 
     [Header("UI Panels")]
     public GameObject stageClearPanel;
@@ -42,6 +46,14 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+    }
+    public void BindSpawnPoints(Transform elite, Transform boss)
+    {
+        currentEliteSpawnPoint = elite;
+        currentBossSpawnPoint = boss;
+
+        Debug.Log("현재 스테이지 스폰 포인트 바인딩 완료");
     }
     private void OnEnable()
     {
@@ -59,14 +71,6 @@ public class GameManager : MonoBehaviour
 
         // 1) stageClearPanel 재할당
         stageClearPanel = GameObject.Find("StageClearPanel");
-
-        // 2) 새 씬의 스폰 포인트 재할당
-        eliteSpawnPoint = GameObject.Find("EliteSpawnPoint")?.transform;
-        bossSpawnPoint = GameObject.Find("BossSpawnPoint")?.transform;
-
-        // 3) EnemySpawn 참조 재설정
-        GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
-     
 
         Debug.Log("씬 전환 후 GameManager 레퍼런스 갱신 완료");
     }
@@ -120,61 +124,64 @@ public class GameManager : MonoBehaviour
     void Stage1Logic()
     {
         // 엘리트 스폰 규칙
-        if (currentWave == 2 && normalKilled >= 8 && spawnedCount == 0)
+        if (currentWave == 2 && normalKilled >= 20 && spawnedCount == 0 
+         || currentWave == 2 && normalKilled >= 40 && spawnedCount == 1
+         || currentWave == 2 && normalKilled >= 60 && spawnedCount == 2)
             SpawnElite();
-
-        if (currentWave == 3 && normalKilled >= 11 && spawnedCount == 0)
+                
+        if (currentWave == 3 && normalKilled >= 20 && spawnedCount == 0
+         || currentWave == 3 && normalKilled >= 40 && spawnedCount == 1)
             SpawnElite();
 
         // 웨이브 넘기기 조건
-        if (currentWave == 1 && normalKilled >= 12)
+        if (currentWave == 1 && normalKilled >= 30)
             StartNextWave();
 
-        if (currentWave == 2 && normalKilled >= 16 && eliteKilled >= 1)
+        if (currentWave == 2 &&  eliteKilled >= 3)
             StartNextWave();
 
-        if (currentWave == 3 && normalKilled >= 22 && eliteKilled >= 2)
+        if (currentWave == 3 &&  eliteKilled >= 2)
             SpawnBoss();
     }
     void Stage2Logic()
     {
-        
-        if (currentWave == 1 && normalKilled >= 10 && spawnedCount == 0)
-            SpawnElite();
 
-        if (currentWave == 2 && normalKilled >= 20 && spawnedCount == 1)
-            SpawnElite();
+        if (currentWave == 2 && normalKilled >= 30 && spawnedCount == 0 
+            || currentWave == 2 && normalKilled >= 60 && spawnedCount == 1)
+            SpawnElite2();
+        if (currentWave == 3 && normalKilled >= 30 && spawnedCount == 0 
+            || currentWave == 3 && normalKilled >= 60 && spawnedCount == 1)
+            SpawnElite2();
 
-        // 웨이브 조건
-        if (currentWave == 1 && normalKilled >= 15)
+        if (currentWave == 1 && normalKilled >= 50)
+            StartNextWave();
+        if (currentWave == 2 && eliteKilled >= 2)
             StartNextWave();
 
-        if (currentWave == 2 && normalKilled >= 25 && eliteKilled >= 1)
-            StartNextWave();
-
-        if (currentWave == 3 && normalKilled >= 30 && eliteKilled >= 2)
+        if (currentWave == 3 && eliteKilled >= 2)
         {
-            //SpawnBoss();
+            //SpawnBoss2();
         }
 
     }
 
     void Stage3Logic()
     {
-        if (currentWave == 1 && normalKilled >= 12 && spawnedCount == 0)
-            SpawnElite();
-
-        if (currentWave == 2 && normalKilled >= 18 && spawnedCount == 1)
-            SpawnElite();
-
-        if (currentWave == 3 && normalKilled >= 30 && eliteKilled >= 2)
-            //SpawnBoss();
-
-        if (currentWave == 1 && normalKilled >= 15)
+        if (currentWave == 1 && normalKilled >= 30)
             StartNextWave();
 
-        if (currentWave == 2 && normalKilled >= 25)
+        if (currentWave == 2 && eliteKilled >= 1)
             StartNextWave();
+
+        if (currentWave == 3 && normalKilled >= 15)
+        {
+            //SpawnBoss3();
+        }
+
+        if (currentWave == 2 && normalKilled >= 15 && spawnedCount == 0)
+            SpawnElite();
+
+       
     }
     public void OnNormalEnemyKilled() //기본 킬  확인
     {
@@ -198,7 +205,12 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnElite() // 엘리트 스폰
     {
-        Instantiate(elitePrefabs, eliteSpawnPoint.transform.position, eliteSpawnPoint.transform.rotation);
+        Instantiate(elitePrefabs, currentEliteSpawnPoint.transform.position, currentEliteSpawnPoint.transform.rotation);
+        spawnedCount++;
+    }
+    public void SpawnElite2()
+    {
+        Instantiate(elite2Prefabs, currentEliteSpawnPoint.transform.position, currentEliteSpawnPoint.transform.rotation);
         spawnedCount++;
     }
    
@@ -212,16 +224,41 @@ public class GameManager : MonoBehaviour
         bossSpawned = false;
         StartWave(currentWave);
     }
+    void ResetStageData()
+    {
+        normalKilled = 0;
+        eliteKilled = 0;
+        bossKilled = 0;
+        spawnedCount = 0;
+        bossSpawned = false;
+    }
     void StartWave(int wave)
     {
         Debug.Log($"Wave {wave} 시작!");
-        
+
     }
     void SpawnBoss() // 보스 스폰
     {
         if (bossSpawned)
             return;
-        Instantiate(bossPrefabs, bossSpawnPoint.position, bossSpawnPoint.rotation);
+        Instantiate(bossPrefabs, currentBossSpawnPoint.position, currentBossSpawnPoint.rotation);
+        bossSpawned = true;
+        StopAllEnemySpawn();
+    }
+    void SpawnBoss2()
+    {
+        if (bossSpawned)
+            return;
+        Instantiate(boss2Prefabs, currentBossSpawnPoint.position, currentBossSpawnPoint.rotation);
+        bossSpawned = true;
+        StopAllEnemySpawn();
+    }
+    void SpawnBoss3()
+    {
+        if (bossSpawned)
+            return;
+
+        Instantiate(boss3Prefabs, currentBossSpawnPoint.position, currentBossSpawnPoint.rotation);
         bossSpawned = true;
         StopAllEnemySpawn();
     }
@@ -265,10 +302,12 @@ public class GameManager : MonoBehaviour
         switch (currentScene)
         {
             case "Game_Play_stage1":
+                ResetStageData();
                 SceneManager.LoadScene("Game_Play_stage2");
                 break;
 
             case "Game_Play_stage2":
+                ResetStageData();
                 SceneManager.LoadScene("Game_Play_stage3");
                 break;
         }

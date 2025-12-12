@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7354156526582991355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4811389040298275702}
+  - component: {fileID: 3398490877822275}
+  m_Layer: 0
+  m_Name: Game_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4811389040298275702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354156526582991355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.94, y: 3.26, z: -0.046826214}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3398490877822275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354156526582991355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e07a6a3ac47f6408d3f66c410e20a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWave: 1
+  bossinterval: 1
+  spawnedCount: 0
+  currentStage: 1
+  normalKilled: 0
+  eliteKilled: 0
+  bossKilled: 0
+  elitePrefabs: {fileID: 805941214016920703, guid: 8e204f6d153289140b52da3bb001eef8, type: 3}
+  bossPrefabs: {fileID: 5602785624397977169, guid: c734b9c1ee69bf5419fb06ec6ad12482, type: 3}
+  elite2Prefabs: {fileID: 7073401299791163637, guid: 8669178636df49f4da37019e1278651b, type: 3}
+  boss2Prefabs: {fileID: 4209751797847306599, guid: d44ba814b0aeed348bd805a3ce1d8ce4, type: 3}
+  eliteSpawnPoint: {fileID: 0}
+  bossSpawnPoint: {fileID: 0}
+  elite2SpanwPoint: {fileID: 0}
+  boss2SpanwPoint: {fileID: 0}
+  stageClearPanel: {fileID: 0}

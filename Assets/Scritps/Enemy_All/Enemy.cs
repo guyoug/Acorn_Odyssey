@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class Enemy : MonoBehaviour
     public int Hp = 5;
     public float maxspeed = 10.0f;
     private bool isDead = false;
+    private float DeadSprite = 0.2f;
 
     [Header("Drop Rates")]
     private float dropItem = 0.05f;  // 5%
@@ -21,56 +23,71 @@ public class Enemy : MonoBehaviour
 
     [Header("References")]
     private GameManager gameManager;
-    
+
+
     [Header("Death Sprite")]
-    public Sprite deadSprite;       
+    public Sprite deadSprite;
     private SpriteRenderer sr;
+    private Collider2D col;
+    private Animator anim;
+
+    [Header("Hit Flash")]
+    private Coroutine hitFlashRoutine;
 
     void Start()
     {
         gameManager = GameManager.Instance;
         if (gameManager == null)
             Debug.Log("GameManager가 null입니다.");
+        sr = GetComponentInChildren<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
+        anim = GetComponentInChildren<Animator>();
         Destroy(gameObject, deleteTime);
-        sr = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
-        if(Hp <= 0)
-        {
-            Die();
-        }
+       
     }
     void FixedUpdate()
     {
+        if (isDead)
+            return;
         transform.Translate(Vector3.left * maxspeed * Time.fixedDeltaTime);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isDead)
+            return;
         if (collision.CompareTag("Bullet"))
         {
             Hp--;
+            Destroy(collision.gameObject);
+           
+            hitFlashRoutine = StartCoroutine(HitFlash());
+            if (Hp <= 0)
+            {
+                Die();
+            }
         }
         else if (collision.CompareTag("Outline"))
+        {
             Destroy(gameObject);
+        }
     }
-    
     public void Die()
     {
         if (isDead)
-           return;
+            return;
         isDead = true;
+       
         gameManager.OnNormalEnemyKilled(); // 킬 계산
         TryDropItem(); // 속성 아이템
         TryDropGagueItem();// 게이지 아이템
-        sr.sprite = deadSprite;
-  
-        GetComponent<Collider2D>().enabled = false;
-        maxspeed = 0;
+        if (hitFlashRoutine != null)
+            StopCoroutine(hitFlashRoutine);
 
-   
-        Destroy(gameObject, 0.1f);
-    }   
+        StartCoroutine(DieRoutine());
+    }
     private void TryDropItem()
     {
         if (dropItems == null)
@@ -93,5 +110,33 @@ public class Enemy : MonoBehaviour
         }
         if (Random.value <= dropGauge) //25퍼
             Instantiate(gaugePrefabs, transform.position, Quaternion.identity);
+    }
+    IEnumerator HitFlash()
+    {
+        if (sr == null || isDead) yield break;
+
+        sr.color = new Color(1f, 0.4f, 0.4f, 0.7f); 
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.white;
+    }
+    IEnumerator DieRoutine()
+    {
+        if (sr != null && deadSprite != null)
+        {
+            sr.color = Color.white;
+            anim.enabled = false;
+            sr.sprite = deadSprite;
+        }
+
+    
+        if (col != null)
+            col.enabled = false;
+
+        maxspeed = 0f;
+
+    
+        yield return new WaitForSeconds(DeadSprite);
+
+        Destroy(gameObject);
     }
 }
