@@ -44,10 +44,6 @@ public class Enemy : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         Destroy(gameObject, deleteTime);
     }
-    private void Update()
-    {
-       
-    }
     void FixedUpdate()
     {
         if (isDead)
