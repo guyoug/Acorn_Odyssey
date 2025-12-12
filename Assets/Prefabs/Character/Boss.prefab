@@ -42,8 +42,8 @@ GameObject:
   - component: {fileID: 3479122224579059384}
   - component: {fileID: 2524639255284515496}
   - component: {fileID: 2208811109429886635}
-  - component: {fileID: 248534939931533181}
   - component: {fileID: 7949611910716290830}
+  - component: {fileID: 4965222555931346950}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -150,29 +150,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &248534939931533181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5602785624397977169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ea10a7104bf8f24c9ea17cd991c13a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hp: 60
-  moveSpeed: 2
-  firePoint: {fileID: 6971232440330525942}
-  throwPoint: {fileID: 7156316360425849894}
-  bulletPrefab: {fileID: 2474956306608283955, guid: b0feb1bcaf1f2dd479eef5d8d2752235, type: 3}
-  knifePrefab: {fileID: 7633541267755210430, guid: 3e4d6bbe7971d914dbbfc9fd4c9a34c4, type: 3}
-  burstDelay: 0.15
-  burstGroupDelay: 0.5
-  gunDelay: 2
-  knifeDelay: 0.7
-  ThrowDelay: 4
 --- !u!58 &7949611910716290830
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -209,6 +186,28 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -2, y: 0.2}
   m_Radius: 2.8
+--- !u!114 &4965222555931346950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5602785624397977169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef807ffdacad431489cad47fa7329200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 60
+  moveSpeed: 2
+  firePoint: {fileID: 6971232440330525942}
+  throwPoint: {fileID: 7156316360425849894}
+  bulletPrefab: {fileID: 1183129726303432694, guid: b0feb1bcaf1f2dd479eef5d8d2752235, type: 3}
+  knifePrefab: {fileID: 7633541267755210430, guid: 3e4d6bbe7971d914dbbfc9fd4c9a34c4, type: 3}
+  burstDelay: 0.15
+  burstGroupDelay: 0.5
+  knifeDelay: 0.7
+  GroupDelay: 0.8
 --- !u!1 &6632058931028223721
 GameObject:
   m_ObjectHideFlags: 0
