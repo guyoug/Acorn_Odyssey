@@ -62,6 +62,12 @@ TagManager:
   - name: Enemy
     uniqueID: 2868633769
     locked: 0
+  - name: Elite
+    uniqueID: 813463829
+    locked: 0
+  - name: Boss
+    uniqueID: 3319854829
+    locked: 0
   - name: Player
     uniqueID: 969417113
     locked: 0

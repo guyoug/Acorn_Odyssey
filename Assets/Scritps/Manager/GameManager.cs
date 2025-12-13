@@ -111,6 +111,10 @@ public class GameManager : MonoBehaviour
         {
             SpawnElite();
         }
+        if (Input.GetKeyDown(KeyCode.F8))
+        {
+            SpawnElite2();
+        }
     }
     void StageWaveLogic()
     {
