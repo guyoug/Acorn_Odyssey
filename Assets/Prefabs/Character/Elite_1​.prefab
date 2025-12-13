@@ -180,6 +180,7 @@ MonoBehaviour:
   - {fileID: 5153587646109670503, guid: cde32f50a8008fc44ac3d1d39aada91f, type: 3}
   throwPoint: {fileID: 722528788329661437}
   firePoint: {fileID: 9166389584856717191}
+  deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
 --- !u!95 &-3320379276178593035
 Animator:
   serializedVersion: 7

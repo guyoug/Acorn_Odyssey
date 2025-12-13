@@ -8,7 +8,7 @@ public class Boss : MonoBehaviour
     [Header("Boss Status")]
     public int Hp = 60;
     private bool isDead = false;
-    public float moveSpeed = 2f;
+    public float maxSpeed = 2f;
     private GameManager gameManager;
 
     [Header("Pattern Points")]
@@ -32,9 +32,21 @@ public class Boss : MonoBehaviour
     private float maxY = 3.3f;
     private Vector3 targetPos;
 
+    [Header("Death Sprite")]
+    public Sprite deadSprite;
+    private SpriteRenderer sr;
+    private Collider2D col;
+    private Animator anim;
+    private float DeadSprite = 0.3f;
+
+    [Header("Hit Flash")]
+    private Coroutine hitFlashRoutine;
     void Start()
     {
         gameManager = GameManager.Instance;
+        sr = GetComponentInChildren<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
+        anim = GetComponentInChildren<Animator>();
         SetNewTarget();
         StartCoroutine(PattenLoop());
     }
@@ -77,11 +89,39 @@ public class Boss : MonoBehaviour
             yield return new WaitForSeconds(knifeDelay);
         }
     }
+    IEnumerator HitFlash()
+    {
+        if (sr == null || isDead) yield break;
+
+        sr.color = new Color(1f, 0.4f, 0.4f, 0.7f);
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.white;
+    }
+    IEnumerator DieRoutine()
+    {
+        if (sr != null && deadSprite != null)
+        {
+            sr.color = Color.white;
+            anim.enabled = false;
+            sr.sprite = deadSprite;
+        }
+
+
+        if (col != null)
+            col.enabled = false;
+
+        maxSpeed = 0f;
+
+
+        yield return new WaitForSeconds(DeadSprite);
+
+        Destroy(gameObject);
+    }
     void MoveRandom()
     {
         if (isDead)
             return;
-        Vector3 newPos = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+        Vector3 newPos = Vector3.MoveTowards(transform.position, targetPos, maxSpeed * Time.deltaTime);
         transform.position = newPos;
 
 
@@ -102,6 +142,7 @@ public class Boss : MonoBehaviour
         if (collision.CompareTag("Bullet"))  
         {
             TakeDamage(1);
+            hitFlashRoutine = StartCoroutine(HitFlash());
             Destroy(collision.gameObject);
         }
     }
@@ -122,7 +163,10 @@ public class Boss : MonoBehaviour
         isDead = true;
         if (gameManager != null)
             gameManager.OnBossEnemyKilled();
-        Destroy(gameObject);
+        if (hitFlashRoutine != null)
+            StopCoroutine(hitFlashRoutine);
+
+        StartCoroutine(DieRoutine());
 
     }
   

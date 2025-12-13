@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 15
-  moveSpeed: 2
+  maxSpeed: 2
   enemyPrefabs: {fileID: 3567399046413335669, guid: 499aa7594577ce44e854ca90039a4ff3, type: 3}
   firePoint: {fileID: 8182221724724245187}
   dashSpeed: 8
@@ -433,6 +433,7 @@ MonoBehaviour:
   normalSprite: {fileID: 21300000, guid: 7f9874de946ab4c4e9f14c424c56b0dc, type: 3}
   shootSprite: {fileID: 21300000, guid: e11eac4c0cd90ae47a2fa08ec3db22f4, type: 3}
   shootSpriteTime: 0.15
+  deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
 --- !u!50 &5905176651306377439
 Rigidbody2D:
   serializedVersion: 5

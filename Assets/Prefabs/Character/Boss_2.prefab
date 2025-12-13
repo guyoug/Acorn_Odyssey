@@ -1038,6 +1038,7 @@ MonoBehaviour:
   centerWarning: {fileID: 869737951335399204}
   upWarning: {fileID: 102617678237820442}
   downWarning: {fileID: 1258120353291935175}
+  exclamationUI: {fileID: 3653330195996773883}
   bulletPrefab: {fileID: 3567399046413335669, guid: 499aa7594577ce44e854ca90039a4ff3, type: 3}
   shootInterval: 0.3
   patternDelay: 1
@@ -1048,11 +1049,11 @@ MonoBehaviour:
   dashSpeed: 12
   dashDuration: 0.6
   dashCooldown: 4
-  exclamationUI: {fileID: 3653330195996773883}
   moveSpeed: 2
   normalSprite: {fileID: 21300000, guid: 62eb221fc59afdd46982aa659e281415, type: 3}
   shootSprite: {fileID: 21300000, guid: a390ca576c6cd054baeb903838492765, type: 3}
   shootSpriteTime: 0.15
+  deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
 --- !u!1 &5298200406770161373
 GameObject:
   m_ObjectHideFlags: 0

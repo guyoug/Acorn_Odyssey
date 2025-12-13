@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -13,14 +14,29 @@ public class PlayerHealth : MonoBehaviour
     public Image[] Player_HP;
     public GameObject gameOverPanel;
 
+    [Header("Hit Flash")]
+    public float hitFlashTime = 0.1f;
+    private Coroutine hitFlashRoutine;
+    private SpriteRenderer sr;
+
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);   // ★ Player 유지
+        DontDestroyOnLoad(gameObject);  
     }
+
     void Start()
     {
         Health();
         UpdateUI();
+        sr = GetComponentInChildren<SpriteRenderer>();
+    }
+    void Update()
+    {
+        // 무적 토글 치트
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            isInvincible = false;
+        }
     }
     void Health() // 최대치
     {
@@ -44,6 +60,10 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= damage;
         UpdateUI();
+
+        if (hitFlashRoutine != null)
+            StopCoroutine(hitFlashRoutine);
+        hitFlashRoutine = StartCoroutine(HitFlash());
         if (currentHealth <= 0)
             Die();
     }
@@ -72,6 +92,16 @@ public class PlayerHealth : MonoBehaviour
         UpdateUI();
         
     }
+    IEnumerator HitFlash()
+    {
+        if (sr == null)
+            yield break;
+
+        sr.color = new Color(1f, 0.4f, 0.4f, 1f);
+        yield return new WaitForSeconds(hitFlashTime);
+        sr.color = Color.white;
+    }
+
 
 }
 

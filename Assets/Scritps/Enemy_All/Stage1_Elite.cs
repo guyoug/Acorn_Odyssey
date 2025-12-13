@@ -11,7 +11,8 @@ public class Elite : MonoBehaviour
     public float knifeDelay = 0.7f;   
     private float GroupDelay = 1.2f;
     private bool isDead = false;
-  
+    private float DeadSprite = 0.3f;
+
 
     [Header("Movement Range")]
     private float minX = 3.5f;
@@ -34,10 +35,23 @@ public class Elite : MonoBehaviour
     private GameManager gameManager;
     private Rigidbody2D rb;
 
+    [Header("Death Sprite")]
+    public Sprite deadSprite;
+    private SpriteRenderer sr;
+    private Collider2D col;
+    private Animator anim;
+
+    [Header("Hit Flash")]
+    private Coroutine hitFlashRoutine;
+
+
     public void Start()
     {
         gameManager = GameManager.Instance;
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
+        anim = GetComponentInChildren<Animator>();
         SetNewTarget();  // 시작 시 최초 목표 위치 설정
         StartCoroutine(PattenLoop());
     }
@@ -100,6 +114,7 @@ public class Elite : MonoBehaviour
         if (collision.CompareTag("Bullet"))
         {
             TakeDamage(1);
+            hitFlashRoutine = StartCoroutine(HitFlash());
             Destroy(collision.gameObject); 
         }
     }
@@ -119,13 +134,45 @@ public class Elite : MonoBehaviour
         isDead = true;
         gameManager.OnEliteEnemyKilled();
         DropItem();
-        Destroy(gameObject);
+        if (hitFlashRoutine != null)
+            StopCoroutine(hitFlashRoutine);
+
+        StartCoroutine(DieRoutine());
+       
     }
     // 아이템 드롭 처리 (무작위 1개)
     private void DropItem()
     {
         int idx = Random.Range(0, dropItems.Length);
         Instantiate(dropItems[idx], transform.position, Quaternion.identity);
+    }
+    IEnumerator HitFlash()
+    {
+        if (sr == null || isDead) yield break;
+
+        sr.color = new Color(1f, 0.4f, 0.4f, 0.7f);
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.white;
+    }
+    IEnumerator DieRoutine()
+    {
+        if (sr != null && deadSprite != null)
+        {
+            sr.color = Color.white;
+            anim.enabled = false;
+            sr.sprite = deadSprite;
+        }
+
+
+        if (col != null)
+            col.enabled = false;
+
+        moveSpeed = 0;
+
+
+        yield return new WaitForSeconds(DeadSprite);
+
+        Destroy(gameObject);
     }
 }
 

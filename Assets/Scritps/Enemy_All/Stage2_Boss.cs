@@ -56,6 +56,15 @@ public class Stage2_Boss : MonoBehaviour
     public float shootSpriteTime = 0.15f;
     private SpriteRenderer sr;
 
+    [Header("Death Sprite")]
+    public Sprite deadSprite;
+    private Collider2D col;
+    private Animator anim;
+    private float DeadSprite = 0.3f;
+
+    [Header("Hit Flash")]
+    private Coroutine hitFlashRoutine;
+
 
     void Start()
     {
@@ -63,6 +72,7 @@ public class Stage2_Boss : MonoBehaviour
         spawnPosition = transform.position;
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         sr = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
 
         if (exclamationUI != null)
             exclamationUI.SetActive(false);
@@ -206,13 +216,43 @@ public class Stage2_Boss : MonoBehaviour
 
         transform.position = pos;
     }
+    IEnumerator HitFlash()
+    {
+        if (sr == null || isDead) yield break;
 
+        sr.color = new Color(1f, 0.4f, 0.4f, 0.7f);
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.white;
+    }
+    IEnumerator DieRoutine()
+    {
+        if (sr != null && deadSprite != null)
+        {
+            sr.color = Color.white;
+            anim.enabled = false;
+            sr.sprite = deadSprite;
+        }
+
+
+        if (col != null)
+            col.enabled = false;
+
+        moveSpeed = 0f;
+
+
+        yield return new WaitForSeconds(DeadSprite);
+
+        StopAllCoroutines();
+
+        Destroy(gameObject);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
         {
             TakeDamage(1);
+            hitFlashRoutine = StartCoroutine(HitFlash());
             Destroy(collision.gameObject);
         }
     }
@@ -232,8 +272,12 @@ public class Stage2_Boss : MonoBehaviour
         isDead = true;
         if (gameManager != null)
             gameManager.OnBossEnemyKilled();
-        StopAllCoroutines();
-        Destroy(gameObject);
+        if (hitFlashRoutine != null)
+            StopCoroutine(hitFlashRoutine);
+
+        StartCoroutine(DieRoutine());
+      
+   
 
 
     }

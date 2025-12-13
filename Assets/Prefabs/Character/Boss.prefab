@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 60
-  moveSpeed: 2
+  maxSpeed: 2
   firePoint: {fileID: 6971232440330525942}
   throwPoint: {fileID: 7156316360425849894}
   bulletPrefab: {fileID: 1183129726303432694, guid: b0feb1bcaf1f2dd479eef5d8d2752235, type: 3}
@@ -209,6 +209,7 @@ MonoBehaviour:
   burstGroupDelay: 0.5
   knifeDelay: 0.7
   GroupDelay: 0.8
+  deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
 --- !u!95 &-8862285071727688489
 Animator:
   serializedVersion: 7

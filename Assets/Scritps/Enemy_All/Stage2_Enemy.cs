@@ -54,9 +54,10 @@ public class Enemy2 : MonoBehaviour
         if (collision.CompareTag("Bullet"))
         {
             Hp--;
+            hitFlashRoutine = StartCoroutine(HitFlash());
             Destroy(collision.gameObject);
 
-            hitFlashRoutine = StartCoroutine(HitFlash());
+           
             if (Hp <= 0)
             {
                 Die();
