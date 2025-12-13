@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4039725711469319171}
   - component: {fileID: 3464773557909226744}
   m_Layer: 0
-  m_Name: warning
+  m_Name: warning_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -473,7 +473,7 @@ MonoBehaviour:
   returnSpeed: 4
   returnDuration: 0.6
   exclamationUI: {fileID: 1681593352740439287}
-  warningUI: {fileID: 1772622626452891311}
+  warningUIObj: {fileID: 2019248888469313740}
   dropItems: []
 --- !u!50 &5905176651306377439
 Rigidbody2D:
