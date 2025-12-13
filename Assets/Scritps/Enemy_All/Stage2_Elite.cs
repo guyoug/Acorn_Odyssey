@@ -25,8 +25,9 @@ public class Stage2_Elite : MonoBehaviour
     public float returnDuration = 0.6f;
     public GameObject exclamationUI;
 
-    [Header("Warning UI")]
-    public Elite2WarningBlink warningUI;
+    [Header("Warning UI")] 
+    public GameObject warningUIObj;
+    private Elite2WarningBlink warningUI;
 
     [Header("Drop Items")]
     public GameObject[] dropItems;
@@ -45,8 +46,9 @@ public class Stage2_Elite : MonoBehaviour
         if (firePoint == null)
             firePoint = transform.Find("FirePoint");
 
-        if (warningUI == null)
-            warningUI = GetComponentInChildren<Elite2WarningBlink>(true);
+        warningUI = warningUIObj.GetComponent<Elite2WarningBlink>();
+        //  if (warningUI == null)
+              //warningUI = GetComponentInChildren<Elite2WarningBlink>(true);
 
         if (exclamationUI == null)
             exclamationUI = transform.Find("ExclamationUI")?.gameObject;
