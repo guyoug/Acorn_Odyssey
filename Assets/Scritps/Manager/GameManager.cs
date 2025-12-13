@@ -207,6 +207,11 @@ public class GameManager : MonoBehaviour
     public void OnBossEnemyKilled() // 보스 킬 확인
     {
         bossKilled++;
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.stageClearSFX);
+
+
         Debug.Log("보스 제거 : " + bossKilled);
         StartCoroutine(killboss());
       

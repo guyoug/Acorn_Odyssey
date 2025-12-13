@@ -161,6 +161,7 @@ public class Boss : MonoBehaviour
         if (isDead) 
             return;
         isDead = true;
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
         if (gameManager != null)
             gameManager.OnBossEnemyKilled();
         if (hitFlashRoutine != null)

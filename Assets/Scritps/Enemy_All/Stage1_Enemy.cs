@@ -76,7 +76,9 @@ public class Enemy : MonoBehaviour
         if (isDead)
             return;
         isDead = true;
-       
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
+
+
         gameManager.OnNormalEnemyKilled(); // 킬 계산
         TryDropItem(); // 속성 아이템
         TryDropGagueItem();// 게이지 아이템

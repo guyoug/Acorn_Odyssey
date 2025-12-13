@@ -99,5 +99,12 @@ public class PlayerUpgrade : MonoBehaviour
 
         Debug.Log($"Tail 생성 완료! 현재 Tail 수: {tailList.Count}");
     }
+    public void ResetUpgrade()
+    {
+        speedStack = 0;
+        moreStack = 0;
+        nutStack = 0;
+        shoot.isNutStormMode = false;
+    }
 }
 

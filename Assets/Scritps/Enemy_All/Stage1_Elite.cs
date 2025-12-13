@@ -132,6 +132,7 @@ public class Elite : MonoBehaviour
         if (isDead)
            return;
         isDead = true;
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
         gameManager.OnEliteEnemyKilled();
         DropItem();
         if (hitFlashRoutine != null)

@@ -242,7 +242,7 @@ public class Stage2_Elite : MonoBehaviour
             return;
 
         isDead = true;
-        StopAllCoroutines();
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
 
         gameManager.OnEliteEnemyKilled();
         DropItem();

@@ -18,9 +18,17 @@ public class PlayerHealth : MonoBehaviour
     public float hitFlashTime = 0.1f;
     private Coroutine hitFlashRoutine;
     private SpriteRenderer sr;
-
+    public static PlayerHealth Instance;
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         DontDestroyOnLoad(gameObject);  
     }
 
@@ -64,6 +72,7 @@ public class PlayerHealth : MonoBehaviour
         if (hitFlashRoutine != null)
             StopCoroutine(hitFlashRoutine);
         hitFlashRoutine = StartCoroutine(HitFlash());
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.playerHitSFX);
         if (currentHealth <= 0)
             Die();
     }
@@ -71,6 +80,10 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         isDead = true;
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.gameOverSFX);
+
         Debug.Log("Game Over");
         PlayerGauge gauge = GetComponent<PlayerGauge>();
         if (gauge != null)
@@ -102,7 +115,13 @@ public class PlayerHealth : MonoBehaviour
         sr.color = Color.white;
     }
 
-
+    public void ResetPlayer()
+    {
+        isDead = false;
+        isInvincible = false;
+        currentHealth = maxHealth;
+        UpdateUI();
+    }
 }
 
 

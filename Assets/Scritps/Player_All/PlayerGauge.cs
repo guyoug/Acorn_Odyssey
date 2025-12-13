@@ -120,5 +120,10 @@ public class PlayerGauge : MonoBehaviour
         Instantiate(gaugePrefab, pos, Quaternion.identity);
         Debug.Log("치트: 게이지 아이템 생성!");
     }
+    public void ResetGauge()
+    {
+        gauge = 0;
+        UpdateGaugeUI();
+    }
 }
 
