@@ -6947,14 +6947,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2759379992947635011, guid: 19e321547e7abfd4bbff9645c5da5f96, type: 3}
-      propertyPath: brustDelay
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 2759379992947635011, guid: 19e321547e7abfd4bbff9645c5da5f96, type: 3}
-      propertyPath: isNutStormMode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2920152261575186229, guid: 19e321547e7abfd4bbff9645c5da5f96, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.51
@@ -7039,10 +7031,6 @@ PrefabInstance:
       propertyPath: 'offSlots.Array.data[4]'
       value: 
       objectReference: {fileID: 719844884}
-    - target: {fileID: 5983915457375961484, guid: 19e321547e7abfd4bbff9645c5da5f96, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6437303073587295994, guid: 19e321547e7abfd4bbff9645c5da5f96, type: 3}
       propertyPath: m_Name
       value: Player

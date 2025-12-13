@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Status")]
     public int Hp = 5;
-    public float maxspeed = 10.0f;
+    public float maxspeed = 3.0f;
     private bool isDead = false;
     private float DeadSprite = 0.2f;
 
