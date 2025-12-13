@@ -115,6 +115,10 @@ public class GameManager : MonoBehaviour
         {
             SpawnElite2();
         }
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            SpawnBoss2();   
+        }
     }
     void StageWaveLogic()
     {
@@ -164,7 +168,7 @@ public class GameManager : MonoBehaviour
 
         if (currentWave == 3 && eliteKilled >= 2)
         {
-            //SpawnBoss2();
+            SpawnBoss2();
         }
 
     }
@@ -247,7 +251,7 @@ public class GameManager : MonoBehaviour
             return;
         Instantiate(bossPrefabs, currentBossSpawnPoint.position, currentBossSpawnPoint.rotation);
         bossSpawned = true;
-        StopAllEnemySpawn();
+        StopAllEnemySpawn1();
     }
     void SpawnBoss2()
     {
@@ -255,7 +259,7 @@ public class GameManager : MonoBehaviour
             return;
         Instantiate(boss2Prefabs, currentBossSpawnPoint.position, currentBossSpawnPoint.rotation);
         bossSpawned = true;
-        StopAllEnemySpawn();
+        StopAllEnemySpawn2();
     }
     void SpawnBoss3()
     {
@@ -264,14 +268,29 @@ public class GameManager : MonoBehaviour
 
         Instantiate(boss3Prefabs, currentBossSpawnPoint.position, currentBossSpawnPoint.rotation);
         bossSpawned = true;
-        StopAllEnemySpawn();
+        //StopAllEnemySpawn3();
     }
-    void StopAllEnemySpawn() //스폰시 enemy 스폰 X
+    void StopAllEnemySpawn1() //스폰시 enemy 스폰 X
     {
         GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
         EnemySpawn1  spawner = spawnObj.GetComponent<EnemySpawn1>();
+       
         spawner.StopSpawn();
     }
+    void StopAllEnemySpawn2() //스폰시 enemy 스폰 X
+    {
+        GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
+        EnemySpawn2 spawner = spawnObj.GetComponent<EnemySpawn2>();
+
+        spawner.StopSpawn();
+    }
+    //void StopAllEnemySpawn1() //스폰시 enemy 스폰 X
+    //{
+    //    GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
+    //    EnemySpawn1 spawner = spawnObj.GetComponent<EnemySpawn1>();
+
+    //    spawner.StopSpawn();
+    //}
 
     IEnumerator killboss()
     {

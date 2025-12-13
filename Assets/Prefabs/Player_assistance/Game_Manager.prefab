@@ -55,8 +55,6 @@ MonoBehaviour:
   bossPrefabs: {fileID: 5602785624397977169, guid: c734b9c1ee69bf5419fb06ec6ad12482, type: 3}
   elite2Prefabs: {fileID: 7073401299791163637, guid: 8669178636df49f4da37019e1278651b, type: 3}
   boss2Prefabs: {fileID: 4209751797847306599, guid: d44ba814b0aeed348bd805a3ce1d8ce4, type: 3}
-  eliteSpawnPoint: {fileID: 0}
-  bossSpawnPoint: {fileID: 0}
-  elite2SpanwPoint: {fileID: 0}
-  boss2SpanwPoint: {fileID: 0}
+  elite3Prefabs: {fileID: 0}
+  boss3Prefabs: {fileID: 4343329236677918334, guid: e1f829e85d815ab4d81937188bfe48da, type: 3}
   stageClearPanel: {fileID: 0}
