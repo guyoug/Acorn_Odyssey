@@ -36,6 +36,13 @@ public class Stage2_Elite : MonoBehaviour
     private GameManager gameManager;
     private Transform player;
 
+    [Header("Shoot Sprite Effect")]
+    public Sprite normalSprite;      // 기본 이미지
+    public Sprite shootSprite;       // 공격 시 이미지
+    public float shootSpriteTime = 0.15f;
+
+    private SpriteRenderer sr;
+
     private Vector3 spawnPosition;
 
     void Awake()
@@ -61,6 +68,11 @@ public class Stage2_Elite : MonoBehaviour
 
     void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
+
+        if (sr != null && normalSprite == null)
+            normalSprite = sr.sprite;
+
         StartCoroutine(PatternLoop());
     }
 
@@ -78,8 +90,10 @@ public class Stage2_Elite : MonoBehaviour
             spawnPosition = transform.position;
             if (warningUI != null)
                 yield return StartCoroutine(warningUI.Blink());
+
             // 1️ Shoot
             ShootEnemy();
+
             isPatternRunning = true;
             // 2️ 2초 대기
             yield return new WaitForSeconds(1f);
@@ -89,10 +103,7 @@ public class Stage2_Elite : MonoBehaviour
 
             // 4️ Dash
             yield return StartCoroutine(DashAttack());
-
-            // 5️ 원위치 복귀
-            yield return StartCoroutine(ReturnToSpawn());
-
+      
             // 6️ 1초 휴식
             yield return new WaitForSeconds(1f);
 
@@ -102,6 +113,7 @@ public class Stage2_Elite : MonoBehaviour
 
     void ShootEnemy()
     {
+        StartCoroutine(ShootSpriteEffect());
         Instantiate(enemyPrefabs, firePoint.position, firePoint.rotation);
         Debug.Log("Shoot Enemy");
     }
@@ -135,9 +147,11 @@ public class Stage2_Elite : MonoBehaviour
             );
             yield return null;
         }
+        yield return StartCoroutine(ReturnToSpawn());
+
     }
 
-   
+
     IEnumerator ReturnToSpawn()
     {
         Vector3 startPos = transform.position;
@@ -156,8 +170,16 @@ public class Stage2_Elite : MonoBehaviour
         transform.position = spawnPosition;
     }
 
+    IEnumerator ShootSpriteEffect()
+    {
+        if (sr == null || shootSprite == null)
+            yield break;
 
-   
+        sr.sprite = shootSprite;
+        yield return new WaitForSeconds(shootSpriteTime);
+        sr.sprite = normalSprite;
+    }
+
     void Move()
     {
         Vector3 pos = transform.position;

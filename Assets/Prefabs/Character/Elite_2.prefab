@@ -305,7 +305,7 @@ Transform:
   m_GameObject: {fileID: 6771589094453221335}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.69, y: -1.46, z: 0}
+  m_LocalPosition: {x: 6.51, y: -0.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -426,7 +426,13 @@ MonoBehaviour:
   returnDuration: 0.6
   exclamationUI: {fileID: 1681593352740439287}
   warningUIObj: {fileID: 2019248888469313740}
-  dropItems: []
+  dropItems:
+  - {fileID: 7479479294581569970, guid: 5613830ff38c08e42907d8e2850c8caf, type: 3}
+  - {fileID: 5967642582716743412, guid: a279bbf78d6038c448230f9d4b8a5ecf, type: 3}
+  - {fileID: 5153587646109670503, guid: cde32f50a8008fc44ac3d1d39aada91f, type: 3}
+  normalSprite: {fileID: 21300000, guid: 7f9874de946ab4c4e9f14c424c56b0dc, type: 3}
+  shootSprite: {fileID: 21300000, guid: e11eac4c0cd90ae47a2fa08ec3db22f4, type: 3}
+  shootSpriteTime: 0.15
 --- !u!50 &5905176651306377439
 Rigidbody2D:
   serializedVersion: 5

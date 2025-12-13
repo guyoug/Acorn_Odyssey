@@ -205,6 +205,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   SpeedStack: 0.25
+  minX: -10.4
+  maxX: 10.4
+  minY: -4.5
+  maxY: 4.5
 --- !u!114 &8210030351846736372
 MonoBehaviour:
   m_ObjectHideFlags: 0

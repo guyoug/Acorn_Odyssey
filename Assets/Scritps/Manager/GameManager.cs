@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("GAME Settings")]
     public int currentWave = 1;
-    public int bossinterval = 5;      
+    public int bossinterval = 3;    
     public int spawnedCount = 0;
     public int currentStage = 1;
 
@@ -239,6 +239,7 @@ public class GameManager : MonoBehaviour
         bossKilled = 0;
         spawnedCount = 0;
         bossSpawned = false;
+        Time.timeScale = 1;
     }
     void StartWave(int wave)
     {
@@ -294,6 +295,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator killboss()
     {
+        Time.timeScale = 0;
         var canvas = GameObject.Find("Canvas");
         if (canvas != null)
         {

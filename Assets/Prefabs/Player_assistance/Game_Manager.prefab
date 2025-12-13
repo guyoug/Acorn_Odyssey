@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWave: 1
-  bossinterval: 5
+  bossinterval: 3
   spawnedCount: 0
   currentStage: 1
   normalKilled: 0
