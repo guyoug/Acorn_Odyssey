@@ -20,6 +20,8 @@ public class PlayerHealth : MonoBehaviour
     private Coroutine hitFlashRoutine;
     private SpriteRenderer sr;
     public static PlayerHealth Instance;
+
+    public GameObject uiRoot;
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -99,14 +101,12 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
         GameManager.Instance.isGameOver = true;
+        if (uiRoot != null)
+            uiRoot.SetActive(false);
         if (SoundManager.Instance != null)
             SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.gameOverSFX);
-
         Debug.Log("Game Over");
-        PlayerGauge gauge = GetComponent<PlayerGauge>();
-        if (gauge != null)
-            gauge.ShowGaugeUI(false); 
         gameOverPanel.SetActive(true);
         Time.timeScale = 0f;
     }

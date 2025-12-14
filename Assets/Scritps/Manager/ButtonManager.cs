@@ -71,23 +71,29 @@ public class ButtonManager : MonoBehaviour
     }
     void Update()
     {
+        // 게임 오버 중에는 ESC 무시
         if (gameOverPanel != null && gameOverPanel.activeSelf)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (settingsPanel.activeSelf)
-            {
-                CloseSettings();
-                return;
-            }
+        if (!Input.GetKeyDown(KeyCode.Escape))
+            return;
 
-            if (!isPaused)
-            {
-                Pause();
-                return;
-            }
+        // 1. 설정창 열려 있으면  설정 닫고 퍼즈 패널로 복귀
+        if (settingsPanel != null && settingsPanel.activeSelf)
+        {
+            CloseSettings();   // settings OFF, pause ON
+            return;
         }
+
+        // 2. 퍼즈 상태면  다시 시작
+        if (isPaused)
+        {
+            Resume();
+            return;
+        }
+
+        // 3. 그 외  퍼즈 진입
+        Pause();
     }
     public void Pause()
     {
