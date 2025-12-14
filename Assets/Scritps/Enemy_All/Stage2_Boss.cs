@@ -59,7 +59,7 @@ public class Stage2_Boss : MonoBehaviour
     [Header("Death Sprite")]
     public Sprite deadSprite;
     private Collider2D col;
-    private Animator anim;
+    //private Animator anim;
     private float DeadSprite = 0.3f;
 
     [Header("Hit Flash")]
@@ -234,7 +234,7 @@ public class Stage2_Boss : MonoBehaviour
         if (sr != null && deadSprite != null)
         {
             sr.color = Color.white;
-            anim.enabled = false;
+            //anim.enabled = false;
             sr.sprite = deadSprite;
         }
 

@@ -13,6 +13,7 @@ TagManager:
   - PlayerAttack
   - Bullet
   - Enemy_Spawn_Manager
+  - StageUI
   layers:
   - Default
   - TransparentFX

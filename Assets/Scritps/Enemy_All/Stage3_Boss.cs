@@ -43,7 +43,13 @@ public class Stage3_Boss : MonoBehaviour
         whip.SetActive(false);
         StartCoroutine(WhipPattern());
     }
-
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.M))
+        {
+            TakeDamage(210);
+        }
+    }
     IEnumerator WhipPattern()
     {
         while (true)

@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game_Play_stage3.unity
     guid: 6a6025b81954e4e4d9827718a1e35491
+  - enabled: 1
+    path: Assets/Scenes/EndingScene.unity
+    guid: e7b2d1db6fcfab84fb63fad9cf9d39e2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

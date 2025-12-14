@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerShoot : MonoBehaviour
 {
 
@@ -23,7 +23,20 @@ public class PlayerShoot : MonoBehaviour
     [Header("NutStorm Mode")]
     public bool isNutStormMode = false;
     private bool isBurstRunning = false;
+    void Awake()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RefreshReferences();
+    }
     void Update()
     {
         checkTime += Time.deltaTime;
@@ -36,13 +49,26 @@ public class PlayerShoot : MonoBehaviour
                 checkTime = 0f;
             }
 
-            return;   // <<<<<< 이 한 줄이 핵심
+            return;   
         }
     }
+    void RefreshReferences()
+    {
+        // FirePoint 재연결
+        if (!firePoint)
+            firePoint = transform.Find("FirePoint");
 
+        // Tail 재연결
+        PlayerUpgrade upgrade = GetComponent<PlayerUpgrade>();
+        if (upgrade != null)
+            upgrade.RefreshTailList();
+    }
 
     public void Shoot()
     {
+        if (!firePoint)
+            RefreshReferences();
+
         PlayerUpgrade upgrade = GetComponent<PlayerUpgrade>();
 
         // 넛스톰 모드일 때

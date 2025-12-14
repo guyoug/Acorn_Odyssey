@@ -53,8 +53,10 @@ public class Stage3_Enemy : MonoBehaviour
         if (isDead)
             return;
         isDead = true;
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
-        GameManager.Instance.OnNormalEnemyKilled(); 
+        if (SoundManager.Instance != null && SoundManager.Instance.enemyDieSFX != null)
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
+        if (GameManager.Instance != null)
+            GameManager.Instance.OnNormalEnemyKilled();
         TryDropItem(); // 속성 아이템
         TryDropGagueItem();// 게이지 아이템
         if (hitFlashRoutine != null)
@@ -98,7 +100,8 @@ public class Stage3_Enemy : MonoBehaviour
         if (sr != null && deadSprite != null)
         {
             sr.color = Color.white;
-            anim.enabled = false;
+            if (anim != null)
+                anim.enabled = false;
             sr.sprite = deadSprite;
         }
 
@@ -118,7 +121,7 @@ public class Stage3_Enemy : MonoBehaviour
     {
         if (collision.CompareTag("Outline"))
         {
-            Die();
+            TakeDamage(9999);
         }
     }
   

@@ -63,7 +63,7 @@ public class PlayerHealth : MonoBehaviour
         // 무적 토글 치트
         if (Input.GetKeyDown(KeyCode.P))
         {
-            isInvincible = false;
+            isInvincible = true;
         }
     }
     void Health() // 최대치
@@ -103,6 +103,9 @@ public class PlayerHealth : MonoBehaviour
         GameManager.Instance.isGameOver = true;
         if (uiRoot != null)
             uiRoot.SetActive(false);
+        PlayerGauge gauge = GetComponent<PlayerGauge>();
+        if (gauge != null)
+            gauge.ResetGauge();
         if (SoundManager.Instance != null)
             SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.gameOverSFX);

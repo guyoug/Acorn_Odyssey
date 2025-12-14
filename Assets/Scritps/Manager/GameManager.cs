@@ -36,7 +36,9 @@ public class GameManager : MonoBehaviour
     [Header("Singleton")]
     public static GameManager Instance;
 
+
     public bool isGameOver = false;
+    public GameObject stageUICanvas;
 
     private void Awake() //싱글턴
     {
@@ -116,7 +118,7 @@ public class GameManager : MonoBehaviour
         {
             SpawnElite2();
         }
-        if (Input.GetKeyDown(KeyCode.F9))
+        if (Input.GetKeyDown(KeyCode.F11))
         {
             SpawnBoss2();   
         }
@@ -312,6 +314,9 @@ public class GameManager : MonoBehaviour
     IEnumerator killboss()
     {
         Time.timeScale = 0;
+        GameObject stageCanvas = GameObject.FindWithTag("StageUI");
+        if (stageCanvas != null)
+            stageCanvas.SetActive(false);
         var canvas = GameObject.Find("Canvas");
         if (canvas != null)
         {

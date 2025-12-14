@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerUpgrade : MonoBehaviour
@@ -98,6 +99,11 @@ public class PlayerUpgrade : MonoBehaviour
         tailList.Add(newTail);
 
         Debug.Log($"Tail 생성 완료! 현재 Tail 수: {tailList.Count}");
+    }
+    public void RefreshTailList()
+    {
+        tailList.Clear();
+        tailList.AddRange(GetComponentsInChildren<Tail>());
     }
     public void ResetUpgrade()
     {

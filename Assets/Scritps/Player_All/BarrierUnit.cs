@@ -47,7 +47,7 @@ public class BarrierUnit : MonoBehaviour
             Stage3_Enemy stage3_Enemy = collision.GetComponent<Stage3_Enemy>();
             if(stage3_Enemy != null)
             {
-                stage3_Enemy.Die();
+                stage3_Enemy.TakeDamage(1);
             }
               
             
@@ -68,12 +68,12 @@ public class BarrierUnit : MonoBehaviour
                 hitBarrier();
             }
 
-            //Stage3_Elite stage3_Elite = collision.GetComponent<Stage3_Elite>();
-            //if(stage3_Elite != null)
-            //{
-            //    stage3_Elite.TakeDamage(1);
-            //    hitBarrier();
-            //}
+            Stage3_Elite stage3_Elite = collision.GetComponent<Stage3_Elite>();
+            if (stage3_Elite != null)
+            {
+                stage3_Elite.TakeDamage(1);
+                hitBarrier();
+            }
 
         }
         if (collision.CompareTag("Boss"))
