@@ -418,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 15
   maxSpeed: 2
-  enemyPrefabs: {fileID: 3567399046413335669, guid: 499aa7594577ce44e854ca90039a4ff3, type: 3}
+  enemyPrefabs: {fileID: 8706026456541892852, guid: 162ed320a87aebc43b4d20d6afe23991, type: 3}
   firePoint: {fileID: 8182221724724245187}
   dashSpeed: 8
   dashDistance: 6

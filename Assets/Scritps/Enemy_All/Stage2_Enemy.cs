@@ -32,25 +32,31 @@ public class Stage2_Enemy : MonoBehaviour
     private Coroutine hitFlashRoutine;
     private void Start()
     {
-
-        gameManager = GameManager.Instance;
-        if (gameManager == null)
-            Debug.Log("GameManager가 null입니다.");
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         anim = GetComponentInChildren<Animator>();
+
+        if (sr != null)
+        {
+            sr.enabled = true;
+            sr.color = Color.white;
+        }
+
+        if (anim != null)
+            anim.enabled = true;
+
         Destroy(gameObject, deleteTime);
     }
     void FixedUpdate()
     {
         if (isDead)
             return;
+
         transform.Translate(Vector3.left * maxspeed * Time.fixedDeltaTime);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isDead)
-            return;
+
         if (collision.CompareTag("Bullet"))
         {
             TakeDamage(1);
@@ -78,7 +84,7 @@ public class Stage2_Enemy : MonoBehaviour
             return;
         isDead = true;
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
-        gameManager.OnNormalEnemyKilled(); // 킬 계산
+        GameManager.Instance.OnNormalEnemyKilled(); // 킬 계산
         TryDropItem(); // 속성 아이템
         TryDropGagueItem();// 게이지 아이템
         if (hitFlashRoutine != null)

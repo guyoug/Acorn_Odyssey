@@ -429,7 +429,7 @@ Transform:
   m_GameObject: {fileID: 4106967379748461959}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.77, y: -1.17, z: 0}
+  m_LocalPosition: {x: 4.77, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1039,7 +1039,7 @@ MonoBehaviour:
   upWarning: {fileID: 102617678237820442}
   downWarning: {fileID: 1258120353291935175}
   exclamationUI: {fileID: 3653330195996773883}
-  bulletPrefab: {fileID: 3567399046413335669, guid: 499aa7594577ce44e854ca90039a4ff3, type: 3}
+  bulletPrefab: {fileID: 8706026456541892852, guid: 162ed320a87aebc43b4d20d6afe23991, type: 3}
   shootInterval: 0.3
   patternDelay: 1
   PatternInterval: 2
