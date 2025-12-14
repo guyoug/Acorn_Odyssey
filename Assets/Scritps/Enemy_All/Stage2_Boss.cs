@@ -39,7 +39,7 @@ public class Stage2_Boss : MonoBehaviour
     public float bottomAngle = -30f;
     [Header("Dash Pattern")]
     public float dashSpeed = 10f;
-    public float dashDuration = 0.6f;
+    public float dashDuration = 2.0f;
     public float dashCooldown = 4f;
 
  
@@ -97,36 +97,41 @@ public class Stage2_Boss : MonoBehaviour
         while (!isDead)
         {
             isPatternRunning = true;
+
+            StartCoroutine(ShootSpriteEffect());
+
             if (centerWarning != null)
                 yield return StartCoroutine(centerWarning.Blink());
 
             yield return StartCoroutine(
-                ShootBurst(firePointCenter, 5, centerAngle)
-            );
+            ShootBurst(firePointCenter, 5, centerAngle));
 
             yield return new WaitForSeconds(patternDelay);
+
+            StartCoroutine(ShootSpriteEffect());
 
             if (upWarning != null)
                 yield return StartCoroutine(upWarning.Blink());
 
             yield return StartCoroutine(
-                ShootBurst(firePointUp, 3, topAngle)
-            );
+              ShootBurst(firePointUp, 3, topAngle));
 
             yield return new WaitForSeconds(patternDelay);
 
+            StartCoroutine(ShootSpriteEffect());
 
             if (downWarning != null)
                 yield return StartCoroutine(downWarning.Blink());
 
-            yield return StartCoroutine(
-                ShootBurst(firePointDown, 3, bottomAngle)
-            );
-        
+            yield return StartCoroutine(ShootBurst(firePointDown, 3, bottomAngle));
+
             yield return StartCoroutine(DashAttack());
+
 
             yield return new WaitForSeconds(dashCooldown);
             isPatternRunning = false;
+
+
         }
     }
 
@@ -141,7 +146,6 @@ public class Stage2_Boss : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            StartCoroutine(ShootSpriteEffect());
             Instantiate(bulletPrefab, firePoint.position, rot);
             yield return new WaitForSeconds(shootInterval);
         }
@@ -195,7 +199,7 @@ public class Stage2_Boss : MonoBehaviour
             yield break;
 
         sr.sprite = shootSprite;
-        yield return new WaitForSeconds(shootSpriteTime);
+        yield return new WaitForSeconds(1f);
         sr.sprite = normalSprite;
     }
     void Move()

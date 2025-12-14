@@ -14,11 +14,77 @@ public class Stage3_Elite : MonoBehaviour
     public Sprite deadSprite;
     private Coroutine hitFlashRoutine;
 
+    [Header("Fire")]
+    public GameObject fireBreath;
+
+    [Header("Move Points (Bottom → Mid → Top)")]
+    public Transform bottomPoint;
+    public Transform midPoint;
+    public Transform topPoint;
+
+    [Header("Movement")]
+    public float moveSpeed = 5f;
+
+    [Header("Timing (Boss Sync)")]
+    public float preFireDelay = 0.25f;
+    public float fireTime = 0.35f;
+    public float postFireDelay = 0.25f;     
+    public float turnDelay = 1.0f;         
+
     void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
+        fireBreath.SetActive(false);
+        StartCoroutine(FireMovePattern());
 
+    }
+    IEnumerator FireMovePattern()
+    {
+        while (true)
+        {
+            yield return StartCoroutine(MoveAndFire(bottomPoint));
+            yield return StartCoroutine(MoveAndFire(midPoint));
+            yield return StartCoroutine(MoveAndFire(topPoint));
+
+            // ▶ 최상단 정지 (보스랑 동일한 호흡)
+            yield return new WaitForSeconds(turnDelay);
+
+            // ▶ 위 → 아래
+            yield return StartCoroutine(MoveAndFire(midPoint));
+            yield return StartCoroutine(MoveAndFire(bottomPoint));
+
+            // ▶ 최하단 정지
+            yield return new WaitForSeconds(turnDelay);
+        }
+
+
+        IEnumerator MoveAndFire(Transform target)
+        {
+            fireBreath.SetActive(false);
+
+            // 이동
+            while (Vector3.Distance(transform.position, target.position) > 0.05f)
+            {
+                transform.position = Vector3.MoveTowards(
+                    transform.position,
+                    target.position,
+                    moveSpeed * Time.deltaTime
+                );
+                yield return null;
+            }
+
+            // ✔ 도착 후 멈춤 (보스랑 동일한 템포)
+            yield return new WaitForSeconds(preFireDelay);
+
+            // ✔ 공격
+            fireBreath.SetActive(true);
+            yield return new WaitForSeconds(fireTime);
+            fireBreath.SetActive(false);
+
+            // ✔ 공격 후 멈춤
+            yield return new WaitForSeconds(postFireDelay);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

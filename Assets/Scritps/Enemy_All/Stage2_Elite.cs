@@ -94,6 +94,7 @@ public class Stage2_Elite : MonoBehaviour
         while (!isDead)
         {
             spawnPosition = transform.position;
+            StartCoroutine(ShootSpriteEffect());
             if (warningUI != null)
                 yield return StartCoroutine(warningUI.Blink());
 
@@ -119,7 +120,7 @@ public class Stage2_Elite : MonoBehaviour
 
     void ShootEnemy()
     {
-        StartCoroutine(ShootSpriteEffect());
+     
         Instantiate(enemyPrefabs, firePoint.position, firePoint.rotation);
         Debug.Log("Shoot Enemy");
     }

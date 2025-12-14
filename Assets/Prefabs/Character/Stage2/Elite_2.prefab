@@ -280,37 +280,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1 &6771589094453221335
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8182221724724245187}
-  m_Layer: 0
-  m_Name: FirePoint_Center
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8182221724724245187
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6771589094453221335}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.51, y: -0.49, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6903033608621395802}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7073401299791163637
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +314,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4039725711469319171}
-  - {fileID: 8182221724724245187}
   - {fileID: 6433486115581563610}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -419,7 +387,7 @@ MonoBehaviour:
   Hp: 20
   maxSpeed: 2
   enemyPrefabs: {fileID: 8706026456541892852, guid: 162ed320a87aebc43b4d20d6afe23991, type: 3}
-  firePoint: {fileID: 8182221724724245187}
+  firePoint: {fileID: 3094790427641578070, guid: 1b31613be5de01643bea2c5656bf4ec3, type: 3}
   dashSpeed: 8
   dashDistance: 6
   returnSpeed: 4

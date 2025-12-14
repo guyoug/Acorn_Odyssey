@@ -30,6 +30,9 @@ public class Stage3_Boss : MonoBehaviour
     [Header("Runtime")]
     private Coroutine hitFlashRoutine;
 
+    public Sprite normalSprite;      
+    public Sprite HitSprite;      
+
 
 
     void Start()
@@ -53,6 +56,7 @@ public class Stage3_Boss : MonoBehaviour
             
             yield return new WaitForSeconds(1f);
             whip.SetActive(true);
+            StartCoroutine(ShootSpriteEffect());
             yield return new WaitForSeconds(whipActiveTime);
             whip.SetActive(false);
 
@@ -61,7 +65,22 @@ public class Stage3_Boss : MonoBehaviour
             yield return StartCoroutine(MoveAndHit(point1));
         }
     }
+    IEnumerator ShootSpriteEffect()
+    {
+        bool prevAnimEnabled = false;
+        if (anim != null)
+        {
+            prevAnimEnabled = anim.enabled;
+            anim.enabled = false; // 
+        }
 
+        sr.sprite = HitSprite;
+        yield return new WaitForSeconds(whipActiveTime);
+        sr.sprite = normalSprite;
+
+        if (anim != null)
+            anim.enabled = prevAnimEnabled;
+    }
     IEnumerator MoveAndHit(Transform target)
     {
         // 이동 중엔 whip 비활성
@@ -79,6 +98,7 @@ public class Stage3_Boss : MonoBehaviour
 
         // 도착 → whip 활성 (타격)
         whip.SetActive(true);
+        StartCoroutine(ShootSpriteEffect());
         yield return new WaitForSeconds(whipActiveTime);
         whip.SetActive(false);
     }
@@ -131,7 +151,7 @@ public class Stage3_Boss : MonoBehaviour
         if (col != null)
             col.enabled = false;
 
-        //moveSpeed = 0f;
+        moveSpeed = 0f;
 
 
         yield return new WaitForSeconds(deathDelay);
