@@ -4,7 +4,7 @@ using UnityEngine;
 public class Stage2_Boss : MonoBehaviour
 {
     [Header("Boss Status")]
-    public int Hp = 60;
+    public int Hp = 120;
     private bool isDead = false;
     private bool isPatternRunning = false;
 

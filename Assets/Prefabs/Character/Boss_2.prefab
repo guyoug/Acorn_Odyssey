@@ -1031,7 +1031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc7e4a2c8e333f741823557f93dbab3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 60
+  Hp: 120
   firePointCenter: {fileID: 7596642826205262291}
   firePointUp: {fileID: 9049507454023891911}
   firePointDown: {fileID: 2701177246266150095}

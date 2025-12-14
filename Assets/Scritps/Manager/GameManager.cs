@@ -210,8 +210,6 @@ public class GameManager : MonoBehaviour
         if (SoundManager.Instance != null)
             SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.stageClearSFX);
-
-
         Debug.Log("보스 제거 : " + bossKilled);
         StartCoroutine(killboss());
       

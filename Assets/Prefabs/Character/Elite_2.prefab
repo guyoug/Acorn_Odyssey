@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d5de441d585d9f4aaa26596bd97ee81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 15
+  Hp: 20
   maxSpeed: 2
   enemyPrefabs: {fileID: 8706026456541892852, guid: 162ed320a87aebc43b4d20d6afe23991, type: 3}
   firePoint: {fileID: 8182221724724245187}

@@ -4,7 +4,7 @@ using UnityEngine;
 public class Stage2_Elite : MonoBehaviour
 {
     [Header("Status")]
-    public int Hp = 15;
+    public int Hp = 20;
     private bool isDead = false;
     private bool isPatternRunning = false;
 
@@ -74,7 +74,7 @@ public class Stage2_Elite : MonoBehaviour
 
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
+    
 
         if (sr != null && normalSprite == null)
             normalSprite = sr.sprite;
