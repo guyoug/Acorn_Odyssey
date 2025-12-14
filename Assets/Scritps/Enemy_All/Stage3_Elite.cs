@@ -17,13 +17,13 @@ public class Stage3_Elite : MonoBehaviour
     [Header("Fire")]
     public GameObject fireBreath;
 
-    [Header("Move Points (Bottom → Mid → Top)")]
+    [Header("Move Points")]
     public Transform bottomPoint;
-    public Transform midPoint;
+
     public Transform topPoint;
 
     [Header("Movement")]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 15f;
 
     [Header("Timing (Boss Sync)")]
     public float preFireDelay = 0.25f;
@@ -44,17 +44,14 @@ public class Stage3_Elite : MonoBehaviour
         while (true)
         {
             yield return StartCoroutine(MoveAndFire(bottomPoint));
-            yield return StartCoroutine(MoveAndFire(midPoint));
+         
             yield return StartCoroutine(MoveAndFire(topPoint));
 
-            // ▶ 최상단 정지 (보스랑 동일한 호흡)
-            yield return new WaitForSeconds(turnDelay);
-
-            // ▶ 위 → 아래
-            yield return StartCoroutine(MoveAndFire(midPoint));
+            //yield return new WaitForSeconds(turnDelay);
+         
             yield return StartCoroutine(MoveAndFire(bottomPoint));
 
-            // ▶ 최하단 정지
+      
             yield return new WaitForSeconds(turnDelay);
         }
 
@@ -63,18 +60,14 @@ public class Stage3_Elite : MonoBehaviour
         {
             fireBreath.SetActive(false);
 
-            // 이동
+           
             while (Vector3.Distance(transform.position, target.position) > 0.05f)
             {
-                transform.position = Vector3.MoveTowards(
-                    transform.position,
-                    target.position,
-                    moveSpeed * Time.deltaTime
-                );
+                transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
                 yield return null;
             }
 
-            // ✔ 도착 후 멈춤 (보스랑 동일한 템포)
+         
             yield return new WaitForSeconds(preFireDelay);
 
             // ✔ 공격

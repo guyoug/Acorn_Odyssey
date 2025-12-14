@@ -1399,7 +1399,13 @@ MonoBehaviour:
   pausePanel: {fileID: 1700358920}
   gameOverPanel: {fileID: 245614722}
   settingsPanel: {fileID: 1784058692}
+  bgmIcon: {fileID: 976818214}
+  bgmOnSprite: {fileID: 21300000, guid: cf2976e0149ca8b4a8dc69ec3daeeaa4, type: 3}
+  bgmOffSprite: {fileID: 21300000, guid: f88e3d3fd9c6d484ea98b52842cf4a90, type: 3}
   bgmSlider: {fileID: 314791221}
+  sfxIcon: {fileID: 1382613266}
+  sfxOnSprite: {fileID: 21300000, guid: 807b3da5310376947aeacb2b2b144d63, type: 3}
+  sfxOffSprite: {fileID: 21300000, guid: 6f44e59c897a17e4b8117f3665c3fd4e, type: 3}
   sfxSlider: {fileID: 994957647}
 --- !u!4 &334073390
 Transform:
@@ -3611,7 +3617,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7c49132534bcb0246ab17dbe990ac94e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cf2976e0149ca8b4a8dc69ec3daeeaa4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5494,7 +5500,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7c49132534bcb0246ab17dbe990ac94e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 807b3da5310376947aeacb2b2b144d63, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6270,8 +6276,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.007106006, y: 0.021318078}
-  m_Size: {x: 0.94152606, y: 1.112071}
+  m_Offset: {x: 0.059460003, y: 0.0582995}
+  m_Size: {x: 3.1456068, y: 3.7668908}
   m_Direction: 0
 --- !u!1 &1739003709
 GameObject:

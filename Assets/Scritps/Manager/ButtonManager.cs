@@ -19,8 +19,16 @@ public class ButtonManager : MonoBehaviour
     public GameObject settingsPanel;
 
 
-    [Header("Sound UI")]
+    [Header("BGM UI")]
+    public Image bgmIcon;
+    public Sprite bgmOnSprite;
+    public Sprite bgmOffSprite;
     public Slider bgmSlider;
+
+    [Header("SFX UI")]
+    public Image sfxIcon;
+    public Sprite sfxOnSprite;
+    public Sprite sfxOffSprite;
     public Slider sfxSlider;
 
     void Awake()
@@ -212,6 +220,7 @@ public class ButtonManager : MonoBehaviour
             bgmSlider.value = prevVolume;
             isBGMMuted = false;
         }
+        UpdateBGMIcon();
     }
     public void MuteSFX()
     {
@@ -245,6 +254,23 @@ public class ButtonManager : MonoBehaviour
 
             isSFXMuted = false;
         }
+        UpdateSFXIcon();
+    }
+    void UpdateBGMIcon()
+    {
+        if (bgmIcon == null) return;
+
+        bgmIcon.sprite = isBGMMuted
+            ? bgmOffSprite
+            : bgmOnSprite;
+    }
+    void UpdateSFXIcon()
+    {
+        if (sfxIcon == null) return;
+
+        sfxIcon.sprite = isSFXMuted
+            ? sfxOffSprite
+            : sfxOnSprite;
     }
 }
 

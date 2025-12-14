@@ -308,9 +308,8 @@ MonoBehaviour:
   deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
   fireBreath: {fileID: 8909924948500580}
   bottomPoint: {fileID: 2750877644953499416, guid: 6ce52c07cec6ee2478c9df3a7658f83f, type: 3}
-  midPoint: {fileID: 5230384036131597691, guid: 123cf6f1c9363934c867798384634f3d, type: 3}
   topPoint: {fileID: 1340752386400233903, guid: 4ebe2626c3401e24b8a2fae558679bd3, type: 3}
-  moveSpeed: 5
+  moveSpeed: 15
   preFireDelay: 0.25
   fireTime: 0.35
   postFireDelay: 0.25
