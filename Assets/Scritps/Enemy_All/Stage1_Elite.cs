@@ -2,7 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Elite : MonoBehaviour
+public class Stage1_Elite : MonoBehaviour
 {
     [Header("Status")]
     public int Hp = 15;

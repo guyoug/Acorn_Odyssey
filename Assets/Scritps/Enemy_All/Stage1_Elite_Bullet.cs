@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EliteBullet : MonoBehaviour
+public class Stage1_Elite_Bullet : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float maxSpeed = 10.0f;

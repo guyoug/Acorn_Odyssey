@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Enemy3 : MonoBehaviour
+public class Stage3_Enemy : MonoBehaviour
 {
    
     public int maxspeed = 20;

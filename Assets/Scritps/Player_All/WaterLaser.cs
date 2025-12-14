@@ -18,8 +18,7 @@ public class WaterLaser : MonoBehaviour
 
         if (collision.CompareTag("Enemy"))
         {
-            Enemy enemy = collision.GetComponent<Enemy>();
-            enemy.Die();
+           
         }
 
         if (collision.CompareTag("EnemyBullet"))

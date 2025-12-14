@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -31,7 +32,24 @@ public class PlayerHealth : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);  
     }
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Game_Start")
+        {
+            Instance = null;   // ⭐ 중요
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         Health();

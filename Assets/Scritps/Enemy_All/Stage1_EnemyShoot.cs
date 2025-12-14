@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyShoot : MonoBehaviour
+public class Stage1_EnemyShoot : MonoBehaviour
 {
     [Header("Attack Timing")]
     public float delayTime = 3.0f;

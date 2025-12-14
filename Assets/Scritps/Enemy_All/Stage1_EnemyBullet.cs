@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class Stage1_EnemyBullet : MonoBehaviour
 {
     [Header("Movement Settings")]
     public int maxSpeed = 1;

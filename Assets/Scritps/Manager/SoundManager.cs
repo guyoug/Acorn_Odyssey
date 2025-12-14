@@ -21,6 +21,10 @@ public class SoundManager : MonoBehaviour
     public AudioClip playerHitSFX;
     public AudioClip gameOverSFX;
 
+    private bool isMasterMuted = false;
+    private float prevBGMVolume = 0.6f;
+    private float prevSFXVolume = 0.8f;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,8 +36,8 @@ public class SoundManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        bgmSource.volume = 0.6f;
-        sfxSource.volume = 0.8f;
+        bgmSource.volume = prevBGMVolume;
+        sfxSource.volume = prevSFXVolume;
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -97,6 +101,64 @@ public class SoundManager : MonoBehaviour
         bgmSource.Stop();
         bgmSource.clip = clip;
         bgmSource.loop = true;
+        bgmSource.Play();
+    }
+    public void ToggleMasterMute()
+    {
+        if (!isMasterMuted)
+        {
+            prevBGMVolume = bgmSource.volume;
+            prevSFXVolume = sfxSource.volume;
+
+            bgmSource.volume = 0f;
+            sfxSource.volume = 0f;
+            isMasterMuted = true;
+        }
+        else
+        {
+            bgmSource.volume = prevBGMVolume;
+            sfxSource.volume = prevSFXVolume;
+            isMasterMuted = false;
+        }
+
+    }
+    public void UnmuteIfNeeded()
+    {
+        if (!isMasterMuted)
+            return;
+
+        bgmSource.volume = prevBGMVolume;
+        sfxSource.volume = prevSFXVolume;
+        isMasterMuted = false;
+    }
+
+    public void SetBGMVolume(float value)
+    {
+        UnmuteIfNeeded();
+        bgmSource.volume = value;
+        prevBGMVolume = value;
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        UnmuteIfNeeded();
+        sfxSource.volume = value;
+        prevSFXVolume = value;
+    }
+    public void PlayMainBGM()
+    {
+        if (bgmSource == null || mainBGM == null)
+            return;
+
+        bgmSource.Stop();              // 이전 상태 전부 무시
+        bgmSource.clip = mainBGM;
+        bgmSource.loop = true;
+
+        // 볼륨 복구 (0이면 기본값)
+        if (bgmSource.volume <= 0f)
+            bgmSource.volume = prevBGMVolume > 0f ? prevBGMVolume : 0.6f;
+
+        isMasterMuted = false;         // 전체 뮤트 상태였다면 해제
         bgmSource.Play();
     }
 }

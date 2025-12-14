@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Enemy2 : MonoBehaviour
+public class Stage2_Enemy : MonoBehaviour
 {
     [Header("Status")]
     public int Hp = 7;

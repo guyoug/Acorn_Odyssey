@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Stage1_Enemy : MonoBehaviour
 {
 
     [Header("Status")]

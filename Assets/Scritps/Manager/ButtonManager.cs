@@ -8,7 +8,7 @@ public class ButtonManager : MonoBehaviour
     [Header("Settings")]
     private float interval = 1.0f;
     private bool isPaused = false;
-    private bool isMuted = false;
+    private bool isBGMMuted = false;
     private float prevVolume = 1f;
     private bool isSFXMuted = false;
     private float prevSFXVolume = 1f;
@@ -65,7 +65,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(settingsPanel.activeSelf)
+            if (settingsPanel.activeSelf)
             {
                 CloseSettings();
                 return;
@@ -77,15 +77,6 @@ public class ButtonManager : MonoBehaviour
                 return;
             }
         }
-    }
-    public void GameStart()
-    {
-        SceneManager.LoadScene("Game_Play_stage1");
-    }
-    public void GameQuit()
-    {
-        Application.Quit();
-        Debug.Log("게임종료");//위 코드 유니티 에디터에선 동작 X > 디버그로 확인
     }
     public void Pause()
     {
@@ -117,6 +108,8 @@ public class ButtonManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        SoundManager.Instance?.PlayMainBGM();
         SceneManager.LoadScene("Game_Start");
     }
 
@@ -172,14 +165,16 @@ public class ButtonManager : MonoBehaviour
             Debug.LogWarning("SoundManager 또는 BGM Source가 없습니다!");
             return;
         }
-
+      
         SoundManager.Instance.bgmSource.volume = value;
+        if (value > 0f)
+            isBGMMuted = false;
     }
     public void OnSFXSliderChanged(float value)
     {
         if (SoundManager.Instance == null || SoundManager.Instance.sfxSource == null)
             return;
-
+       
         SoundManager.Instance.sfxSource.volume = value;
 
         // 슬라이더 움직이면 뮤트 해제
@@ -198,7 +193,7 @@ public class ButtonManager : MonoBehaviour
 
         var bgm = SoundManager.Instance.bgmSource;
 
-        if (!isMuted)
+        if (!isBGMMuted)
         {
             // 현재 볼륨 저장하고 0으로
             prevVolume = bgm.volume;
@@ -206,7 +201,7 @@ public class ButtonManager : MonoBehaviour
 
             // 슬라이더도 0으로 내려가도록
             bgmSlider.value = 0f;
-            isMuted = true;
+            isBGMMuted = true;
         }
         else
         {
@@ -215,7 +210,7 @@ public class ButtonManager : MonoBehaviour
 
             // 슬라이더도 원래대로 복원
             bgmSlider.value = prevVolume;
-            isMuted = false;
+            isBGMMuted = false;
         }
     }
     public void MuteSFX()

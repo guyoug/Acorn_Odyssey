@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Boss : MonoBehaviour
+public class Stage1_Boss : MonoBehaviour
 {
     [Header("Boss Status")]
     public int Hp = 60;
