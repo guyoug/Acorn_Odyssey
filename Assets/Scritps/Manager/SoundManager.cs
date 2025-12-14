@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip stageClearSFX;
     public AudioClip playerHitSFX;
     public AudioClip gameOverSFX;
+    public AudioClip pickPowerupSFX;    
 
     private bool isMasterMuted = false;
     private float prevBGMVolume = 0.6f;

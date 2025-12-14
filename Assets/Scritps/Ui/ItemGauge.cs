@@ -8,6 +8,7 @@ public class ItemGauge : MonoBehaviour
         {
             PlayerGauge gauge = collision.GetComponent<PlayerGauge>();
             gauge.AddGauge();
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.pickPowerupSFX);
             Debug.Log($"게이지 증가!{gauge.gauge}");
             Destroy(gameObject);
         }

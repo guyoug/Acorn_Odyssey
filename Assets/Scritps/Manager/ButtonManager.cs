@@ -148,24 +148,29 @@ public class ButtonManager : MonoBehaviour
     }
     public void OpenSettings()
     {
-
         if (settingsPanel != null)
             settingsPanel.SetActive(true);
 
-        
-        if (SoundManager.Instance != null)
-        {
-            //BGM
-            bgmSlider.onValueChanged.RemoveListener(OnBGMSliderChanged);
-            bgmSlider.value = SoundManager.Instance.bgmSource.volume;
-            bgmSlider.onValueChanged.AddListener(OnBGMSliderChanged);
-            //SFX
-            sfxSlider.onValueChanged.RemoveListener(OnSFXSliderChanged);
-            sfxSlider.value = SoundManager.Instance.sfxSource.volume;
-            sfxSlider.onValueChanged.AddListener(OnSFXSliderChanged);
-        }
+        if (SoundManager.Instance == null)
+            return;
+
+     
+        bgmSlider.onValueChanged.RemoveListener(OnBGMSliderChanged);
+        bgmSlider.value = SoundManager.Instance.bgmSource.volume;
+        bgmSlider.onValueChanged.AddListener(OnBGMSliderChanged);
+
+        isBGMMuted = (SoundManager.Instance.bgmSource.volume <= 0f);
+        UpdateBGMIcon();
+
+      
+        sfxSlider.onValueChanged.RemoveListener(OnSFXSliderChanged);
+        sfxSlider.value = SoundManager.Instance.sfxSource.volume;
+        sfxSlider.onValueChanged.AddListener(OnSFXSliderChanged);
+
+        isSFXMuted = (SoundManager.Instance.sfxSource.volume <= 0f);
+        UpdateSFXIcon();
     }
-    
+
     public void OnBGMSliderChanged(float value)
     {
         if (SoundManager.Instance == null || SoundManager.Instance.bgmSource == null)

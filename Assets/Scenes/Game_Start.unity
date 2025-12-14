@@ -1758,6 +1758,7 @@ MonoBehaviour:
   stageClearSFX: {fileID: 8300000, guid: 586dc05751171cb4b9c682ef9d0fd01d, type: 3}
   playerHitSFX: {fileID: 8300000, guid: efc0efc32eefef142a97417c89a2b4fe, type: 3}
   gameOverSFX: {fileID: 8300000, guid: b885c52bc9591ca4399ff50d54019cf9, type: 3}
+  pickPowerupSFX: {fileID: 8300000, guid: bd2f82e11544ed742b4225ec5a62922e, type: 3}
 --- !u!4 &1277603172
 Transform:
   m_ObjectHideFlags: 0
@@ -1786,7 +1787,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.422
+  m_Volume: 0.615
   m_Pitch: 1
   Loop: 0
   Mute: 0

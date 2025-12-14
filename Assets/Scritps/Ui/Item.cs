@@ -19,6 +19,7 @@ public class Item : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.pickPowerupSFX);
             collision.GetComponent<PlayerItem>().PickItem(itemType);
             Destroy(gameObject);
         }
