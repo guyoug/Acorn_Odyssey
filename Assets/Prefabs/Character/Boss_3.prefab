@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1049332435997324000}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.19, y: 0.11, z: 0}
+  m_LocalPosition: {x: -18.15, y: -0.27, z: 0}
   m_LocalScale: {x: 2.7946293, y: 2.7946293, z: 1.8426034}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -325,3 +325,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 200
   deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
+  whip: {fileID: 1049332435997324000}
+  point1: {fileID: 1796015150403351470, guid: 2faa468a9ce810c43beed2b23fe382c6, type: 3}
+  point2: {fileID: 3997405026136821360, guid: 94ff8ea9383c5414187c1beeb1153288, type: 3}
+  point3: {fileID: 4700970433095895003, guid: 4a8dd7c45084f8f4dabc4bea0eb170df, type: 3}
+  moveSpeed: 6
+  whipActiveTime: 0.2

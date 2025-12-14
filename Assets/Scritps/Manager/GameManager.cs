@@ -119,6 +119,10 @@ public class GameManager : MonoBehaviour
         {
             SpawnBoss2();   
         }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            SpawnBoss3();
+        }
     }
     void StageWaveLogic()
     {
@@ -183,11 +187,11 @@ public class GameManager : MonoBehaviour
 
         if (currentWave == 3 && normalKilled >= 15)
         {
-            //SpawnBoss3();
+            SpawnBoss3();
         }
 
         if (currentWave == 2 && normalKilled >= 15 && spawnedCount == 0)
-            SpawnElite();
+            SpawnElite3();
 
        
     }
@@ -223,6 +227,10 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(elite2Prefabs, currentEliteSpawnPoint.transform.position, currentEliteSpawnPoint.transform.rotation);
         spawnedCount++;
+    }
+    public void SpawnElite3()
+    {
+        Instantiate(elite3Prefabs, currentEliteSpawnPoint.transform.position, currentEliteSpawnPoint.transform.rotation);
     }
    
     public void StartNextWave() //웨이브 시초기화
@@ -272,7 +280,7 @@ public class GameManager : MonoBehaviour
 
         Instantiate(boss3Prefabs, currentBossSpawnPoint.position, currentBossSpawnPoint.rotation);
         bossSpawned = true;
-        //StopAllEnemySpawn3();
+        StopAllEnemySpawn3();
     }
     void StopAllEnemySpawn1() //스폰시 enemy 스폰 X
     {
@@ -288,13 +296,13 @@ public class GameManager : MonoBehaviour
 
         spawner.StopSpawn();
     }
-    //void StopAllEnemySpawn1() //스폰시 enemy 스폰 X
-    //{
-    //    GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
-    //    EnemySpawn1 spawner = spawnObj.GetComponent<EnemySpawn1>();
+    void StopAllEnemySpawn3() //스폰시 enemy 스폰 X
+    {
+        GameObject spawnObj = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
+        EnemySpawn3 spawner = spawnObj.GetComponent<EnemySpawn3>();
 
-    //    spawner.StopSpawn();
-    //}
+        spawner.StopSpawn();
+    }
 
     IEnumerator killboss()
     {

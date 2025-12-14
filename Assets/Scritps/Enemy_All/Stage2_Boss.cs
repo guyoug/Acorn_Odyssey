@@ -74,6 +74,7 @@ public class Stage2_Boss : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
 
+
         if (exclamationUI != null)
             exclamationUI.SetActive(false);
     
