@@ -166,5 +166,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d28b27dce506d48b287c44bf94f614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hp: 15
   maxspeed: 20
   isDead: 0
+  dropItems:
+  - {fileID: 7479479294581569970, guid: 5613830ff38c08e42907d8e2850c8caf, type: 3}
+  - {fileID: 5967642582716743412, guid: a279bbf78d6038c448230f9d4b8a5ecf, type: 3}
+  - {fileID: 5153587646109670503, guid: cde32f50a8008fc44ac3d1d39aada91f, type: 3}
+  gaugePrefabs: {fileID: 3584423131887629857, guid: 1c45008bcb762584f862bdf55077d94c, type: 3}
+  deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}

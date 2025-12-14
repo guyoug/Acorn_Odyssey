@@ -59,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         // 무적 토글 치트
-        if (Input.GetKeyDown(KeyCode.F12))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             isInvincible = false;
         }
@@ -98,6 +98,7 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         isDead = true;
+        GameManager.Instance.isGameOver = true;
         if (SoundManager.Instance != null)
             SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.gameOverSFX);

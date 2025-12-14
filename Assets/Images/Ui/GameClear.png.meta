@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: 5e840b9947f494f43b626ccadf4eab58
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1536380896892045753
+    second: GameClear_0
+  - first:
+      213: -8672679745229411933
+    second: GameClear_1
+  - first:
+      213: -2740045450851835429
+    second: GameClear_2
+  - first:
+      213: -8202373389506066892
+    second: GameClear_3
+  - first:
+      213: -6715530029818846562
+    second: GameClear_4
+  - first:
+      213: -1367529029447242540
+    second: GameClear_5
+  - first:
+      213: 1857704982188559067
+    second: GameClear_6
+  - first:
+      213: 729872997274838716
+    second: GameClear_7
+  - first:
+      213: -8669220552906134204
+    second: GameClear_8
+  - first:
+      213: 7566596683259352668
+    second: GameClear_9
+  - first:
+      213: -3644123288695234825
+    second: GameClear_10
+  - first:
+      213: 3426906193655149652
+    second: GameClear_11
+  - first:
+      213: 7989291447305784794
+    second: GameClear_12
+  - first:
+      213: 6323668775640471149
+    second: GameClear_13
+  - first:
+      213: -5384105472237655857
+    second: GameClear_14
+  - first:
+      213: 8206758123144940446
+    second: GameClear_15
+  - first:
+      213: 685573831945672569
+    second: GameClear_16
+  - first:
+      213: 2770559132530963177
+    second: GameClear_17
+  - first:
+      213: -469094774306422320
+    second: GameClear_18
+  - first:
+      213: -3156486944748242003
+    second: GameClear_19
+  - first:
+      213: -4771674143764070334
+    second: GameClear_20
+  - first:
+      213: 9156867952855912760
+    second: GameClear_21
+  - first:
+      213: -7425211682990429688
+    second: GameClear_22
+  - first:
+      213: 7176789431902217612
+    second: GameClear_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GameClear_0
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 157
+        width: 45
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b942fe1942525510800000000000000
+      internalID: 1536380896892045753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_1
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 157
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a920e6b8b374a780800000000000000
+      internalID: -8672679745229411933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_2
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 157
+        width: 61
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd12d890e2769f9d0800000000000000
+      internalID: -2740045450851835429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_3
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 157
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 436cf5b3cd05b2e80800000000000000
+      internalID: -8202373389506066892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_4
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 157
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e92ed2ea405adc2a0800000000000000
+      internalID: -6715530029818846562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_5
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 157
+        width: 20
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dc23cbd79f850de0800000000000000
+      internalID: -1367529029447242540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_6
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 157
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bda82d8b6d4e7c910800000000000000
+      internalID: 1857704982188559067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_7
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 157
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb667bdbf97012a00800000000000000
+      internalID: 729872997274838716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_8
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 157
+        width: 36
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44da380b6ddb0b780800000000000000
+      internalID: -8669220552906134204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_9
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 182
+        width: 11
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5692580893f10960800000000000000
+      internalID: 7566596683259352668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_10
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 157
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fe97932d297d6dc0800000000000000
+      internalID: -3644123288695234825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_11
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 57
+        width: 45
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 454b66fc601de8f20800000000000000
+      internalID: 3426906193655149652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_12
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 57
+        width: 45
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: add4ab30e3aafde60800000000000000
+      internalID: 7989291447305784794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_13
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 57
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6697494f3f22c750800000000000000
+      internalID: 6323668775640471149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_14
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 57
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc8a9066990d745b0800000000000000
+      internalID: -5384105472237655857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_15
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 57
+        width: 36
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9b0b9f180344e170800000000000000
+      internalID: 8206758123144940446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_16
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 57
+        width: 36
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 977dc6094c5a38900800000000000000
+      internalID: 685573831945672569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_17
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 57
+        width: 36
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e2f8bb1ad0037620800000000000000
+      internalID: 2770559132530963177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_18
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 57
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d14973c9c07d79f0800000000000000
+      internalID: -469094774306422320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_19
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 57
+        width: 36
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dab7f18f8d7e134d0800000000000000
+      internalID: -3156486944748242003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_20
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 49
+        width: 45
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 240c60dc5ab97cdb0800000000000000
+      internalID: -4771674143764070334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_21
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 57
+        width: 20
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 831922153eab31f70800000000000000
+      internalID: 9156867952855912760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_22
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 57
+        width: 45
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80a6645905954f890800000000000000
+      internalID: -7425211682990429688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameClear_23
+      rect:
+        serializedVersion: 2
+        x: 657
+        y: 49
+        width: 45
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c852f4cc6f3199360800000000000000
+      internalID: 7176789431902217612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GameClear_0: 1536380896892045753
+      GameClear_1: -8672679745229411933
+      GameClear_10: -3644123288695234825
+      GameClear_11: 3426906193655149652
+      GameClear_12: 7989291447305784794
+      GameClear_13: 6323668775640471149
+      GameClear_14: -5384105472237655857
+      GameClear_15: 8206758123144940446
+      GameClear_16: 685573831945672569
+      GameClear_17: 2770559132530963177
+      GameClear_18: -469094774306422320
+      GameClear_19: -3156486944748242003
+      GameClear_2: -2740045450851835429
+      GameClear_20: -4771674143764070334
+      GameClear_21: 9156867952855912760
+      GameClear_22: -7425211682990429688
+      GameClear_23: 7176789431902217612
+      GameClear_3: -8202373389506066892
+      GameClear_4: -6715530029818846562
+      GameClear_5: -1367529029447242540
+      GameClear_6: 1857704982188559067
+      GameClear_7: 729872997274838716
+      GameClear_8: -8669220552906134204
+      GameClear_9: 7566596683259352668
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

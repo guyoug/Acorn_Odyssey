@@ -11,8 +11,8 @@ public class PlayerMove : MonoBehaviour
     private PlayerUpgrade upgrade;
     private Rigidbody2D rb;
     [Header("Screen Bounds")]
-    public float minX = -9.5f;
-    public float maxX = 9.5f;
+    public float minX = -10.4f;
+    public float maxX = 10.4f;
     public float minY = -4.5f;
     public float maxY = 4.5f;
 

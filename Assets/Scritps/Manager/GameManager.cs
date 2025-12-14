@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     [Header("Singleton")]
     public static GameManager Instance;
 
+    public bool isGameOver = false;
 
     private void Awake() //싱글턴
     {
@@ -122,6 +123,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
             SpawnBoss3();
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            SpawnElite3();
         }
     }
     void StageWaveLogic()
@@ -346,10 +351,12 @@ public class GameManager : MonoBehaviour
                 ResetStageData();
                 SceneManager.LoadScene("Game_Play_stage3");
                 break;
-        }
 
-        //case "Game_Play_stage3":
-        //    SceneManager.LoadScene("EndingScene");
-        //    break;
+            case "Game_Play_stage3":
+                SceneManager.LoadScene("EndingScene");
+                break;
+        }
     }
+
+       
 }

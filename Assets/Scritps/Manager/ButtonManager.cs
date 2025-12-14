@@ -71,6 +71,9 @@ public class ButtonManager : MonoBehaviour
     }
     void Update()
     {
+        if (gameOverPanel != null && gameOverPanel.activeSelf)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (settingsPanel.activeSelf)
@@ -154,45 +157,39 @@ public class ButtonManager : MonoBehaviour
         if (SoundManager.Instance == null)
             return;
 
-     
         bgmSlider.onValueChanged.RemoveListener(OnBGMSliderChanged);
         bgmSlider.value = SoundManager.Instance.bgmSource.volume;
         bgmSlider.onValueChanged.AddListener(OnBGMSliderChanged);
 
-        isBGMMuted = (SoundManager.Instance.bgmSource.volume <= 0f);
+        isBGMMuted = bgmSlider.value <= 0f;
         UpdateBGMIcon();
 
-      
         sfxSlider.onValueChanged.RemoveListener(OnSFXSliderChanged);
         sfxSlider.value = SoundManager.Instance.sfxSource.volume;
         sfxSlider.onValueChanged.AddListener(OnSFXSliderChanged);
 
-        isSFXMuted = (SoundManager.Instance.sfxSource.volume <= 0f);
+        isSFXMuted = sfxSlider.value <= 0f;
         UpdateSFXIcon();
     }
 
+
     public void OnBGMSliderChanged(float value)
     {
-        if (SoundManager.Instance == null || SoundManager.Instance.bgmSource == null)
-        {
-            Debug.LogWarning("SoundManager 또는 BGM Source가 없습니다!");
-            return;
-        }
-      
-        SoundManager.Instance.bgmSource.volume = value;
-        if (value > 0f)
-            isBGMMuted = false;
+        if (SoundManager.Instance == null) return;
+
+        SoundManager.Instance.SetBGMVolume(value);
+
+        isBGMMuted = value <= 0f;
+        UpdateBGMIcon();
     }
     public void OnSFXSliderChanged(float value)
     {
-        if (SoundManager.Instance == null || SoundManager.Instance.sfxSource == null)
-            return;
-       
-        SoundManager.Instance.sfxSource.volume = value;
+        if (SoundManager.Instance == null) return;
 
-        // 슬라이더 움직이면 뮤트 해제
-        if (value > 0f)
-            isSFXMuted = false;
+        SoundManager.Instance.SetSFXVolume(value);
+
+        isSFXMuted = value <= 0f;
+        UpdateSFXIcon();
     }
     public void CloseSettings()
     {

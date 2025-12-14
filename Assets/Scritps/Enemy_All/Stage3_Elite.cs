@@ -19,7 +19,6 @@ public class Stage3_Elite : MonoBehaviour
 
     [Header("Move Points")]
     public Transform bottomPoint;
-
     public Transform topPoint;
 
     [Header("Movement")]
@@ -29,13 +28,18 @@ public class Stage3_Elite : MonoBehaviour
     public float preFireDelay = 0.25f;
     public float fireTime = 0.35f;
     public float postFireDelay = 0.25f;     
-    public float turnDelay = 1.0f;         
+    public float turnDelay = 1.0f;
+
+    [SerializeField] private GameObject bodyPrefab;
+
+    private GameObject bodyInstance;
 
     void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         fireBreath.SetActive(false);
+        bodyInstance = Instantiate(bodyPrefab, transform.position, Quaternion.identity);
         StartCoroutine(FireMovePattern());
 
     }
@@ -47,7 +51,7 @@ public class Stage3_Elite : MonoBehaviour
          
             yield return StartCoroutine(MoveAndFire(topPoint));
 
-            //yield return new WaitForSeconds(turnDelay);
+        
          
             yield return StartCoroutine(MoveAndFire(bottomPoint));
 
@@ -107,6 +111,7 @@ public class Stage3_Elite : MonoBehaviour
             return;
 
         isDead = true;
+        Destroy(bodyInstance);
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
 
         GameManager.Instance.OnEliteEnemyKilled();

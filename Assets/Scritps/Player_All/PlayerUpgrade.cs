@@ -62,9 +62,9 @@ public class PlayerUpgrade : MonoBehaviour
     {
 
         shoot.burstCount = 3 + nutStack * 3;
+        shoot.multiShot = 1;
         shoot.isNutStormMode = true;
 
-        // 나중에 스택 증가
         if (nutStack < maxNutStack)
             nutStack++;
     
