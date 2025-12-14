@@ -53,20 +53,24 @@ public class Stage2_Enemy : MonoBehaviour
             return;
         if (collision.CompareTag("Bullet"))
         {
-            Hp--;
-            hitFlashRoutine = StartCoroutine(HitFlash());
+            TakeDamage(1);
             Destroy(collision.gameObject);
 
-           
-            if (Hp <= 0)
-            {
-                Die();
-            }
         }
         if (collision.CompareTag("Outline"))
         {
             Destroy(gameObject);
         }
+    }
+    public void TakeDamage(int damage)
+    {
+        if (isDead)
+            return;
+
+        Hp -= damage;
+        hitFlashRoutine = StartCoroutine(HitFlash());
+        if (Hp <= 0)
+            Die();
     }
     public void Die()
     {

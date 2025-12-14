@@ -252,7 +252,7 @@ public class Stage2_Boss : MonoBehaviour
         if (collision.CompareTag("Bullet"))
         {
             TakeDamage(1);
-            hitFlashRoutine = StartCoroutine(HitFlash());
+
             Destroy(collision.gameObject);
         }
     }
@@ -261,6 +261,7 @@ public class Stage2_Boss : MonoBehaviour
         if (isDead)
             return;
         Hp -= dmg;
+        hitFlashRoutine = StartCoroutine(HitFlash());
         Debug.Log($"보스 남은 HP : {Hp}");
         if (Hp <= 0)
             Die();

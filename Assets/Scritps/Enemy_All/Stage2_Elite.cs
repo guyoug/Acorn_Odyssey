@@ -219,7 +219,7 @@ public class Stage2_Elite : MonoBehaviour
         if (collision.CompareTag("Bullet"))
         {
             TakeDamage(1);
-            hitFlashRoutine = StartCoroutine(HitFlash());
+      
             Destroy(collision.gameObject);
         }
     }
@@ -230,6 +230,7 @@ public class Stage2_Elite : MonoBehaviour
             return;
 
         Hp -= dmg;
+        hitFlashRoutine = StartCoroutine(HitFlash());
         Debug.Log($"엘리트 HP: {Hp}");
 
         if (Hp <= 0)
