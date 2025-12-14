@@ -1046,10 +1046,10 @@ MonoBehaviour:
   centerAngle: 0
   topAngle: 24
   bottomAngle: -30
-  dashSpeed: 12
+  dashSpeed: 10
   dashDuration: 0.6
   dashCooldown: 4
-  moveSpeed: 2
+  moveSpeed: 10
   normalSprite: {fileID: 21300000, guid: 62eb221fc59afdd46982aa659e281415, type: 3}
   shootSprite: {fileID: 21300000, guid: a390ca576c6cd054baeb903838492765, type: 3}
   shootSpriteTime: 0.15
