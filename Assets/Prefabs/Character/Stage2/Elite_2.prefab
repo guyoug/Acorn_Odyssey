@@ -359,7 +359,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 813463829
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7f9874de946ab4c4e9f14c424c56b0dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -385,6 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 20
+  Damage: 1
   maxSpeed: 2
   enemyPrefabs: {fileID: 8706026456541892852, guid: 162ed320a87aebc43b4d20d6afe23991, type: 3}
   firePoint: {fileID: 3094790427641578070, guid: 1b31613be5de01643bea2c5656bf4ec3, type: 3}
@@ -394,6 +395,7 @@ MonoBehaviour:
   returnDuration: 0.6
   exclamationUI: {fileID: 1681593352740439287}
   warningUIObj: {fileID: 2019248888469313740}
+  warningUI: {fileID: 380456340063271196}
   dropItems:
   - {fileID: 7479479294581569970, guid: 5613830ff38c08e42907d8e2850c8caf, type: 3}
   - {fileID: 5967642582716743412, guid: a279bbf78d6038c448230f9d4b8a5ecf, type: 3}

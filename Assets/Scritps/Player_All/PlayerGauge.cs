@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerGauge : MonoBehaviour
@@ -23,10 +25,49 @@ public class PlayerGauge : MonoBehaviour
     {
         upgrade = GetComponent<PlayerUpgrade>();
         health = GetComponent<PlayerHealth>();
-        UpdateGaugeUI();
+      
     }
  
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (!scene.name.StartsWith("Game_Play"))
+            return;
+
+        StartCoroutine(BindGaugeUI());
+
+    }
+    IEnumerator BindGaugeUI()
+    {
+        yield return null;
+
+        GameObject offRoot = GameObject.Find("OffSlots");
+        GameObject onRoot = GameObject.Find("OnSlots");
+
+        if (offRoot == null || onRoot == null)
+        {
+            Debug.LogError("[GaugeUI] OffSlots / OnSlots 못 찾음");
+            yield break;
+        }
+
+        offSlots = offRoot.GetComponentsInChildren<Image>(true);
+        onSlots = onRoot.GetComponentsInChildren<Image>(true);
+
+        Debug.Log($"[GaugeUI] Bind 완료 → OFF:{offSlots.Length}, ON:{onSlots.Length}");
+
+        ResetState();
+    }
+
+  
     public void ShowGaugeUI(bool show)
     {
         if (gaugeUIRoot != null)
@@ -64,16 +105,29 @@ public class PlayerGauge : MonoBehaviour
 
     void UpdateGaugeUI()
     {
+        if (offSlots == null || onSlots == null)
+            return;
 
-        for (int i = 0; i < onSlots.Length; i++)
+        int slotCount = Mathf.Min(offSlots.Length, onSlots.Length);
+        int safeGauge = Mathf.Clamp(gauge, 0, slotCount);
+
+        // 전체 초기화
+        for (int i = 0; i < slotCount; i++)
         {
+            offSlots[i].gameObject.SetActive(true);
+            offSlots[i].enabled = true;
+
             onSlots[i].gameObject.SetActive(false);
+            onSlots[i].enabled = false;
         }
 
-
-        for (int i = 0; i < gauge; i++)
+        // ON 슬롯 켜기
+        for (int i = 0; i < safeGauge; i++)
         {
-            onSlots[i].gameObject.SetActive(true);
+            offSlots[i].gameObject.SetActive(false);
+
+            onSlots[i].gameObject.SetActive(true);   
+            onSlots[i].enabled = true;
         }
     }
 
@@ -120,7 +174,7 @@ public class PlayerGauge : MonoBehaviour
         Instantiate(gaugePrefab, pos, Quaternion.identity);
         Debug.Log("치트: 게이지 아이템 생성!");
     }
-    public void ResetGauge()
+    public void ResetState()
     {
         gauge = 0;
         UpdateGaugeUI();

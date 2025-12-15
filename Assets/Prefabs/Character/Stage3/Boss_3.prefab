@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1720613461
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f5a8c3d57098bfe43aa85f0f572993bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -213,7 +213,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -975112467
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 63e4b72616183af4d9d53331ef605b09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -326,6 +326,7 @@ MonoBehaviour:
   Hp: 200
   deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
   whip: {fileID: 1049332435997324000}
+  attackDelay: 0.6
   point1: {fileID: 1796015150403351470, guid: 2faa468a9ce810c43beed2b23fe382c6, type: 3}
   point2: {fileID: 3997405026136821360, guid: 94ff8ea9383c5414187c1beeb1153288, type: 3}
   point3: {fileID: 4700970433095895003, guid: 4a8dd7c45084f8f4dabc4bea0eb170df, type: 3}
@@ -333,3 +334,14 @@ MonoBehaviour:
   whipActiveTime: 0.2
   normalSprite: {fileID: 21300000, guid: f5955c066b9a3c34597fe8dea257c657, type: 3}
   HitSprite: {fileID: 21300000, guid: df739c8941d9ecc48bc492b3a281edab, type: 3}
+  arrowPrefab: {fileID: 705380277578638664, guid: c2843579117cc1f48bb4a0d2a5ee886e, type: 3}
+  attackPoints:
+  - {fileID: 6127033670861423889, guid: fefdd0ffcd11b6b4f828d66fea3a1e47, type: 3}
+  - {fileID: 2685286597538848543, guid: 687e30787346f0b4db53df785facde40, type: 3}
+  - {fileID: 831947111950617358, guid: 33f7844ca6d1ef14b8b92bd41673136f, type: 3}
+  arrowDelay: 0.8
+  rockPrefab: {fileID: 9138349320036121175, guid: b3f4a355632751f46b0d77693eb7bb2e, type: 3}
+  rockPoints:
+  - {fileID: 169778825223601195, guid: aea58e13d42d4484aaba1680b2a83eb7, type: 3}
+  - {fileID: 2488791525607110492, guid: 6c22e594f63301f4ca292cbf3309aacf, type: 3}
+  rockDelay: 0.4

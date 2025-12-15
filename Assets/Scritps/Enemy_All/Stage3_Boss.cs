@@ -17,6 +17,7 @@ public class Stage3_Boss : MonoBehaviour
 
     [Header("Whip")]
     public GameObject whip;
+    public float attackDelay = 0.6f;
 
     [Header("Whip Points (1 → 2 → 3)")]
     public Transform point1;
@@ -24,15 +25,21 @@ public class Stage3_Boss : MonoBehaviour
     public Transform point3;
 
     [Header("Movement")]
-    public float moveSpeed = 6f;
-    public float whipActiveTime = 0.2f;
+    public float moveSpeed = 3f;
+    public float whipActiveTime = 0.3f;
 
     [Header("Runtime")]
     private Coroutine hitFlashRoutine;
 
     public Sprite normalSprite;      
-    public Sprite HitSprite;      
+    public Sprite HitSprite;
 
+    public GameObject arrowPrefab;
+    public Transform[] attackPoints;
+    public float arrowDelay = 0.8f;
+    public GameObject rockPrefab;
+    public Transform[] rockPoints;
+    public float rockDelay = 0.4f;
 
 
     void Start()
@@ -54,13 +61,26 @@ public class Stage3_Boss : MonoBehaviour
     {
         while (true)
         {
+            yield return StartCoroutine(ShootArrows()); // 화살 3발을 랜덤한 위치에 쏜다.
+            yield return new WaitForSeconds(attackDelay);
+
+            yield return StartCoroutine(ThrowRocks()); // 돌을 두 번 랜덤한 위치에 던진다.
+            yield return new WaitForSeconds(attackDelay);
+
             //포인트 1 = 위 2 = 가운데 3 = 아래
             yield return StartCoroutine(MoveAndHit(point1));
             yield return StartCoroutine(MoveAndHit(point2));
             yield return StartCoroutine(MoveAndHit(point3));
 
-            
-            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(ShootArrows()); // 화살 3발을 랜덤한 위치에 쏜다.
+            yield return new WaitForSeconds(attackDelay);
+
+            yield return StartCoroutine(ThrowRocks()); // 돌을 두 번 랜덤한 위치에 던진다.
+            yield return new WaitForSeconds(attackDelay);
+
+
+            yield return new WaitForSeconds(attackDelay);
+
             whip.SetActive(true);
             StartCoroutine(ShootSpriteEffect());
             yield return new WaitForSeconds(whipActiveTime);
@@ -102,11 +122,43 @@ public class Stage3_Boss : MonoBehaviour
             yield return null;
         }
 
-        // 도착 → whip 활성 (타격)
+        yield return new WaitForSeconds(attackDelay);
+
+
         whip.SetActive(true);
         StartCoroutine(ShootSpriteEffect());
         yield return new WaitForSeconds(whipActiveTime);
         whip.SetActive(false);
+    }
+    IEnumerator ShootArrows()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            int rand = Random.Range(0, attackPoints.Length);
+            Transform point = attackPoints[rand];
+
+            Instantiate(arrowPrefab, point.position, point.rotation);
+            yield return new WaitForSeconds(arrowDelay);
+        }
+    }
+    IEnumerator ThrowRocks()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            int rand = Random.Range(0, rockPoints.Length); 
+            Transform point = rockPoints[rand];
+
+            Instantiate(rockPrefab, point.position, point.rotation);
+            yield return new WaitForSeconds(rockDelay);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bullet"))
+        {
+            TakeDamage(1);
+            Destroy(collision.gameObject);
+        }
     }
     public void TakeDamage(int dmg)
     {
@@ -131,8 +183,6 @@ public class Stage3_Boss : MonoBehaviour
             StopCoroutine(hitFlashRoutine);
 
         StartCoroutine(DieRoutine());
-
-
 
 
     }

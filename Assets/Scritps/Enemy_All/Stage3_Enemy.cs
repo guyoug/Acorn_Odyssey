@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Stage3_Enemy : MonoBehaviour
@@ -119,6 +120,11 @@ public class Stage3_Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Bullet"))
+        {
+            TakeDamage(1);
+            Destroy(collision.gameObject);
+        }
         if (collision.CompareTag("Outline"))
         {
             TakeDamage(9999);

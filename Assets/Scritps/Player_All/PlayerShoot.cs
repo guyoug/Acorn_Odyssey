@@ -150,15 +150,7 @@ public class PlayerShoot : MonoBehaviour
             Instantiate(bulletPrefabs, firePoint.position + offset, firePoint.rotation);
         }
     }
-    //void NutStormBurst()
-    //{
-    //    for (int i = 0; i < burstCount; i++)
-    //    {
-    //        NutStormMoreShot();
-           
-    //    }
-    //    isBurstRunning = false;
-    //}
+ 
     IEnumerator NutStormBurst()
     {
         for (int i = 0; i < burstCount; i++)

@@ -13,6 +13,9 @@ public class Stage1_EnemyShoot : MonoBehaviour
     [Header("References")]
     private Transform player;
 
+    public float stopShootX = -5f;
+
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -30,6 +33,13 @@ public class Stage1_EnemyShoot : MonoBehaviour
     }
     void Update()
     {
+        if (transform.position.x <= stopShootX)
+            return;
+
+       
+        if (player != null && transform.position.x <= player.position.x)
+            return;
+
         checkTime += Time.deltaTime;
         if (checkTime >= delayTime)
         {

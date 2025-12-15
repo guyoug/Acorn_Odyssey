@@ -13,9 +13,12 @@ public class EnemySpawn3 : MonoBehaviour
 
     [Header("Runtime")]
     private Coroutine spawnRoutine;
+
+    //스폰 위치 2개
+    public Transform[] spawnPoints;
     void Start()
     {
-        Debug.Log("EnemySpawn2 Start 호출됨 : " + gameObject.name);
+    
 
         if (spawnRoutine == null)
             spawnRoutine = StartCoroutine(spawnEnemy());
@@ -33,9 +36,12 @@ public class EnemySpawn3 : MonoBehaviour
     {
         while (true)
         {
-            Vector3 position = new Vector3(transform.position.x, Random.Range(minY, maxY), transform.position.z);
-            Instantiate(enemy3Prefabs, position, transform.rotation);
             yield return new WaitForSeconds(interval);
+            int rand = Random.Range(0, spawnPoints.Length);
+            Transform point = spawnPoints[rand];
+
+            Instantiate(enemy3Prefabs, point.position, point.rotation);
+            
         }
     }
 }

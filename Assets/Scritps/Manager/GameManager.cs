@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Panels")]
     public GameObject stageClearPanel;
+    public GameObject gameOverPanel;
 
     [Header("Singleton")]
     public static GameManager Instance;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
 
     public bool isGameOver = false;
     public GameObject stageUICanvas;
+    public GameObject gameUIRoot;
 
     private void Awake() //싱글턴
     {
@@ -49,8 +51,40 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
     }
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("씬 로드됨 : " + scene.name);
+        if (scene.name.StartsWith("Game_Play"))
+        {
+            ShowGameUI(true);
+           
+        }
+        else
+        {
+            // 메인, 엔딩, 결과 화면
+            ShowGameUI(false);
+        }
+
+    }
+
+    public void ShowGameOver()
+    {
+        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    public void ShowGameUI(bool show)
+    {
+        if (gameUIRoot != null)
+            gameUIRoot.SetActive(show);
+    }
+
     public void BindSpawnPoints(Transform elite, Transform boss)
     {
         currentEliteSpawnPoint = elite;
@@ -58,25 +92,8 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("현재 스테이지 스폰 포인트 바인딩 완료");
     }
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log($"씬 변경 감지: {scene.name}");
-
-
-        // 1) stageClearPanel 재할당
-        stageClearPanel = GameObject.Find("StageClearPanel");
-
-        Debug.Log("씬 전환 후 GameManager 레퍼런스 갱신 완료");
-    }
+  
+   
     void Start()
     {
         StartWave(currentWave);
@@ -87,7 +104,7 @@ public class GameManager : MonoBehaviour
     {
         string sceneName = SceneManager.GetActiveScene().name;
 
-        // 예: "Game_Play_stage2" → 마지막 숫자 뽑기
+      
         for (int i = sceneName.Length - 1; i >= 0; i--)
         {
             if (char.IsDigit(sceneName[i]))
@@ -257,8 +274,27 @@ public class GameManager : MonoBehaviour
         bossKilled = 0;
         spawnedCount = 0;
         bossSpawned = false;
-        Time.timeScale = 1;
+
+        currentWave = 1;
+
+        Time.timeScale = 1f;
+
     }
+   
+    public void ResetState()
+    {
+        currentStage = 1;
+        currentWave = 1;
+
+        normalKilled = 0;
+        eliteKilled = 0;
+        bossKilled = 0;
+        spawnedCount = 0;
+        bossSpawned = false;
+
+        Time.timeScale = 1f;
+    }
+
     void StartWave(int wave)
     {
         Debug.Log($"Wave {wave} 시작!");
@@ -310,45 +346,55 @@ public class GameManager : MonoBehaviour
 
         spawner.StopSpawn();
     }
-
-    IEnumerator killboss()
+    void PrepareEnding()
     {
-        Time.timeScale = 0;
-        GameObject stageCanvas = GameObject.FindWithTag("StageUI");
+        Time.timeScale = 1f;
+
+        // Player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+            player.SetActive(false);
+
+        // Stage UI
+        GameObject stageCanvas = GameObject.FindWithTag("Ui");
         if (stageCanvas != null)
             stageCanvas.SetActive(false);
-        var canvas = GameObject.Find("Canvas");
-        if (canvas != null)
-        {
-            stageClearPanel = canvas.transform.Find("StageClearPanel")?.gameObject;
-        }
 
-        Debug.Log("killboss 시작, stageClearPanel = " + stageClearPanel);
-       
+        // Gauge UI
+        PlayerGauge gauge = player?.GetComponent<PlayerGauge>();
+        if (gauge != null)
+            gauge.ShowGaugeUI(false);
+
+        // Enemy Spawn
+        GameObject spawn = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
+        if (spawn != null)
+            spawn.SetActive(false);
+
+        // GameManager는 엔딩 씬에서 필요 없으면 꺼도 됨
+        gameObject.SetActive(false);
+    }
+    IEnumerator killboss()
+    {
+        Time.timeScale = 0f;
+
+        ShowGameUI(false);
+
         if (stageClearPanel != null)
             stageClearPanel.SetActive(true);
 
-        PlayerGauge gauge = GameObject.FindWithTag("Player").GetComponent<PlayerGauge>();
-        if (gauge != null)
-            gauge.ShowGaugeUI(false); // 스테이지 클리어 시 UI 숨김
-
-     
-
-        // timeScale = 0이어도 기다리기 위해 Realtime 사용
-        yield return new WaitForSecondsRealtime(bossinterval);
+        yield return new WaitForSecondsRealtime(2f);
 
         if (stageClearPanel != null)
             stageClearPanel.SetActive(false);
 
-        if (gauge != null)
-            gauge.ShowGaugeUI(true);
+        Time.timeScale = 1f;
 
         string currentScene = SceneManager.GetActiveScene().name;
 
         switch (currentScene)
         {
             case "Game_Play_stage1":
-                ResetStageData();
+                ResetStageData();   
                 SceneManager.LoadScene("Game_Play_stage2");
                 break;
 
@@ -358,6 +404,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "Game_Play_stage3":
+                PrepareEnding();
                 SceneManager.LoadScene("EndingScene");
                 break;
         }

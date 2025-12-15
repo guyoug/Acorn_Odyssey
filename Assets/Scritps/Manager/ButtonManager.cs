@@ -132,29 +132,27 @@ public class ButtonManager : MonoBehaviour
 
     public void restart()
     {
-        gameOverPanel.SetActive(false);
-
+        gameOverPanel?.SetActive(false);
         Time.timeScale = 1f;
-        if (SoundManager.Instance != null)
-            SoundManager.Instance.PlayBGMForce(SoundManager.Instance.stage1BGM);
-
-
-
-        if (PlayerHealth.Instance != null)
-        {
-            PlayerHealth.Instance.ResetPlayer();
-
-            PlayerGauge gauge = PlayerHealth.Instance.GetComponent<PlayerGauge>();
-            if (gauge != null)
-                gauge.ResetGauge();
-
-            PlayerUpgrade upgrade = PlayerHealth.Instance.GetComponent<PlayerUpgrade>();
-            if (upgrade != null)
-                upgrade.ResetUpgrade();
-        }
-
-        SceneManager.LoadScene("Game_Play_stage1");
+        StartCoroutine(RestartRoutine());
     }
+
+    IEnumerator RestartRoutine()
+    {
+        SceneManager.LoadScene("Game_Play_stage1");
+
+        yield return null;
+        
+        GameManager.Instance.ResetState();
+        PlayerHealth.Instance.ResetState();
+        PlayerGauge gauge = PlayerHealth.Instance.GetComponent<PlayerGauge>();
+        gauge?.ResetState();
+        PlayerUpgrade upgrade = PlayerHealth.Instance?.GetComponent<PlayerUpgrade>(); 
+        upgrade?.ResetState();
+        SoundManager.Instance.ResetState();
+    }
+
+
     public void OpenSettings()
     {
         if (settingsPanel != null)

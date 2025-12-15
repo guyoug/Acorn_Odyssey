@@ -166,4 +166,10 @@ public class SoundManager : MonoBehaviour
         isMasterMuted = false;         // 전체 뮤트 상태였다면 해제
         bgmSource.Play();
     }
+    public void ResetState()
+    {
+        isMasterMuted = false;
+        bgmSource.Stop();
+        PlayBGMForce(stage1BGM);
+    }
 }

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static PlayerHealth Instance;
+
     [Header("Health Settings")]
     public int maxHealth = 3;
     private int currentHealth;
@@ -13,15 +15,15 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("UI Elements")]
     public Image[] Player_HP;
-    public GameObject gameOverPanel;
 
     [Header("Hit Flash")]
     public float hitFlashTime = 0.1f;
     private Coroutine hitFlashRoutine;
     private SpriteRenderer sr;
-    public static PlayerHealth Instance;
 
-    public GameObject uiRoot;
+    public GameObject gameOverPanel;
+
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -46,11 +48,24 @@ public class PlayerHealth : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
         if (scene.name == "Game_Start")
         {
-            Instance = null;   // ⭐ 중요
+            Instance = null;  
             Destroy(gameObject);
+           
         }
+
+        GameObject healthPanel = GameObject.Find("Health_Panel");
+        if (healthPanel == null)
+        {
+            Debug.LogError("Health_Panel 못 찾음");
+            return;
+        }
+
+        Player_HP = healthPanel.GetComponentsInChildren<Image>(false);
+
+        ResetState();
     }
     void Start()
     {
@@ -63,7 +78,8 @@ public class PlayerHealth : MonoBehaviour
         // 무적 토글 치트
         if (Input.GetKeyDown(KeyCode.P))
         {
-            isInvincible = true;
+            isInvincible = !isInvincible;   // ← 핵심
+            Debug.Log(isInvincible ? "무적 ON" : "무적 OFF");
         }
     }
     void Health() // 최대치
@@ -74,6 +90,10 @@ public class PlayerHealth : MonoBehaviour
     
     void UpdateUI()
     {
+
+        if (Player_HP == null)
+            return;
+
         for (int i = 0; i < Player_HP.Length; i++)
             Player_HP[i].enabled = i < currentHealth; // 체력 ui
     }
@@ -93,39 +113,32 @@ public class PlayerHealth : MonoBehaviour
             StopCoroutine(hitFlashRoutine);
         hitFlashRoutine = StartCoroutine(HitFlash());
         SoundManager.Instance.PlaySFX(SoundManager.Instance.playerHitSFX);
+
         if (currentHealth <= 0)
             Die();
     }
 
     void Die()
     {
+        if (isDead)
+            return;
         isDead = true;
-        GameManager.Instance.isGameOver = true;
-        if (uiRoot != null)
-            uiRoot.SetActive(false);
-        PlayerGauge gauge = GetComponent<PlayerGauge>();
-        if (gauge != null)
-            gauge.ResetGauge();
-        if (SoundManager.Instance != null)
-            SoundManager.Instance.StopBGM();
+        currentHealth = 0;
+        UpdateUI();
+        GameManager.Instance.ShowGameOver();
+        SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.gameOverSFX);
-        Debug.Log("Game Over");
-        gameOverPanel.SetActive(true);
+     
         Time.timeScale = 0f;
     }
 
     public void Heal(int heal)
     {
-        if (isDead) 
+        if (isDead)
             return;
 
-        currentHealth += heal;
-
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
-
+        currentHealth = Mathf.Min(currentHealth + heal, maxHealth);
         UpdateUI();
-        
     }
     IEnumerator HitFlash()
     {
@@ -137,10 +150,9 @@ public class PlayerHealth : MonoBehaviour
         sr.color = Color.white;
     }
 
-    public void ResetPlayer()
+    public void ResetState()
     {
         isDead = false;
-        isInvincible = false;
         currentHealth = maxHealth;
         UpdateUI();
     }

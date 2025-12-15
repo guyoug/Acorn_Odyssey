@@ -29,5 +29,9 @@ public class Item : MonoBehaviour
             collision.GetComponent<PlayerItem>().PickItem(itemType);
             Destroy(gameObject);
         }
+        if (collision.CompareTag("Outline"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

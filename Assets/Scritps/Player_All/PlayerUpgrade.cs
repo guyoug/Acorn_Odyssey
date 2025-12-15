@@ -105,12 +105,16 @@ public class PlayerUpgrade : MonoBehaviour
         tailList.Clear();
         tailList.AddRange(GetComponentsInChildren<Tail>());
     }
-    public void ResetUpgrade()
+    public void ResetState()
     {
         speedStack = 0;
         moreStack = 0;
         nutStack = 0;
-        shoot.isNutStormMode = false;
+
+        foreach (var tail in tailList)
+            Destroy(tail);
+
+        tailList.Clear();
     }
 }
 
