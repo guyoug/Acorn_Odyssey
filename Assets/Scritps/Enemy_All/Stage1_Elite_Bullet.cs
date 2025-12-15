@@ -3,6 +3,7 @@
 public class Stage1_Elite_Bullet : MonoBehaviour
 {
     [Header("Movement Settings")]
+    public int Damage = 1; 
     public float maxSpeed = 10.0f;
     private Vector2 shootDirection;
 
@@ -15,9 +16,16 @@ public class Stage1_Elite_Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Transform player = GameObject.FindWithTag("Player").transform;
-        if (player != null)
-            shootDirection = (player.position - transform.position).normalized; // 방향 벡터 정규화 (거리와 상관없이 방향만 유지)
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            shootDirection = (playerObj.transform.position - transform.position).normalized;
+        }
+        else
+        {
+            // 플레이어 없으면 그냥 왼쪽으로 발사하거나 즉시 제거
+            shootDirection = Vector2.left;
+        }
         Destroy(gameObject, deleteTime);
     }
     void FixedUpdate()
@@ -28,8 +36,7 @@ public class Stage1_Elite_Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(1);
+            PlayerHealth.Instance.TakeDamage(Damage);
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Outline"))

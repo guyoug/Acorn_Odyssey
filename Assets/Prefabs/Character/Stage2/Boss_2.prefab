@@ -360,7 +360,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -975112467
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7c49132534bcb0246ab17dbe990ac94e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -452,7 +452,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -975112467
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 62eb221fc59afdd46982aa659e281415, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -981,8 +981,8 @@ MonoBehaviour:
   centerAngle: 0
   topAngle: 24
   bottomAngle: -30
-  dashSpeed: 10
-  dashDuration: 0.6
+  dashSpeed: 13
+  dashDuration: 1
   dashCooldown: 4
   moveSpeed: 10
   normalSprite: {fileID: 21300000, guid: 62eb221fc59afdd46982aa659e281415, type: 3}

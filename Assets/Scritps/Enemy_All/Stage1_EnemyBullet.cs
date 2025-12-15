@@ -11,6 +11,8 @@ public class Stage1_EnemyBullet : MonoBehaviour
 
     [Header("References")]
     private Rigidbody2D rb;
+
+    public int Damage = 1;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,8 +33,8 @@ public class Stage1_EnemyBullet : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(1);
+            PlayerHealth.Instance.TakeDamage(Damage);
+            
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Outline"))

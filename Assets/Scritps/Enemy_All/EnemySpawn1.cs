@@ -5,7 +5,7 @@ public class EnemySpawn1 : MonoBehaviour
 {
     [Header("Spawn Settings")]
     public GameObject enemy1Prefabs;
-    public float interval = 1.0f;
+    public int interval = 2;
 
     [Header("Spawn Range (Y Axis)")]
     public float maxY = 3.3f;

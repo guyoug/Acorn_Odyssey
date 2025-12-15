@@ -30,6 +30,7 @@ public class Stage2_Enemy : MonoBehaviour
 
     [Header("Hit Flash")]
     private Coroutine hitFlashRoutine;
+    public int Damage = 1;
     private void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
@@ -66,6 +67,10 @@ public class Stage2_Enemy : MonoBehaviour
         if (collision.CompareTag("Outline"))
         {
             Destroy(gameObject);
+        }
+        if (collision.CompareTag("Player"))
+        {
+            PlayerHealth.Instance.TakeDamage(Damage);
         }
     }
     public void TakeDamage(int damage)

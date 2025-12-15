@@ -59,8 +59,7 @@ public class Knife : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerHealth hp = collision.GetComponent<PlayerHealth>();
-            hp.TakeDamage(damage);
+            PlayerHealth.Instance.TakeDamage(damage);
             Destroy(gameObject);
         }
         if (collision.CompareTag("Outline"))

@@ -54,9 +54,6 @@ TagManager:
   - name: BackGround
     uniqueID: 2844328505
     locked: 0
-  - name: Item
-    uniqueID: 2594493325
-    locked: 0
   - name: Bullet
     uniqueID: 2574353835
     locked: 0
@@ -68,6 +65,9 @@ TagManager:
     locked: 0
   - name: Boss
     uniqueID: 3319854829
+    locked: 0
+  - name: Item
+    uniqueID: 2594493325
     locked: 0
   - name: Player
     uniqueID: 969417113

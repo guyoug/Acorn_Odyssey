@@ -1,4 +1,6 @@
 using System.Collections;
+using Unity.Jobs;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Stage2_Elite : MonoBehaviour
@@ -7,6 +9,7 @@ public class Stage2_Elite : MonoBehaviour
     public int Hp = 20;
     private bool isDead = false;
     private bool isPatternRunning = false;
+    public int Damage = 1;
 
     [Header("Movement Settings")]
     public float maxSpeed = 2f;
@@ -222,6 +225,10 @@ public class Stage2_Elite : MonoBehaviour
             TakeDamage(1);
       
             Destroy(collision.gameObject);
+        }
+        if(collision.CompareTag("Player"))
+        {
+            PlayerHealth.Instance.TakeDamage(Damage);
         }
     }
 

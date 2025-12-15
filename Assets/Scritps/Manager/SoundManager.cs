@@ -44,6 +44,10 @@ public class SoundManager : MonoBehaviour
     {
         PlayBGMByScene(scene.name);
     }
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
     void PlayBGM(AudioClip clip)
     {
         if (clip == null) return;

@@ -6,7 +6,9 @@ public class Stage2_Boss : MonoBehaviour
     [Header("Boss Status")]
     public int Hp = 120;
     private bool isDead = false;
-    private bool isPatternRunning = false;
+    private bool canMove = true;
+    public int Damage = 1;
+
 
     private GameManager gameManager;
     private Vector3 spawnPosition;
@@ -38,14 +40,14 @@ public class Stage2_Boss : MonoBehaviour
     public float topAngle = 24f;
     public float bottomAngle = -30f;
     [Header("Dash Pattern")]
-    public float dashSpeed = 10f;
-    public float dashDuration = 2.0f;
+    public float dashSpeed = 13f;
+    public float dashDuration = 1.0f;
     public float dashCooldown = 4f;
 
  
 
     [Header("Movement Settings")]
-    public float moveSpeed = 10f;
+    public float moveSpeed = 4f;
     private bool movingUp = true;
     private float minY = -2.0f;
     private float maxY = 3.3f;
@@ -86,7 +88,7 @@ public class Stage2_Boss : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isPatternRunning && !isDead)
+        if (!isDead && canMove)
             Move();
     }
 
@@ -96,8 +98,9 @@ public class Stage2_Boss : MonoBehaviour
 
         while (!isDead)
         {
-            isPatternRunning = true;
-
+           
+            
+            //가운데 부제 다섯번 소환
             StartCoroutine(ShootSpriteEffect());
 
             if (centerWarning != null)
@@ -108,6 +111,16 @@ public class Stage2_Boss : MonoBehaviour
 
             yield return new WaitForSeconds(patternDelay);
 
+            //아래 부제 세 번 소환
+            StartCoroutine(ShootSpriteEffect());
+
+            if (downWarning != null)
+                yield return StartCoroutine(downWarning.Blink());
+
+            yield return StartCoroutine(ShootBurst(firePointDown, 3, bottomAngle));
+
+            yield return new WaitForSeconds(patternDelay);
+            //위 부제 세 번 소환
             StartCoroutine(ShootSpriteEffect());
 
             if (upWarning != null)
@@ -118,18 +131,12 @@ public class Stage2_Boss : MonoBehaviour
 
             yield return new WaitForSeconds(patternDelay);
 
-            StartCoroutine(ShootSpriteEffect());
-
-            if (downWarning != null)
-                yield return StartCoroutine(downWarning.Blink());
-
-            yield return StartCoroutine(ShootBurst(firePointDown, 3, bottomAngle));
-
-            yield return StartCoroutine(DashAttack());
+            //박치기
+            yield return StartCoroutine(DashAttackBurst(3));
 
 
             yield return new WaitForSeconds(dashCooldown);
-            isPatternRunning = false;
+        
 
 
         }
@@ -150,8 +157,20 @@ public class Stage2_Boss : MonoBehaviour
             yield return new WaitForSeconds(shootInterval);
         }
     }
+    IEnumerator DashAttackBurst(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            if (isDead)
+                yield break;
+
+            yield return StartCoroutine(DashAttack());
+            yield return new WaitForSeconds(0.5f); // 박치기 사이 텀
+        }
+    }
     IEnumerator DashAttack()
     {
+        canMove = false;
         if (player == null)
             yield break;
         spawnPosition = transform.position;
@@ -167,15 +186,19 @@ public class Stage2_Boss : MonoBehaviour
         Vector3 dir = (player.position - transform.position).normalized;
         float timer = 0f;
 
-        while (timer < dashDuration)
-        {
-            transform.position += dir * dashSpeed * Time.deltaTime;
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        yield return new WaitForSeconds(0.2f);
+            while (timer < dashDuration)
+            {
+                transform.position += dir * dashSpeed * Time.deltaTime;
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            yield return new WaitForSeconds(0.2f);
+            yield return StartCoroutine(ReturnToSpawn());
 
-        yield return StartCoroutine(ReturnToSpawn());
+
+        canMove = true;
+
+
     }
 
     IEnumerator ReturnToSpawn()
@@ -259,6 +282,10 @@ public class Stage2_Boss : MonoBehaviour
             TakeDamage(1);
 
             Destroy(collision.gameObject);
+        }
+        if(collision.CompareTag("Player"))
+        {
+            PlayerHealth.Instance.TakeDamage(Damage);
         }
     }
     public void TakeDamage(int dmg)
