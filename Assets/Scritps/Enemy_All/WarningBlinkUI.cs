@@ -2,9 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
-public class Elite2WarningBlink : MonoBehaviour
+public class WarningBlinkUI : MonoBehaviour
 {
     [Header("Warning Image")]
     public Image warnImg;

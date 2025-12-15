@@ -19,9 +19,9 @@ public class Stage2_Boss : MonoBehaviour
 
 
     [Header("Warning UI")]
-    public Boss2WaringBlink centerWarning;
-    public Boss2WaringBlink upWarning;
-    public Boss2WaringBlink downWarning;
+    public WarningBlinkUI centerWarning;
+    public WarningBlinkUI upWarning;
+    public WarningBlinkUI downWarning;
 
     [Header("Dash Warning UI")]
     public GameObject exclamationUI;

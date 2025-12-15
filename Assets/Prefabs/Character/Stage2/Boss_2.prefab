@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3588425857933542938}
   - component: {fileID: 2024732715227026207}
   - component: {fileID: 329380151073088350}
-  - component: {fileID: 1258120353291935175}
+  - component: {fileID: 13055250649710607}
   m_Layer: 5
   m_Name: WarningBottom
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1258120353291935175
+--- !u!114 &13055250649710607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 681228987524779527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6d04c4c45f648c4dacf1dbf3ede2d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e5e775428a7b77478624da1ddb117e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   warnImg: {fileID: 329380151073088350}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 5438429270755977892}
   - component: {fileID: 809726988421741804}
   - component: {fileID: 7449898522077525886}
-  - component: {fileID: 869737951335399204}
+  - component: {fileID: 3391904692298201212}
   m_Layer: 5
   m_Name: Warningsenter
   m_TagString: Untagged
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &869737951335399204
+--- !u!114 &3391904692298201212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2004226584905810245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6d04c4c45f648c4dacf1dbf3ede2d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e5e775428a7b77478624da1ddb117e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   warnImg: {fileID: 7449898522077525886}
@@ -359,8 +359,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 969417113
-  m_SortingLayer: 7
+  m_SortingLayerID: -975112467
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7c49132534bcb0246ab17dbe990ac94e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -970,9 +970,9 @@ MonoBehaviour:
   firePointCenter: {fileID: 5292103217308621908, guid: 1a98a6c036b46624186be67482e8ad8c, type: 3}
   firePointUp: {fileID: 1184926174532146310, guid: 26e3b7f2534378549b2d532255df6316, type: 3}
   firePointDown: {fileID: 4231757972154783022, guid: 7521a308a211dcd46b2632199627dcee, type: 3}
-  centerWarning: {fileID: 869737951335399204}
-  upWarning: {fileID: 102617678237820442}
-  downWarning: {fileID: 1258120353291935175}
+  centerWarning: {fileID: 3391904692298201212}
+  upWarning: {fileID: 7188986707108854214}
+  downWarning: {fileID: 13055250649710607}
   exclamationUI: {fileID: 3653330195996773883}
   bulletPrefab: {fileID: 8706026456541892852, guid: 162ed320a87aebc43b4d20d6afe23991, type: 3}
   shootInterval: 0.3
@@ -1000,7 +1000,7 @@ GameObject:
   - component: {fileID: 2228962517082755517}
   - component: {fileID: 8892454690876257635}
   - component: {fileID: 4469092770004773750}
-  - component: {fileID: 102617678237820442}
+  - component: {fileID: 7188986707108854214}
   m_Layer: 5
   m_Name: WarningTop
   m_TagString: Untagged
@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &102617678237820442
+--- !u!114 &7188986707108854214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7179330717190045819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6d04c4c45f648c4dacf1dbf3ede2d0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e5e775428a7b77478624da1ddb117e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   warnImg: {fileID: 4469092770004773750}
