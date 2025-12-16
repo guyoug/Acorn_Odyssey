@@ -16,11 +16,14 @@ public class SoundManager : MonoBehaviour
     public AudioClip stage1BGM;
     public AudioClip stage2BGM;
     public AudioClip stage3BGM;
+
+    [Header("SFX Clips")]
     public AudioClip enemyDieSFX;
     public AudioClip stageClearSFX;
     public AudioClip playerHitSFX;
     public AudioClip gameOverSFX;
-    public AudioClip pickPowerupSFX;    
+    public AudioClip pickPowerupSFX;
+    public AudioClip BarrierHitSFX;
 
     private bool isMasterMuted = false;
     private float prevBGMVolume = 0.6f;
@@ -108,10 +111,14 @@ public class SoundManager : MonoBehaviour
         bgmSource.loop = true;
         bgmSource.Play();
     }
+  
     public void ToggleMasterMute()
     {
         if (!isMasterMuted)
         {
+            //prevBGMVolume = bgmSource.volume > 0f ? bgmSource.volume : 0.6f;
+            //prevSFXVolume = sfxSource.volume > 0f ? sfxSource.volume : 0.8f;
+
             prevBGMVolume = bgmSource.volume;
             prevSFXVolume = sfxSource.volume;
 
@@ -149,6 +156,30 @@ public class SoundManager : MonoBehaviour
         UnmuteIfNeeded();
         sfxSource.volume = value;
         prevSFXVolume = value;
+    }
+    public void ToggleBGMMute()
+    {
+        if (bgmSource.volume > 0f)
+        {
+            prevBGMVolume = bgmSource.volume;
+            bgmSource.volume = 0f;
+        }
+        else
+        {
+            bgmSource.volume = prevBGMVolume;
+        }
+    }
+    public void ToggleSFXMute()
+    {
+        if (sfxSource.volume > 0f)
+        {
+            prevSFXVolume = sfxSource.volume;
+            prevSFXVolume = 0f;
+        }
+        else
+        {
+            sfxSource.volume = prevSFXVolume;
+        }
     }
     public void PlayMainBGM()
     {

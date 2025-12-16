@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
     private SpriteRenderer sr;
 
     public GameObject gameOverPanel;
+    private GameObject healthPanel;
 
 
     void Awake()
@@ -56,13 +57,12 @@ public class PlayerHealth : MonoBehaviour
            
         }
 
-        GameObject healthPanel = GameObject.Find("Health_Panel");
+        healthPanel = GameObject.Find("Health_Panel");
         if (healthPanel == null)
         {
             Debug.LogError("Health_Panel 못 찾음");
             return;
         }
-
         Player_HP = healthPanel.GetComponentsInChildren<Image>(false);
 
         ResetState();
@@ -134,10 +134,9 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = 0;
         UpdateUI();
         HideStageCanvas();
-        GameManager.Instance.ShowGameOver();
         SoundManager.Instance.StopBGM();
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.gameOverSFX);
-     
+        GameManager.Instance.ShowGameOver();
+        
         Time.timeScale = 0f;
     }
 

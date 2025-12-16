@@ -134,44 +134,89 @@ public class ButtonManager : MonoBehaviour
     {
         gameOverPanel?.SetActive(false);
         Time.timeScale = 1f;
+        StartCoroutine(RestartRoutine());
+    }
+    IEnumerator RestartRoutine()
+    {
+        SceneManager.LoadScene("Game_Play_stage1");
+
+        yield return null; // 1 프레임 대기
 
         PlayerHealth.Instance.ResetState();
 
-        PlayerGauge gauge =
-            PlayerHealth.Instance.GetComponent<PlayerGauge>();
+        PlayerGauge gauge = PlayerHealth.Instance.GetComponent<PlayerGauge>();
         gauge.ResetState();
 
-        PlayerUpgrade upgrade =
-            PlayerHealth.Instance.GetComponent<PlayerUpgrade>();
+        PlayerUpgrade upgrade = PlayerHealth.Instance.GetComponent<PlayerUpgrade>();
         upgrade.ResetState();
 
-        GameManager.Instance.ResetState(); // 필요하면
+        PlayerItem item = PlayerHealth.Instance.GetComponent<PlayerItem>();
 
-        SceneManager.LoadScene("Game_Play_stage1");
+        item.ClearAllItems();
+
+        GameManager.Instance.ResetState();
     }
 
 
     public void OpenSettings()
     {
-        if (settingsPanel != null)
-            settingsPanel.SetActive(true);
+         if (SoundManager.Instance == null)
+        return;
 
-        if (SoundManager.Instance == null)
-            return;
+    settingsPanel.SetActive(true);
 
-        bgmSlider.onValueChanged.RemoveListener(OnBGMSliderChanged);
-        bgmSlider.value = SoundManager.Instance.bgmSource.volume;
-        bgmSlider.onValueChanged.AddListener(OnBGMSliderChanged);
+    // 🔒 이벤트 잠시 차단
+    bgmSlider.onValueChanged.RemoveListener(OnBGMSliderChanged);
+    sfxSlider.onValueChanged.RemoveListener(OnSFXSliderChanged);
 
-        isBGMMuted = bgmSlider.value <= 0f;
-        UpdateBGMIcon();
+    // 🎯 현재 사운드 상태를 UI에 반영
+    bgmSlider.value = SoundManager.Instance.bgmSource.volume;
+    sfxSlider.value = SoundManager.Instance.sfxSource.volume;
 
-        sfxSlider.onValueChanged.RemoveListener(OnSFXSliderChanged);
-        sfxSlider.value = SoundManager.Instance.sfxSource.volume;
-        sfxSlider.onValueChanged.AddListener(OnSFXSliderChanged);
+    isBGMMuted = bgmSlider.value <= 0f;
+    isSFXMuted = sfxSlider.value <= 0f;
 
-        isSFXMuted = sfxSlider.value <= 0f;
-        UpdateSFXIcon();
+    UpdateBGMIcon();
+    UpdateSFXIcon();
+
+    // 🔓 이벤트 복구
+    bgmSlider.onValueChanged.AddListener(OnBGMSliderChanged);
+    sfxSlider.onValueChanged.AddListener(OnSFXSliderChanged);
+        //bgmSlider.onValueChanged.RemoveAllListeners();
+        //sfxSlider.onValueChanged.RemoveAllListeners();
+
+        //bgmSlider.value = SoundManager.Instance.bgmSource.volume;
+        //sfxSlider.value = SoundManager.Instance.sfxSource.volume;
+
+  
+        //bgmSlider.onValueChanged.AddListener(
+        //    SoundManager.Instance.SetBGMVolume
+        //);
+        //sfxSlider.onValueChanged.AddListener(
+        //    SoundManager.Instance.SetSFXVolume
+        //);
+
+        //settingsPanel.SetActive(true);
+
+        //SoundManager.Instance.SetBGMVolume(bgmSlider.value);
+        //SoundManager.Instance.SetSFXVolume(sfxSlider.value);
+
+        //if (SoundManager.Instance == null)
+        //    return;
+
+        //bgmSlider.onValueChanged.RemoveListener(OnBGMSliderChanged);
+        //bgmSlider.value = SoundManager.Instance.bgmSource.volume;
+        //bgmSlider.onValueChanged.AddListener(OnBGMSliderChanged);
+
+        //isBGMMuted = bgmSlider.value <= 0f;
+        //UpdateBGMIcon();
+
+        //sfxSlider.onValueChanged.RemoveListener(OnSFXSliderChanged);
+        //sfxSlider.value = SoundManager.Instance.sfxSource.volume;
+        //sfxSlider.onValueChanged.AddListener(OnSFXSliderChanged);
+
+        //isSFXMuted = sfxSlider.value <= 0f;
+        //UpdateSFXIcon();
     }
 
 
@@ -200,65 +245,75 @@ public class ButtonManager : MonoBehaviour
     }
     public void MuteBGM()
     {
-        if (SoundManager.Instance == null || SoundManager.Instance.bgmSource == null)
-            return;
+        //if (SoundManager.Instance == null || SoundManager.Instance.bgmSource == null)
+        //    return;
 
-        var bgm = SoundManager.Instance.bgmSource;
+        //var bgm = SoundManager.Instance.bgmSource;
 
-        if (!isBGMMuted)
-        {
-            // 현재 볼륨 저장하고 0으로
-            prevVolume = bgm.volume;
-            bgm.volume = 0f;
+        //if (!isBGMMuted)
+        //{
+        //    // 현재 볼륨 저장하고 0으로
+        //    //prevVolume = bgm.volume;
+        //    SoundManager.Instance.ToggleMasterMute();
+        //    bgm.volume = 0f;
 
-            // 슬라이더도 0으로 내려가도록
-            bgmSlider.value = 0f;
-            isBGMMuted = true;
-        }
-        else
-        {
-            // 이전 볼륨 복원
-            bgm.volume = prevVolume;
+        //    // 슬라이더도 0으로 내려가도록
+        //    bgmSlider.value = 0f;
+        //    isBGMMuted = true;
+        //}
+        //else
+        //{
+        //    // 이전 볼륨 복원
+        //    SoundManager.Instance.ToggleMasterMute();
+        //    //bgm.volume = prevVolume;
 
-            // 슬라이더도 원래대로 복원
-            bgmSlider.value = prevVolume;
-            isBGMMuted = false;
-        }
+        //    // 슬라이더도 원래대로 복원
+        //    bgmSlider.value = prevVolume;
+        //    isBGMMuted = false;
+        //}
+        //UpdateBGMIcon();
+        SoundManager.Instance.ToggleBGMMute();
+        bgmSlider.value = SoundManager.Instance.bgmSource.volume;
+        isBGMMuted = bgmSlider.value <= 0f;
         UpdateBGMIcon();
     }
     public void MuteSFX()
     {
-        if (SoundManager.Instance == null || SoundManager.Instance.sfxSource == null)
-            return;
-
-        var sfx = SoundManager.Instance.sfxSource;
-
-        if (!isSFXMuted)
-        {
-            // 현재 볼륨 저장
-            prevSFXVolume = sfx.volume;
-
-            // 음소거
-            sfx.volume = 0f;
-
-            // 슬라이더도 0으로
-            if (sfxSlider != null)
-                sfxSlider.value = 0f;
-
-            isSFXMuted = true;
-        }
-        else
-        {
-            // 볼륨 복원
-            sfx.volume = prevSFXVolume;
-
-            // 슬라이더도 복원
-            if (sfxSlider != null)
-                sfxSlider.value = prevSFXVolume;
-
-            isSFXMuted = false;
-        }
+        SoundManager.Instance.ToggleSFXMute();
+        sfxSlider.value = SoundManager.Instance.sfxSource.volume;
+        isSFXMuted = sfxSlider.value <= 0f;
         UpdateSFXIcon();
+        //if (SoundManager.Instance == null || SoundManager.Instance.sfxSource == null)
+        //    return;
+
+        //var sfx = SoundManager.Instance.sfxSource;
+
+        //if (!isSFXMuted)
+        //{
+        //    // 현재 볼륨 저장
+        //    prevSFXVolume = sfx.volume;
+
+        //    // 음소거
+        //    sfx.volume = 0f;
+
+        //    // 슬라이더도 0으로
+        //    if (sfxSlider != null)
+        //        sfxSlider.value = 0f;
+
+        //    isSFXMuted = true;
+        //}
+        //else
+        //{
+        //    // 볼륨 복원
+        //    sfx.volume = prevSFXVolume;
+
+        //    // 슬라이더도 복원
+        //    if (sfxSlider != null)
+        //        sfxSlider.value = prevSFXVolume;
+
+        //    isSFXMuted = false;
+        //}
+        //UpdateSFXIcon();
     }
     void UpdateBGMIcon()
     {

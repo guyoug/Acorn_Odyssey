@@ -6,10 +6,9 @@ using Random = UnityEngine.Random;
 public class Stage1_Boss : MonoBehaviour
 {
     [Header("Boss Status")]
-    public int Hp = 60;
-    private bool isDead = false;
-    public float maxSpeed = 2f;
-    private GameManager gameManager;
+    public int Hp = 60;                 
+    public float maxSpeed = 2f;        
+    private bool isDead = false;        
 
     [Header("Pattern Points")]
     public Transform firePoint;
@@ -25,34 +24,38 @@ public class Stage1_Boss : MonoBehaviour
     public float knifeDelay = 0.7f;
     public float GroupDelay = 0.8f;
 
-    [Header("Movement Settings (Elite 방식)")]
+    [Header("Movement Settings")]
     private float minX = 3.5f;
     private float maxX = 7.0f;
     private float minY = -2.0f;
     private float maxY = 3.3f;
+
+    [Header("Runtime")]
     private Vector3 targetPos;
 
     [Header("Death Sprite")]
-    public Sprite deadSprite;
+    public Sprite deadSprite;               
+    public float DeadSpritetime = 0.3f;
+
+    [Header("References")]
     private SpriteRenderer sr;
     private Collider2D col;
     private Animator anim;
-    private float DeadSprite = 0.3f;
 
     [Header("Hit Flash")]
     private Coroutine hitFlashRoutine;
     void Start()
     {
-        gameManager = GameManager.Instance;
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         anim = GetComponentInChildren<Animator>();
+
         SetNewTarget();
         StartCoroutine(PattenLoop());
     }
     private void FixedUpdate()
     {
-        MoveRandom();
+        MoveRandom(); //랜덤 위치로 계속 움직임
         
     }
 
@@ -68,7 +71,7 @@ public class Stage1_Boss : MonoBehaviour
             yield return new WaitForSeconds(GroupDelay);
         }
     }
-    IEnumerator BurstPattern()
+    IEnumerator BurstPattern() // 총 3번씩 3발 점사
     {
         for (int group = 0; group < 3; group++)
         {
@@ -83,51 +86,10 @@ public class Stage1_Boss : MonoBehaviour
     }
     IEnumerator KnifePattern()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++) // 칼 세 번 던짐
         {
             Instantiate(knifePrefab, throwPoint.position, throwPoint.rotation);
             yield return new WaitForSeconds(knifeDelay);
-        }
-    }
-    IEnumerator HitFlash()
-    {
-        if (sr == null || isDead) yield break;
-
-        sr.color = new Color(1f, 0.4f, 0.4f, 0.7f);
-        yield return new WaitForSeconds(0.1f);
-        sr.color = Color.white;
-    }
-    IEnumerator DieRoutine()
-    {
-        if (sr != null && deadSprite != null)
-        {
-            sr.color = Color.white;
-            anim.enabled = false;
-            sr.sprite = deadSprite;
-        }
-
-
-        if (col != null)
-            col.enabled = false;
-
-        maxSpeed = 0f;
-
-
-        yield return new WaitForSeconds(DeadSprite);
-
-        Destroy(gameObject);
-    }
-    void MoveRandom()
-    {
-        if (isDead)
-            return;
-        Vector3 newPos = Vector3.MoveTowards(transform.position, targetPos, maxSpeed * Time.deltaTime);
-        transform.position = newPos;
-
-
-        if (Vector3.Distance(transform.position, targetPos) < 0.1f)
-        {
-            SetNewTarget();
         }
     }
     void SetNewTarget()
@@ -137,6 +99,21 @@ public class Stage1_Boss : MonoBehaviour
 
         targetPos = new Vector3(x, y, transform.position.z);
     }
+    void MoveRandom()
+    {
+        if (isDead)
+            return; 
+        //tragetpos로 이동
+        Vector3 newPos = Vector3.MoveTowards(transform.position, targetPos, maxSpeed * Time.deltaTime);
+        transform.position = newPos;
+
+        // 목표 위치에 거의 도달하면 새로운 목표 설정  
+        if (Vector3.Distance(transform.position, targetPos) < 0.1f)
+        {
+            SetNewTarget();
+        }
+    }
+   
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))  
@@ -156,20 +133,42 @@ public class Stage1_Boss : MonoBehaviour
         if (Hp <= 0)
             Die();
     }
+    IEnumerator HitFlash()
+    {
+        if (sr == null || isDead) yield break;
 
+        sr.color = new Color(1f, 0.4f, 0.4f, 0.7f);
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.white;
+    }
     public void Die()
     {
         if (isDead) 
             return;
         isDead = true;
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
-        if (gameManager != null)
-            gameManager.OnBossEnemyKilled();
+        GameManager.Instance.OnBossEnemyKilled();
         if (hitFlashRoutine != null)
             StopCoroutine(hitFlashRoutine);
-
         StartCoroutine(DieRoutine());
-
     }
-  
+    IEnumerator DieRoutine()
+    {
+        if (sr != null && deadSprite != null)
+        {
+            sr.color = Color.white;
+            anim.enabled = false;
+            sr.sprite = deadSprite;
+        }
+
+        if (col != null)
+            col.enabled = false;
+
+        maxSpeed = 0f;
+
+        yield return new WaitForSeconds(DeadSpritetime);
+
+        Destroy(gameObject);
+    }
+
 }

@@ -7,10 +7,6 @@ public class EnemySpawn3 : MonoBehaviour
     public GameObject enemy3Prefabs;
     public float interval = 2.0f;
 
-    [Header("Spawn Range (Y Axis)")]
-    public float maxY = 3.3f;
-    public float minY = -3.1f;
-
     [Header("Runtime")]
     private Coroutine spawnRoutine;
 

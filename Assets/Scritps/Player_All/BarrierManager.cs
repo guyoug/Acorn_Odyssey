@@ -48,5 +48,15 @@ public class BarrierManager : MonoBehaviour
         if (barrierList.Count > 0)
             angleStep = 360f / barrierList.Count;
     }
+    public void ClearAllBarriers()
+    {
+        foreach (var barrier in barrierList)
+        {
+            if (barrier != null)
+                Destroy(barrier.gameObject);
+        }
 
+        barrierList.Clear();
+      
+    }
 }

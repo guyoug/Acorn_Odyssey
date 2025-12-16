@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
     public void ShowGameOver()
     {
         gameOverPanel.SetActive(true);
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.gameOverSFX);
         Time.timeScale = 0f;
     }
     public void ShowGameUI(bool show)
@@ -244,7 +245,7 @@ public class GameManager : MonoBehaviour
         bossKilled++;
         if (SoundManager.Instance != null)
             SoundManager.Instance.StopBGM();
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.stageClearSFX);
+       
         Debug.Log("보스 제거 : " + bossKilled);
         StartCoroutine(killboss());
       
@@ -381,6 +382,7 @@ public class GameManager : MonoBehaviour
 
         ShowGameUI(false);
         HideStageCanvas();
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.stageClearSFX);
         if (stageClearPanel != null)
             stageClearPanel.SetActive(true);
 

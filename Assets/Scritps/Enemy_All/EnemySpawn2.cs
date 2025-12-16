@@ -15,7 +15,6 @@ public class EnemySpawn2 : MonoBehaviour
     private Coroutine spawnRoutine;
     void Start()
     {
-        Debug.Log("EnemySpawn2 Start 호출됨 : " + gameObject.name);
 
         if (spawnRoutine == null)
             spawnRoutine = StartCoroutine(spawnEnemy());
@@ -33,9 +32,9 @@ public class EnemySpawn2 : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(interval);
             Vector3 position = new Vector3(transform.position.x, Random.Range(minY, maxY), transform.position.z);
             Instantiate(enemy2Prefabs, position, transform.rotation);
-            yield return new WaitForSeconds(interval);
         }
     }
 }

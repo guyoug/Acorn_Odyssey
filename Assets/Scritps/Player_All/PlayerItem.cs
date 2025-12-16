@@ -56,25 +56,31 @@ public class PlayerItem : MonoBehaviour
 
     }
 
-    void ClearAllItems()
+    public void ClearAllItems()
     {
+        currentItem = 0;
+
         hasItem1 = false;
         hasItem2 = false;
         hasItem3 = false;
 
-        itemUI1.SetActive(false);
-        itemUI2.SetActive(false);
-        itemUI3.SetActive(false);
+        SafeSetActive(itemUI1, false);
+        SafeSetActive(itemUI2, false);
+        SafeSetActive(itemUI3, false);
 
-        attrUI1.SetActive(false);
-        attrUI2.SetActive(false);
-        attrUI3.SetActive(false);
+        SafeSetActive(attrUI1, false);
+        SafeSetActive(attrUI2, false);
+        SafeSetActive(attrUI3, false);
 
-        item1Image.SetActive(false);
-        item2Image.SetActive(false);
-        item3Image.SetActive(false);
+        SafeSetActive(item1Image, false);
+        SafeSetActive(item2Image, false);
+        SafeSetActive(item3Image, false);
     }
-
+    void SafeSetActive(GameObject obj, bool value)
+    {
+        if (obj != null)
+            obj.SetActive(value);
+    }
     public void PickItem(int type)
     {
         ClearAllItems();

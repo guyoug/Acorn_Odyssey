@@ -16,6 +16,7 @@ public class PlayerUpgrade : MonoBehaviour
     [Header("NutStorm Upgrade")]
     public int nutStack = 0;
     public int maxNutStack = 2;
+    private bool nutStormFirst = false;
 
     [Header("Tail Settings")]
     public int maxTailCount = 4;
@@ -62,9 +63,13 @@ public class PlayerUpgrade : MonoBehaviour
     public void ActivateNutStorm() //넛스톰
     {
 
-        shoot.burstCount = 3 + nutStack * 3;
-        shoot.multiShot = 1;
-        shoot.isNutStormMode = true;
+        if (!nutStormFirst)
+        {
+            nutStormFirst = true;
+            moreStack = 0;
+        }
+       shoot.burstCount = 3 + nutStack * 3;
+       shoot.isNutStormMode = true;
 
         if (nutStack < maxNutStack)
             nutStack++;
@@ -107,14 +112,23 @@ public class PlayerUpgrade : MonoBehaviour
     }
     public void ResetState()
     {
-        speedStack = 0;
-        moreStack = 0;
         nutStack = 0;
+        moreStack = 0;
+        speedStack = 0;
+        shoot.isNutStormMode = false;
+        shoot.burstCount = 1;
+        shoot.multiShot = basicShotCount;
+        shoot.checkTime = 0f;
 
         foreach (var tail in tailList)
-            Destroy(tail);
-
+        {
+            if (tail != null)
+                Destroy(tail);
+        }
         tailList.Clear();
+
+        barrierManager?.ClearAllBarriers();
+
     }
 }
 

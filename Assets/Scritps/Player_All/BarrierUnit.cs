@@ -28,7 +28,10 @@ public class BarrierUnit : MonoBehaviour
         if (collision.CompareTag("EnemyBullet"))
         {
             Destroy(collision.gameObject);
+          
+        
             hitBarrier();
+
         }
         if (collision.CompareTag("Enemy"))
         {
@@ -101,6 +104,7 @@ public class BarrierUnit : MonoBehaviour
     void hitBarrier()
     {
         hp--;
+        SoundManager.Instance?.PlaySFX(SoundManager.Instance.BarrierHitSFX);
         Debug.Log($"밤송이 피격! 남은 HP = {hp}"); ;
         if (hp <= 0)
         {

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Stage1_Elite : MonoBehaviour
@@ -9,16 +8,16 @@ public class Stage1_Elite : MonoBehaviour
     public int moveSpeed = 3;
     public float burstDelay = 0.12f;   
     public float knifeDelay = 0.7f;   
-    private float GroupDelay = 1.2f;
+    private float patternDelay = 1.2f;
+  
     private bool isDead = false;
-    private float DeadSprite = 0.3f;
-
 
     [Header("Movement Range")]
     private float minX = 3.5f;
     private float maxX = 7.0f;
     private float minY = -2.0f;
     private float maxY = 3.3f;
+
     private Vector3 targetPos;
 
     [Header("Prefabs & Items")]
@@ -31,28 +30,30 @@ public class Stage1_Elite : MonoBehaviour
     public Transform throwPoint;
     public Transform firePoint;
 
-    [Header("References")]
-    private GameManager gameManager;
-    private Rigidbody2D rb;
-
     [Header("Death Sprite")]
     public Sprite deadSprite;
+    private float deadSpriteTime = 0.3f;
+
+    [Header("Hit Flash")]
+    public float hitFlashTime = 0.1f;
+
+    [Header("References")]
+    private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Collider2D col;
     private Animator anim;
 
-    [Header("Hit Flash")]
     private Coroutine hitFlashRoutine;
 
 
     public void Start()
     {
-        gameManager = GameManager.Instance;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         anim = GetComponentInChildren<Animator>();
-        SetNewTarget();  // 시작 시 최초 목표 위치 설정
+
+        SetNewTarget();  
         StartCoroutine(PattenLoop());
     }
     IEnumerator PattenLoop()
@@ -66,13 +67,11 @@ public class Stage1_Elite : MonoBehaviour
 
             yield return StartCoroutine(KnifeAttack());
 
-            yield return new WaitForSeconds(GroupDelay);
+            yield return new WaitForSeconds(patternDelay);
         }
            
     }
-
-
-    IEnumerator BrustAttack()
+    IEnumerator BrustAttack() // 3발 점사
     {
         for (int i = 0; i < 3; i++)
         {
@@ -81,7 +80,7 @@ public class Stage1_Elite : MonoBehaviour
         }
     }
        
-    IEnumerator KnifeAttack()
+    IEnumerator KnifeAttack() // 칼 투척
     {
         Instantiate(knifePrefab, throwPoint.position, throwPoint.rotation);
         yield return new WaitForSeconds(knifeDelay);
@@ -95,7 +94,7 @@ public class Stage1_Elite : MonoBehaviour
     {
         if (rb == null)
             return;
-        // 현재 위치에서 targetPos 방향으로 이동
+        //tragetpos로 이동
         Vector2 newPos = Vector2.MoveTowards(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
         // 목표 위치에 거의 도달하면 새로운 목표 설정
@@ -127,26 +126,6 @@ public class Stage1_Elite : MonoBehaviour
         if (Hp <= 0)
             Die();
     }
-    public void Die()
-    {
-        if (isDead)
-           return;
-        isDead = true;
-        SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
-        gameManager.OnEliteEnemyKilled();
-        DropItem();
-        if (hitFlashRoutine != null)
-            StopCoroutine(hitFlashRoutine);
-
-        StartCoroutine(DieRoutine());
-       
-    }
-    // 아이템 드롭 처리 (무작위 1개)
-    private void DropItem()
-    {
-        int idx = Random.Range(0, dropItems.Length);
-        Instantiate(dropItems[idx], transform.position, Quaternion.identity);
-    }
     IEnumerator HitFlash()
     {
         if (sr == null || isDead) yield break;
@@ -154,6 +133,20 @@ public class Stage1_Elite : MonoBehaviour
         sr.color = new Color(1f, 0.4f, 0.4f, 0.7f);
         yield return new WaitForSeconds(0.1f);
         sr.color = Color.white;
+    }
+    public void Die()
+    {
+        if (isDead)
+           return;
+        isDead = true;
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
+        GameManager.Instance.OnEliteEnemyKilled();
+        DropItem();
+        if (hitFlashRoutine != null)
+            StopCoroutine(hitFlashRoutine);
+
+        StartCoroutine(DieRoutine());
+       
     }
     IEnumerator DieRoutine()
     {
@@ -164,16 +157,22 @@ public class Stage1_Elite : MonoBehaviour
             sr.sprite = deadSprite;
         }
 
-
         if (col != null)
             col.enabled = false;
 
         moveSpeed = 0;
 
-
-        yield return new WaitForSeconds(DeadSprite);
+        yield return new WaitForSeconds(deadSpriteTime);
 
         Destroy(gameObject);
     }
+    // 아이템 드롭 처리 (무작위 1개)
+    private void DropItem()
+    {
+        int idx = Random.Range(0, dropItems.Length);
+        Instantiate(dropItems[idx], transform.position, Quaternion.identity);
+    }
+   
+  
 }
 

@@ -40,14 +40,14 @@ public class Stage2_Boss : MonoBehaviour
     public float topAngle = 24f;
     public float bottomAngle = -30f;
     [Header("Dash Pattern")]
-    public float dashSpeed = 13f;
+    public float dashSpeed = 12f;
     public float dashDuration = 1.0f;
     public float dashCooldown = 4f;
 
  
 
     [Header("Movement Settings")]
-    public float moveSpeed = 4f;
+    public float moveSpeed = 8f;
     private bool movingUp = true;
     private float minY = -2.0f;
     private float maxY = 3.3f;
