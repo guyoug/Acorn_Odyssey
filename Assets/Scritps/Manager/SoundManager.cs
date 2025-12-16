@@ -116,9 +116,6 @@ public class SoundManager : MonoBehaviour
     {
         if (!isMasterMuted)
         {
-            //prevBGMVolume = bgmSource.volume > 0f ? bgmSource.volume : 0.6f;
-            //prevSFXVolume = sfxSource.volume > 0f ? sfxSource.volume : 0.8f;
-
             prevBGMVolume = bgmSource.volume;
             prevSFXVolume = sfxSource.volume;
 
@@ -146,16 +143,24 @@ public class SoundManager : MonoBehaviour
 
     public void SetBGMVolume(float value)
     {
-        UnmuteIfNeeded();
         bgmSource.volume = value;
-        prevBGMVolume = value;
+
+        if (value > 0f)
+        {
+            prevBGMVolume = value;
+            isMasterMuted = false;
+        }
     }
 
     public void SetSFXVolume(float value)
     {
-        UnmuteIfNeeded();
         sfxSource.volume = value;
-        prevSFXVolume = value;
+
+        if (value > 0f)
+        {
+            prevSFXVolume = value;
+            isMasterMuted = false;
+        }
     }
     public void ToggleBGMMute()
     {
@@ -174,7 +179,7 @@ public class SoundManager : MonoBehaviour
         if (sfxSource.volume > 0f)
         {
             prevSFXVolume = sfxSource.volume;
-            prevSFXVolume = 0f;
+            sfxSource.volume = 0f;
         }
         else
         {
