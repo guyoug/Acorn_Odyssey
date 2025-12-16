@@ -9,16 +9,16 @@ public class Stage2_Boss : MonoBehaviour
     private bool canMove = true;
     public int Damage = 1;
 
-
-    private GameManager gameManager;
-    private Vector3 spawnPosition;
+    [Header("References")]
     private Transform player;
-
+    private Vector3 spawnPosition;    // 대시 후 복귀 위치
+    private SpriteRenderer sr;
+    private Collider2D col;
+    
     [Header("Boss Shoot Points")]
     public Transform firePointCenter;
     public Transform firePointUp;
     public Transform firePointDown;
-
 
     [Header("Warning UI")]
     public WarningBlinkUI centerWarning;
@@ -33,35 +33,35 @@ public class Stage2_Boss : MonoBehaviour
     public GameObject bulletPrefab;
     public float shootInterval = 0.3f;
     public float patternDelay = 1f;
-    public float PatternInterval = 2.0f;
+    public float PatternInterval = 2f;
 
     [Header("Shoot Angles")]
     public float centerAngle = 0f;
     public float topAngle = 24f;
     public float bottomAngle = -30f;
+
     [Header("Dash Pattern")]
     public float dashSpeed = 12f;
     public float dashDuration = 1.0f;
     public float dashCooldown = 4f;
+    private bool isDashing = false;
 
- 
+
 
     [Header("Movement Settings")]
     public float moveSpeed = 8f;
-    private bool movingUp = true;
     private float minY = -2.0f;
     private float maxY = 3.3f;
+    private bool movingUp = true;
 
     [Header("Shoot Sprite Effect")]
     public Sprite normalSprite;      // 기본 이미지
     public Sprite shootSprite;       // 공격 시 이미지
     public float shootSpriteTime = 0.15f;
-    private SpriteRenderer sr;
+  
 
     [Header("Death Sprite")]
     public Sprite deadSprite;
-    private Collider2D col;
-    //private Animator anim;
     private float DeadSprite = 0.3f;
 
     [Header("Hit Flash")]
@@ -70,12 +70,12 @@ public class Stage2_Boss : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameManager.Instance;
-        spawnPosition = transform.position;
+      
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
 
+        spawnPosition = transform.position;
 
         if (exclamationUI != null)
             exclamationUI.SetActive(false);
@@ -94,13 +94,11 @@ public class Stage2_Boss : MonoBehaviour
 
     IEnumerator BossShootPattern()
     {
-        yield return new WaitForSeconds(PatternInterval);
+        yield return new WaitForSeconds(PatternInterval); // 나오면 2초 기다리고
 
         while (!isDead)
         {
-           
-            
-            //가운데 부제 다섯번 소환
+            //가운데 부제 다섯번 소환 
             StartCoroutine(ShootSpriteEffect());
 
             if (centerWarning != null)
@@ -170,6 +168,7 @@ public class Stage2_Boss : MonoBehaviour
     }
     IEnumerator DashAttack()
     {
+        isDashing = true;
         canMove = false;
         if (player == null)
             yield break;
@@ -195,7 +194,7 @@ public class Stage2_Boss : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             yield return StartCoroutine(ReturnToSpawn());
 
-
+        isDashing = false;
         canMove = true;
 
 
@@ -257,7 +256,6 @@ public class Stage2_Boss : MonoBehaviour
         if (sr != null && deadSprite != null)
         {
             sr.color = Color.white;
-            //anim.enabled = false;
             sr.sprite = deadSprite;
         }
 
@@ -283,7 +281,7 @@ public class Stage2_Boss : MonoBehaviour
 
             Destroy(collision.gameObject);
         }
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag("Player") && isDashing)
         {
             PlayerHealth.Instance.TakeDamage(Damage);
         }
@@ -305,8 +303,7 @@ public class Stage2_Boss : MonoBehaviour
         isDead = true;
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
 
-        if (gameManager != null)
-            gameManager.OnBossEnemyKilled();
+        GameManager.Instance.OnBossEnemyKilled();
         if (hitFlashRoutine != null)
             StopCoroutine(hitFlashRoutine);
 

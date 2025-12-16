@@ -168,24 +168,25 @@ public class GameManager : MonoBehaviour
     void Stage1Logic()
     {
         // 엘리트 스폰 규칙
-        if (currentWave == 2 && normalKilled >= 20 && spawnedCount == 0 
-         || currentWave == 2 && normalKilled >= 40 && spawnedCount == 1
-         || currentWave == 2 && normalKilled >= 60 && spawnedCount == 2)
+        if (currentWave == 2 && normalKilled >= 15 && spawnedCount == 0 
+         || currentWave == 2 && normalKilled >= 30 && spawnedCount == 1
+         || currentWave == 2 && normalKilled >= 45 && spawnedCount == 2)
             SpawnElite();
                 
-        if (currentWave == 3 && normalKilled >= 20 && spawnedCount == 0
-         || currentWave == 3 && normalKilled >= 40 && spawnedCount == 1)
+        if (currentWave == 3 && normalKilled >= 15 && spawnedCount == 0
+         || currentWave == 3 && normalKilled >= 30 && spawnedCount == 1)
             SpawnElite();
 
-        // 웨이브 넘기기 조건
-        if (currentWave == 1 && normalKilled >= 30)
-            StartNextWave();
-
-        if (currentWave == 2 &&  eliteKilled >= 3)
-            StartNextWave();
-
-        if (currentWave == 3 &&  eliteKilled >= 2)
+        if (currentWave == 3 && eliteKilled >= 2)
             SpawnBoss();
+        // 웨이브 넘기기 조건
+        if (currentWave == 1 && normalKilled >= 15)
+            StartNextWave();
+
+        if (currentWave == 2 &&  normalKilled >= 45 && eliteKilled >= 3)
+            StartNextWave();
+
+        
     }
     void Stage2Logic()
     {

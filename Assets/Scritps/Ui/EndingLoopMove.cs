@@ -24,10 +24,10 @@ public class EndingLoopMove : MonoBehaviour
             transform.position = pos;
         }
 
-        //if (Input.anyKeyDown)
-        //{
-        //    SceneManager.LoadScene("Game_Start");
-        //}
+        if (Input.anyKeyDown)
+        {
+            SceneManager.LoadScene("Game_Start");
+        }
     }
 }
 

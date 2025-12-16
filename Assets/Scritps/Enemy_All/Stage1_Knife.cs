@@ -1,30 +1,24 @@
 ﻿using UnityEngine;
 
 public class Knife : MonoBehaviour
-{
+{    
     [Header("Knife Settings")]
-    public float speed = 10f;
-    public float curveStrength = 2f;
+    public float speed = 10f;           
     public float upwardForce = 5.5f;     
-    public float gravity = 2f;       
-    public float lifeTime = 5f;
-    public int damage = 1;
-    public float angleOffset = 20f;
-
+    public float gravity = 2f;          
+    public float lifeTime = 5f;       
+    public int damage = 1;              
+    
     [Header("Rotation Settings")]
-    public float spinSpeed = 720f;
+    public float spinSpeed = 720f;       
 
+ 
     [Header("Runtime")]
-    private Rigidbody2D rb;
-    private Vector2 horizontalDir;
+    private Vector2 horizontalDir;      
     private float verticalVelocity;
-
-
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-
         Transform player = GameObject.FindWithTag("Player")?.transform;
 
         if (player != null)

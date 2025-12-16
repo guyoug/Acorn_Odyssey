@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Stage3_Enemy : MonoBehaviour
 {
+    [Header("Stage3_enemy")]
     public int Hp = 15;
     public int maxspeed = 20;
     public bool isDead = false;
     public int Damage = 1;
     private float DeadSprite = 0.2f;
+
+    [Header("Rotation")]
+    public float rotateSpeed = 720f;
 
     [Header("Drop Rates")]
     private float dropItem = 0.05f;  // 5%
@@ -27,17 +31,20 @@ public class Stage3_Enemy : MonoBehaviour
     [Header("Hit Flash")]
     private Coroutine hitFlashRoutine;
 
+    private Rigidbody2D rb;
     private void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         anim = GetComponentInChildren<Animator>();
-        
+        rb = GetComponent<Rigidbody2D>();
 
     }
     void FixedUpdate()
     {
-        transform.Translate(Vector3.left * maxspeed * Time.fixedDeltaTime);
+        rb.linearVelocity = Vector2.left * maxspeed;
+
+        rb.MoveRotation(rb.rotation + rotateSpeed * Time.fixedDeltaTime);
     }
     public void TakeDamage(int damage)
     {
@@ -133,7 +140,7 @@ public class Stage3_Enemy : MonoBehaviour
         }
         if (collision.CompareTag("Outline"))
         {
-            TakeDamage(9999);
+            TakeDamage(15);
         }
     }
   

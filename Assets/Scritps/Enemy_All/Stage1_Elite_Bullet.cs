@@ -4,7 +4,7 @@ public class Stage1_Elite_Bullet : MonoBehaviour
 {
     [Header("Movement Settings")]
     public int Damage = 1; 
-    public float maxSpeed = 10.0f;
+    public float maxSpeed = 8.0f;
     private float lifeTime = 10.0f;
 
     private Vector2 shootDirection;
@@ -23,7 +23,6 @@ public class Stage1_Elite_Bullet : MonoBehaviour
         }
         else
         {
-            // 플레이어 없으면 그냥 왼쪽으로 발사하거나 즉시 제거
             shootDirection = Vector2.left;
         }
         Destroy(gameObject,lifeTime);

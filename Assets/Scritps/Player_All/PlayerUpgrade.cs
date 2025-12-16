@@ -16,7 +16,6 @@ public class PlayerUpgrade : MonoBehaviour
     [Header("NutStorm Upgrade")]
     public int nutStack = 0;
     public int maxNutStack = 2;
-    private bool nutStormFirst = false;
 
     [Header("Tail Settings")]
     public int maxTailCount = 4;
@@ -63,12 +62,13 @@ public class PlayerUpgrade : MonoBehaviour
     public void ActivateNutStorm() //넛스톰
     {
 
-        if (!nutStormFirst)
+        if (!shoot.isNutStormMode)
         {
-            nutStormFirst = true;
             moreStack = 0;
+            shoot.multiShot = basicShotCount; 
         }
-       shoot.burstCount = 3 + nutStack * 3;
+
+        shoot.burstCount = 3 + nutStack * 3;
        shoot.isNutStormMode = true;
 
         if (nutStack < maxNutStack)

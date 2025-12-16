@@ -15,34 +15,31 @@ public class Stage1_Enemy : MonoBehaviour
     private float dropGauge = 0.10f; // 10%
 
     [Header("Lifetime Settings")]
-    private float deleteTime = 10.0f;
+    private float lifeTime = 10.0f;
 
     [Header("Prefabs & Items")]
     public GameObject[] dropItems;
     public GameObject gaugePrefabs;
 
-    [Header("References")]
-    private GameManager gameManager;
-
-
     [Header("Death Sprite")]
-    public Sprite deadSprite;
+    public Sprite deadSprite;              
+
+    [Header("Hit Flash")]
+    public float hitFlashTime = 0.1f;    
+  
+    [Header("References")]
     private SpriteRenderer sr;
     private Collider2D col;
     private Animator anim;
 
-    [Header("Hit Flash")]
     private Coroutine hitFlashRoutine;
 
     void Start()
     {
-        gameManager = GameManager.Instance;
-        if (gameManager == null)
-            Debug.Log("GameManager가 null입니다.");
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         anim = GetComponentInChildren<Animator>();
-        Destroy(gameObject, deleteTime);
+        Destroy(gameObject, lifeTime);
     }
     void FixedUpdate()
     {
@@ -76,20 +73,47 @@ public class Stage1_Enemy : MonoBehaviour
         if (Hp <= 0)
             Die();
     }
+    IEnumerator HitFlash()
+    {
+        if (sr == null || isDead) yield break;
+
+        sr.color = new Color(1f, 0.4f, 0.4f, 0.7f);
+        yield return new WaitForSeconds(0.1f);
+        sr.color = Color.white;
+    }
     public void Die()
     {
         if (isDead)
             return;
         isDead = true;
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
-
-        gameManager.OnNormalEnemyKilled(); // 킬 계산
+        GameManager.Instance.OnNormalEnemyKilled();
         TryDropItem(); // 속성 아이템
         TryDropGagueItem();// 게이지 아이템
         if (hitFlashRoutine != null)
             StopCoroutine(hitFlashRoutine);
 
         StartCoroutine(DieRoutine());
+    }
+    IEnumerator DieRoutine()
+    {
+        if (sr != null && deadSprite != null)
+        {
+            sr.color = Color.white;
+            anim.enabled = false;
+            sr.sprite = deadSprite;
+        }
+
+
+        if (col != null)
+            col.enabled = false;
+
+        maxspeed = 0f;
+
+
+        yield return new WaitForSeconds(DeadSprite);
+
+        Destroy(gameObject);
     }
     private void TryDropItem()
     {
@@ -114,32 +138,6 @@ public class Stage1_Enemy : MonoBehaviour
         if (Random.value <= dropGauge) //25퍼
             Instantiate(gaugePrefabs, transform.position, Quaternion.identity);
     }
-    IEnumerator HitFlash()
-    {
-        if (sr == null || isDead) yield break;
 
-        sr.color = new Color(1f, 0.4f, 0.4f, 0.7f); 
-        yield return new WaitForSeconds(0.1f);
-        sr.color = Color.white;
-    }
-    IEnumerator DieRoutine()
-    {
-        if (sr != null && deadSprite != null)
-        {
-            sr.color = Color.white;
-            anim.enabled = false;
-            sr.sprite = deadSprite;
-        }
-
-    
-        if (col != null)
-            col.enabled = false;
-
-        maxspeed = 0f;
-
-    
-        yield return new WaitForSeconds(DeadSprite);
-
-        Destroy(gameObject);
-    }
+   
 }
