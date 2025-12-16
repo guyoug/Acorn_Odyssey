@@ -60,7 +60,7 @@ public class PlayerHealth : MonoBehaviour
         healthPanel = GameObject.Find("Health_Panel");
         if (healthPanel == null)
         {
-            Debug.LogError("Health_Panel 못 찾음");
+            Debug.Log("Health_Panel 못 찾음");
             return;
         }
         Player_HP = healthPanel.GetComponentsInChildren<Image>(false);

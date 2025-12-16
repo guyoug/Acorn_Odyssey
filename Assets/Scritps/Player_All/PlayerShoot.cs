@@ -155,43 +155,11 @@ public class PlayerShoot : MonoBehaviour
     {
         for (int i = 0; i < burstCount; i++)
         {
-            NutStormMoreShot();
+            Shot();
             yield return new WaitForSeconds(brustDelay);
 
         }
         isBurstRunning = false;
-    }
-    void NutStormMoreShot() //넛스톰 멀티샷
-    {
-        for (int i = 0; i < multiShot; i++)
-        {
-            Vector3 offset = Vector3.zero;
-
-            if (multiShot == 1)
-            {
-                offset = Vector3.zero;
-            }
-            else if (multiShot == 2)
-            {
-                if (i == 0) offset = new Vector3(0, space, 0);
-                if (i == 1) offset = Vector3.zero;
-            }
-            else if (multiShot == 3)
-            {
-                if (i == 0) offset = new Vector3(0, space, 0);
-                if (i == 1) offset = Vector3.zero;
-                if (i == 2) offset = new Vector3(0, -space, 0);
-            }
-            else if (multiShot == 4)
-            {
-                if (i == 0) offset = new Vector3(0, spaceX2, 0);
-                if (i == 1) offset = new Vector3(0, space, 0);
-                if (i == 2) offset = Vector3.zero;
-                if (i == 3) offset = new Vector3(0, -space, 0);
-            }
-
-            Instantiate(bulletPrefabs, firePoint.position + offset, firePoint.rotation);
-        }
     }
 }
 

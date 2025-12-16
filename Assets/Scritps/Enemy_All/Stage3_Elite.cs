@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Stage3_Elite : MonoBehaviour
 {
-    public int Hp = 30;
+    public int Hp = 100;
     private bool isDead = false;
     public GameObject[] dropItems;
     private Collider2D col;
@@ -39,7 +39,7 @@ public class Stage3_Elite : MonoBehaviour
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         fireBreath.SetActive(false);
-        bodyInstance = Instantiate(bodyPrefab, transform.position, Quaternion.identity);
+        bodyInstance = Instantiate(bodyPrefab, new Vector3(5.4347f, -1.5088f, 0f), Quaternion.identity);
         StartCoroutine(FireMovePattern());
 
     }
@@ -74,12 +74,12 @@ public class Stage3_Elite : MonoBehaviour
          
             yield return new WaitForSeconds(preFireDelay);
 
-            // ✔ 공격
+        
             fireBreath.SetActive(true);
             yield return new WaitForSeconds(fireTime);
             fireBreath.SetActive(false);
 
-            // ✔ 공격 후 멈춤
+      
             yield return new WaitForSeconds(postFireDelay);
         }
     }

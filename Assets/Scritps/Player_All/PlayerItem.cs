@@ -9,6 +9,8 @@ public class PlayerItem : MonoBehaviour
     [Header("Item Settings")]
     private float itv = 0.3f;
     private int currentItem = 0;
+    private int fire = 100;
+    private float Delay = 0.1f;
     public bool hasItem1 = false; // 썬더넛 보유 여부
     public bool hasItem2 = false; // 데스넛 소스 보유 여부
     public bool hasItem3 = false; // 청량 탄산수 도토리 향 보유 여부
@@ -34,6 +36,11 @@ public class PlayerItem : MonoBehaviour
     public GameObject attrUI1;
     public GameObject attrUI2;
     public GameObject attrUI3;
+
+
+    public float coneStormDuration = 2f;   // 전체 지속시간
+    public float coneInterval = 0.2f;      // 발사 간격
+    private bool isConeStormRunning = false;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
@@ -126,7 +133,8 @@ public class PlayerItem : MonoBehaviour
     {
         StartCoroutine(ShowItem2());
         Debug.Log("2번 아이템 발동");
-        FireCone();
+        if (!isConeStormRunning)
+            StartCoroutine(ConeStormBurst());
         hasItem2 = false;
         itemUI2.SetActive(false);
         attrUI2.SetActive(false);
@@ -161,14 +169,21 @@ public class PlayerItem : MonoBehaviour
         yield return new WaitForSeconds(itv);
         item3Image.SetActive(false);
     }
-    void FireCone()
+    void FireConeOnce()
     {
         GameObject obj = Instantiate(conePrefab, firePoint.position, firePoint.rotation);
         FireCone cone = obj.GetComponent<FireCone>();
         cone.target = this.transform;
-    
     }
 
+    IEnumerator ConeStormBurst()
+    {
+        for (int i = 0; i < fire; i++)
+        {
+             FireConeOnce();
+            yield return new WaitForSeconds(Delay);
+        }
+    }
     void WaterLaser()
     {
         Camera cam = Camera.main;
