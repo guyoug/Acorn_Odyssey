@@ -7,7 +7,7 @@ public class Stage3_Enemy : MonoBehaviour
     public int Hp = 15;
     public int maxspeed = 20;
     public bool isDead = false;
-
+    public int Damage = 1;
     private float DeadSprite = 0.2f;
 
     [Header("Drop Rates")]
@@ -120,6 +120,12 @@ public class Stage3_Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerHealth.Instance.TakeDamage(Damage);
+
+            Destroy(gameObject);
+        }
         if (collision.CompareTag("Bullet"))
         {
             TakeDamage(1);

@@ -116,7 +116,14 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("현재 스테이지 = " + currentStage);
     }
+    void HideStageCanvas()
+    {
+        GameObject stageCanvas =
+            GameObject.FindGameObjectWithTag("StageCanvas");
 
+        if (stageCanvas != null)
+            stageCanvas.SetActive(false);
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F4)) // 스테이지 넘기는 치트
@@ -355,11 +362,6 @@ public class GameManager : MonoBehaviour
         if (player != null)
             player.SetActive(false);
 
-        // Stage UI
-        GameObject stageCanvas = GameObject.FindWithTag("Ui");
-        if (stageCanvas != null)
-            stageCanvas.SetActive(false);
-
         // Gauge UI
         PlayerGauge gauge = player?.GetComponent<PlayerGauge>();
         if (gauge != null)
@@ -378,7 +380,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
 
         ShowGameUI(false);
-
+        HideStageCanvas();
         if (stageClearPanel != null)
             stageClearPanel.SetActive(true);
 

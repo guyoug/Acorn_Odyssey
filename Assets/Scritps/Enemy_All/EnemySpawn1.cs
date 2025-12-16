@@ -17,7 +17,7 @@ public class EnemySpawn1 : MonoBehaviour
     {
         spawnRoutine = StartCoroutine(spawnEnemy());
     }
-    public void StopSpawn()   
+    public void StopSpawn()  // GameManager에서 보스 소환시 멈추는 코드
     {
         if (spawnRoutine != null)
         {
@@ -30,7 +30,7 @@ public class EnemySpawn1 : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(interval);
-            Vector3 position = new Vector3(transform.position.x, Random.Range(minY, maxY), transform.position.z);
+            Vector3 position = new Vector3(transform.position.x, Random.Range(minY, maxY), transform.position.z); // 3.3 ~ -3.1 사이 랜덤 소환
             Instantiate(enemy1Prefabs, position, transform.rotation);
         }
     }

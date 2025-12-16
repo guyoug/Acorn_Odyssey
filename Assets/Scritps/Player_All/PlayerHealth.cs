@@ -82,6 +82,14 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log(isInvincible ? "무적 ON" : "무적 OFF");
         }
     }
+    void HideStageCanvas()
+    {
+        GameObject stageCanvas =
+            GameObject.FindGameObjectWithTag("StageCanvas");
+
+        if (stageCanvas != null)
+            stageCanvas.SetActive(false);
+    }
     void Health() // 최대치
     {
         currentHealth = maxHealth;
@@ -125,6 +133,7 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         currentHealth = 0;
         UpdateUI();
+        HideStageCanvas();
         GameManager.Instance.ShowGameOver();
         SoundManager.Instance.StopBGM();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.gameOverSFX);

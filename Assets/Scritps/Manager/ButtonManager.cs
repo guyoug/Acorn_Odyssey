@@ -134,22 +134,20 @@ public class ButtonManager : MonoBehaviour
     {
         gameOverPanel?.SetActive(false);
         Time.timeScale = 1f;
-        StartCoroutine(RestartRoutine());
-    }
 
-    IEnumerator RestartRoutine()
-    {
-        SceneManager.LoadScene("Game_Play_stage1");
-
-        yield return null;
-        
-        GameManager.Instance.ResetState();
         PlayerHealth.Instance.ResetState();
-        PlayerGauge gauge = PlayerHealth.Instance.GetComponent<PlayerGauge>();
-        gauge?.ResetState();
-        PlayerUpgrade upgrade = PlayerHealth.Instance?.GetComponent<PlayerUpgrade>(); 
-        upgrade?.ResetState();
-        SoundManager.Instance.ResetState();
+
+        PlayerGauge gauge =
+            PlayerHealth.Instance.GetComponent<PlayerGauge>();
+        gauge.ResetState();
+
+        PlayerUpgrade upgrade =
+            PlayerHealth.Instance.GetComponent<PlayerUpgrade>();
+        upgrade.ResetState();
+
+        GameManager.Instance.ResetState(); // 필요하면
+
+        SceneManager.LoadScene("Game_Play_stage1");
     }
 
 
