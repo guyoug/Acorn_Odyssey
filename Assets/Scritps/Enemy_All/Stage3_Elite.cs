@@ -39,7 +39,7 @@ public class Stage3_Elite : MonoBehaviour
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         fireBreath.SetActive(false);
-        bodyInstance = Instantiate(bodyPrefab, new Vector3(5.4347f, -1.5088f, 0f), Quaternion.identity);
+        bodyInstance = Instantiate(bodyPrefab, new Vector3(5.6347f, -1.5088f, 0f), Quaternion.identity);
         StartCoroutine(FireMovePattern());
 
     }

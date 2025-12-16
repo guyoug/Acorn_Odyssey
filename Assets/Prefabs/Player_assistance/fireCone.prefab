@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4502392815909941833}
   - component: {fileID: 7130602307744782387}
-  - component: {fileID: 2789392621277117357}
   - component: {fileID: 4556763091686195899}
   - component: {fileID: 6846951858884685466}
+  - component: {fileID: 7498357264012592416}
   m_Layer: 0
   m_Name: fireCone
   m_TagString: PlayerAttack
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: -1700473971
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d16016dfe16ba194ab6ce7ccfb3e4439, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6037b78bdd391eb44acb6dd5ebe9e429, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -90,43 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &2789392621277117357
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6978787999989164416}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.0050652027, y: -0.058321714}
-  m_Size: {x: 2.7297606, y: 4.273565}
-  m_Direction: 0
 --- !u!50 &4556763091686195899
 Rigidbody2D:
   serializedVersion: 5
@@ -170,3 +133,39 @@ MonoBehaviour:
   maxSpeed: 10
   lifeTime: 2
   target: {fileID: 2920152261575186229, guid: 19e321547e7abfd4bbff9645c5da5f96, type: 3}
+--- !u!58 &7498357264012592416
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6978787999989164416}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 6.5013514, y: -0.16251117}
+  m_Radius: 1.6259947

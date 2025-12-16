@@ -9,8 +9,8 @@ public class PlayerItem : MonoBehaviour
     [Header("Item Settings")]
     private float itv = 0.3f;
     private int currentItem = 0;
-    private int fire = 100;
-    private float Delay = 0.1f;
+    private int fire = 50;
+    private float Delay = 0.05f;
     public bool hasItem1 = false; // 썬더넛 보유 여부
     public bool hasItem2 = false; // 데스넛 소스 보유 여부
     public bool hasItem3 = false; // 청량 탄산수 도토리 향 보유 여부
