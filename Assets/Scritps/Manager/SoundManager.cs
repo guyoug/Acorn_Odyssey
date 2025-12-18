@@ -191,15 +191,14 @@ public class SoundManager : MonoBehaviour
         if (bgmSource == null || mainBGM == null)
             return;
 
-        bgmSource.Stop();              // 이전 상태 전부 무시
+        bgmSource.Stop();            
         bgmSource.clip = mainBGM;
         bgmSource.loop = true;
 
-        // 볼륨 복구 (0이면 기본값)
         if (bgmSource.volume <= 0f)
             bgmSource.volume = prevBGMVolume > 0f ? prevBGMVolume : 0.6f;
 
-        isMasterMuted = false;         // 전체 뮤트 상태였다면 해제
+        isMasterMuted = false;        
         bgmSource.Play();
     }
     public void ResetState()

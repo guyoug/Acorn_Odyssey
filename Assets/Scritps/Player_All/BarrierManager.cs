@@ -55,7 +55,6 @@ public class BarrierManager : MonoBehaviour
             if (barrier != null)
                 Destroy(barrier.gameObject);
         }
-
         barrierList.Clear();
       
     }

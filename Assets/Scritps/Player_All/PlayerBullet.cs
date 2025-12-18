@@ -9,7 +9,7 @@ public class PlayerBullet : MonoBehaviour
 
     [Header("References")]
     private Rigidbody2D rb;
-    //private Vector2 shootDirection;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,7 +23,6 @@ public class PlayerBullet : MonoBehaviour
         Vector3 position = rb.transform.position;
         position = new Vector3(position.x + (+1 * maxSpeed * Time.deltaTime), position.y, position.z);
         rb.MovePosition(position);
-        //rb.linearVelocity = shootDirection * maxSpeed;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

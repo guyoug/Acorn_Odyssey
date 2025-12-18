@@ -16,7 +16,7 @@ public class Stage3_Enemy : MonoBehaviour
 
     [Header("Drop Rates")]
     private float dropItem = 0.05f;  // 5%
-    private float dropGauge = 0.10f; // 10%
+    private float dropGauge = 0.25f; // 25%
 
     [Header("Prefabs & Items")]
     public GameObject[] dropItems;

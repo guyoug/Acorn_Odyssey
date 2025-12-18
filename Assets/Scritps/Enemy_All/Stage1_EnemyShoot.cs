@@ -58,7 +58,7 @@ public class Stage1_EnemyShoot : MonoBehaviour
         }
         Vector3 dir = (player.position - firePoint.position).normalized; // 방향 계산
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg; // 방향 벡터에서  회전 각도 변환
-        firePoint.rotation = Quaternion.Euler(0, 0, angle+ +180f);    // 실제 발사 방향으로 firePoint 회전 (여기서 +180f는 탄환 prefab의 기본 방향 보정)
+        firePoint.rotation = Quaternion.Euler(0, 0, angle+ +180f);    // 실제 발사 방향으로 firePoint 회전 (여기서 +180f는 탄환의 기본 방향 보정)
         Instantiate(bulletPrefabs, firePoint.position, firePoint.rotation);
     }
 }

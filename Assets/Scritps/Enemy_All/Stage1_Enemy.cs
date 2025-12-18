@@ -12,7 +12,7 @@ public class Stage1_Enemy : MonoBehaviour
 
     [Header("Drop Rates")]
     private float dropItem = 0.05f;  // 5%
-    private float dropGauge = 0.10f; // 10%
+    private float dropGauge = 0.25f; // 25%
 
     [Header("Lifetime Settings")]
     private float lifeTime = 10.0f;

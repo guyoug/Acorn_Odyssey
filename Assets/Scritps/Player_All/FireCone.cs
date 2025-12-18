@@ -9,7 +9,6 @@ public class FireCone : MonoBehaviour
     public float lifeTime = 4f;
 
     [Header("Runtime")]
-    private Rigidbody2D rb;
 
     public Transform target;
 

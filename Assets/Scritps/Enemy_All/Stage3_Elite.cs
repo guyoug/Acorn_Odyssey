@@ -31,7 +31,7 @@ public class Stage3_Elite : MonoBehaviour
     public float turnDelay = 1.0f;
 
     [SerializeField] private GameObject bodyPrefab;
-
+    public Vector3 spawnPos = new Vector3(6f, -0.28f, 0f);
     private GameObject bodyInstance;
 
     void Start()
@@ -39,7 +39,7 @@ public class Stage3_Elite : MonoBehaviour
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         fireBreath.SetActive(false);
-        bodyInstance = Instantiate(bodyPrefab, new Vector3(5.6347f, -1.5088f, 0f), Quaternion.identity);
+        bodyInstance = Instantiate(bodyPrefab, spawnPos, Quaternion.identity);
         StartCoroutine(FireMovePattern());
 
     }
@@ -134,7 +134,6 @@ public class Stage3_Elite : MonoBehaviour
         if (sr != null && deadSprite != null)
         {
             sr.color = Color.white;
-            //anim.enabled = false;
             sr.sprite = deadSprite;
         }
 

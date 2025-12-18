@@ -7,14 +7,15 @@ public class WaterLaser : MonoBehaviour
     private float damageInterval = 1f; 
     private float damageTimer = 0f;
 
-    private void Update()
+    private void Start()
     {
-        Destroy(gameObject, lifeTime);
-     
+        Destroy(gameObject,lifeTime);
     }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-      
+        if (collision.CompareTag("EnemyBullet"))
+            Destroy(collision.gameObject);
 
         if (collision.CompareTag("Enemy"))
         {
@@ -36,8 +37,7 @@ public class WaterLaser : MonoBehaviour
             }
         }
 
-        if (collision.CompareTag("EnemyBullet"))
-            Destroy(collision.gameObject);
+       
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     public GameObject stageUICanvas;
     public GameObject gameUIRoot;
 
-    private void Awake() //싱글턴
+    private void Awake() 
     {
         if (Instance != null && Instance != this)
         {
@@ -91,7 +91,6 @@ public class GameManager : MonoBehaviour
         currentEliteSpawnPoint = elite;
         currentBossSpawnPoint = boss;
 
-        Debug.Log("현재 스테이지 스폰 포인트 바인딩 완료");
     }
   
    
@@ -264,9 +263,10 @@ public class GameManager : MonoBehaviour
     public void SpawnElite3()
     {
         Instantiate(elite3Prefabs, currentEliteSpawnPoint.transform.position, currentEliteSpawnPoint.transform.rotation);
+        spawnedCount++;
     }
    
-    public void StartNextWave() //웨이브 시초기화
+    public void StartNextWave() 
     {
         currentWave++;
         normalKilled = 0;
@@ -359,22 +359,20 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        // Player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
             player.SetActive(false);
 
-        // Gauge UI
+       
         PlayerGauge gauge = player?.GetComponent<PlayerGauge>();
         if (gauge != null)
             gauge.ShowGaugeUI(false);
 
-        // Enemy Spawn
         GameObject spawn = GameObject.FindGameObjectWithTag("Enemy_Spawn_Manager");
         if (spawn != null)
             spawn.SetActive(false);
 
-        // GameManager는 엔딩 씬에서 필요 없으면 꺼도 됨
+   
         gameObject.SetActive(false);
     }
     IEnumerator killboss()

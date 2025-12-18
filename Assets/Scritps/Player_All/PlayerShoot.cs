@@ -54,11 +54,9 @@ public class PlayerShoot : MonoBehaviour
     }
     void RefreshReferences()
     {
-        // FirePoint 재연결
         if (!firePoint)
             firePoint = transform.Find("FirePoint");
 
-        // Tail 재연결
         PlayerUpgrade upgrade = GetComponent<PlayerUpgrade>();
         if (upgrade != null)
             upgrade.RefreshTailList();

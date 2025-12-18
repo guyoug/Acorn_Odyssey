@@ -55,14 +55,14 @@ public class PlayerGauge : MonoBehaviour
 
         if (offRoot == null || onRoot == null)
         {
-            Debug.LogError("[GaugeUI] OffSlots / OnSlots 못 찾음");
+            
             yield break;
         }
 
         offSlots = offRoot.GetComponentsInChildren<Image>(true);
         onSlots = onRoot.GetComponentsInChildren<Image>(true);
 
-        Debug.Log($"[GaugeUI] Bind 완료 → OFF:{offSlots.Length}, ON:{onSlots.Length}");
+       
 
         ResetState();
     }
@@ -160,7 +160,7 @@ public class PlayerGauge : MonoBehaviour
                 break;
 
             case 5:
-                upgrade.ActivateTail(); //테일(아직미구현)
+                upgrade.ActivateTail(); //테일
                 break;
         }
         gauge = 0;

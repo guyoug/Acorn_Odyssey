@@ -11,7 +11,7 @@ public class Stage2_Enemy : MonoBehaviour
 
     [Header("Drop Rates")]
     private float dropItem = 0.05f;  // 5%
-    private float dropGauge = 0.10f; // 10%
+    private float dropGauge = 0.25f; // 25%
 
     [Header("Lifetime Settings")]
     private float deleteTime = 10.0f;
@@ -19,8 +19,6 @@ public class Stage2_Enemy : MonoBehaviour
     [Header("Prefabs & Items")]
     public GameObject[] dropItems;
     public GameObject gaugePrefabs;
-    [Header("References")]
-    private GameManager gameManager;
 
     [Header("Death Sprite")]
     public Sprite deadSprite;

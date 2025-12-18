@@ -18,7 +18,7 @@ public class BarrierUnit : MonoBehaviour
         manager = transform.parent.GetComponent<BarrierManager>();
     }
 
-    public void UpdatePosition(float angle)  // BarrierManager가 매 프레임 호출 → 전달된 angle에 따라 위치를 계산해서 이동
+    public void UpdatePosition(float angle)  // angle에 따라 위치를 계산해서 이동
     {
         float rad = angle * Mathf.Deg2Rad; // 각도를 라디안으로 변환
         transform.position = player.position + new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * radius;     // 플레이어 기준 원형 궤도에서 위치 계산

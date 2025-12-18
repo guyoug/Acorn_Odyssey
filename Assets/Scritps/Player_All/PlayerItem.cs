@@ -121,8 +121,7 @@ public class PlayerItem : MonoBehaviour
     {
         StartCoroutine(ShowItem1());
         Debug.Log("1번 아이템 발동");
-        foreach (var bullet in GameObject.FindGameObjectsWithTag("EnemyBullet"))
-            Destroy(bullet);
+        bullitDelete();
         hasItem1 = false;
         itemUI1.SetActive(false);
         attrUI1.SetActive(false);
@@ -169,13 +168,18 @@ public class PlayerItem : MonoBehaviour
         yield return new WaitForSeconds(itv);
         item3Image.SetActive(false);
     }
+    void bullitDelete()
+    {
+        foreach (var bullet in GameObject.FindGameObjectsWithTag("EnemyBullet"))
+            Destroy(bullet);
+    }
     void FireConeOnce()
     {
         GameObject obj = Instantiate(conePrefab, firePoint.position, firePoint.rotation);
         FireCone cone = obj.GetComponent<FireCone>();
         cone.target = this.transform;
     }
-
+    
     IEnumerator ConeStormBurst()
     {
         for (int i = 0; i < fire; i++)
@@ -198,6 +202,7 @@ public class PlayerItem : MonoBehaviour
         worldPos.z = 0f;
 
         Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
+       
     }
 }
 
