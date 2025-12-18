@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 200
-  deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
+  deadSprite: {fileID: 21300000, guid: ef574a54e26de4242ab7316992e16b49, type: 3}
   whip: {fileID: 1049332435997324000}
   attackDelay: 0.6
   point1: {fileID: 1796015150403351470, guid: 2faa468a9ce810c43beed2b23fe382c6, type: 3}

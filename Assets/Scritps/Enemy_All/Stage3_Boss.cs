@@ -6,7 +6,7 @@ public class Stage3_Boss : MonoBehaviour
     [Header("Boss Status")]
     public int Hp = 200;
     private bool isDead = false;
-    private float deathDelay = 0.2f;
+    private float deathDelay = 2f;
     
     [Header("Death Sprite")]
     public Sprite deadSprite;
@@ -18,6 +18,7 @@ public class Stage3_Boss : MonoBehaviour
     [Header("Whip")]
     public GameObject whip;
     public float attackDelay = 0.6f;
+    private bool prevAnimEnabled = false;
 
     [Header("Whip Points (1 → 2 → 3)")]
     public Transform point1;
@@ -59,8 +60,10 @@ public class Stage3_Boss : MonoBehaviour
     }
     IEnumerator WhipPattern()
     {
-        while (true)
+        while (!isDead)
         {
+            if (isDead)
+                yield break;
             yield return StartCoroutine(ShootArrows()); // 화살 3발을 랜덤한 위치에 쏜다.
             yield return new WaitForSeconds(attackDelay);
 
@@ -80,35 +83,25 @@ public class Stage3_Boss : MonoBehaviour
 
 
             yield return new WaitForSeconds(attackDelay);
-
+             if (anim != null)
+            prevAnimEnabled = anim.enabled;
+            anim.enabled = false;
+            sr.sprite = HitSprite;
+            yield return new WaitForSeconds(0.2f);
             whip.SetActive(true);
-            StartCoroutine(ShootSpriteEffect());
             yield return new WaitForSeconds(whipActiveTime);
             whip.SetActive(false);
-
-         
+             sr.sprite = normalSprite;
+    
             yield return StartCoroutine(MoveAndHit(point2));
             yield return StartCoroutine(MoveAndHit(point1));
         }
     }
-    IEnumerator ShootSpriteEffect()
-    {
-        bool prevAnimEnabled = false;
-        if (anim != null)
-        {
-            prevAnimEnabled = anim.enabled;
-            anim.enabled = false; // 
-        }
 
-        sr.sprite = HitSprite;
-        yield return new WaitForSeconds(whipActiveTime);
-        sr.sprite = normalSprite;
-
-        if (anim != null)
-            anim.enabled = prevAnimEnabled;
-    }
     IEnumerator MoveAndHit(Transform target)
     {
+        if (isDead)
+            yield break;
         // 이동 중엔 whip 비활성
         whip.SetActive(false);
 
@@ -121,14 +114,22 @@ public class Stage3_Boss : MonoBehaviour
             );
             yield return null;
         }
+        if (isDead)
+            yield break;
 
         yield return new WaitForSeconds(attackDelay);
-
-
+       
+        if (anim != null)
+        {
+            prevAnimEnabled = anim.enabled;
+            anim.enabled = false; // 
+        }
+        sr.sprite = HitSprite;
+        yield return new WaitForSeconds(0.2f);
         whip.SetActive(true);
-        StartCoroutine(ShootSpriteEffect());
         yield return new WaitForSeconds(whipActiveTime);
         whip.SetActive(false);
+        sr.sprite = normalSprite;
     }
     IEnumerator ShootArrows()
     {
@@ -212,7 +213,7 @@ public class Stage3_Boss : MonoBehaviour
 
         yield return new WaitForSeconds(deathDelay);
 
-        StopAllCoroutines();
+      
 
         Destroy(gameObject);
     }

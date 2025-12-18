@@ -91,7 +91,7 @@ public class Stage2_Elite : MonoBehaviour
  
     IEnumerator PatternLoop()
     {
-        yield return new WaitForSeconds(3f); 
+        yield return new WaitForSeconds(2f); 
         while (!isDead)
         {
             spawnPosition = transform.position;

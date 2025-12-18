@@ -35,7 +35,9 @@ public class Stage1_Boss : MonoBehaviour
 
     [Header("Death Sprite")]
     public Sprite deadSprite;               
-    public float DeadSpritetime = 0.3f;
+    private float DeadSpritetime = 1.5f;
+    public Sprite BoomSprite;
+    private float boomSprite = 0.5f;
 
     [Header("References")]
     private SpriteRenderer sr;
@@ -61,11 +63,9 @@ public class Stage1_Boss : MonoBehaviour
 
     IEnumerator PattenLoop()
     {
-        while (true)
+        while (!isDead)
         {
-            if (isDead)
-                yield break;
-
+          
             yield return StartCoroutine(BurstPattern());
             yield return StartCoroutine(KnifePattern());
             yield return new WaitForSeconds(GroupDelay);
@@ -146,6 +146,7 @@ public class Stage1_Boss : MonoBehaviour
         if (isDead) 
             return;
         isDead = true;
+        StopCoroutine(PattenLoop());
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
         GameManager.Instance.OnBossEnemyKilled();
         if (hitFlashRoutine != null)
@@ -167,6 +168,10 @@ public class Stage1_Boss : MonoBehaviour
         maxSpeed = 0f;
 
         yield return new WaitForSeconds(DeadSpritetime);
+
+        sr.sprite = BoomSprite;
+
+        yield return new WaitForSeconds(boomSprite);
 
         Destroy(gameObject);
     }

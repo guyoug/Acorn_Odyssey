@@ -209,7 +209,8 @@ MonoBehaviour:
   burstGroupDelay: 0.5
   knifeDelay: 0.7
   GroupDelay: 0.8
-  deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
+  deadSprite: {fileID: 21300000, guid: 2c9d66e7ab14a224690e8b7a9e991235, type: 3}
+  BoomSprite: {fileID: 21300000, guid: a7456d4e0fe03a148a047538abbabc17, type: 3}
 --- !u!95 &-8862285071727688489
 Animator:
   serializedVersion: 7

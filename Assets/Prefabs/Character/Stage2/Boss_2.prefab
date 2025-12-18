@@ -989,7 +989,7 @@ MonoBehaviour:
   normalSprite: {fileID: 21300000, guid: 62eb221fc59afdd46982aa659e281415, type: 3}
   shootSprite: {fileID: 21300000, guid: a390ca576c6cd054baeb903838492765, type: 3}
   shootSpriteTime: 0.15
-  deadSprite: {fileID: 21300000, guid: 07be03868729b87478c094325b22fe1a, type: 3}
+  deadSprite: {fileID: 21300000, guid: d946b50aeab5c2f44b96448a23e8c5e2, type: 3}
 --- !u!1 &7179330717190045819
 GameObject:
   m_ObjectHideFlags: 0

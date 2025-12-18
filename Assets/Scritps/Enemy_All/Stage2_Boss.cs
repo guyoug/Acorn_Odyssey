@@ -62,7 +62,8 @@ public class Stage2_Boss : MonoBehaviour
 
     [Header("Death Sprite")]
     public Sprite deadSprite;
-    private float DeadSprite = 0.3f;
+    private float DeadSprite = 2f;
+    private int deadSpeed = 3;
 
     [Header("Hit Flash")]
     private Coroutine hitFlashRoutine;
@@ -98,6 +99,8 @@ public class Stage2_Boss : MonoBehaviour
 
         while (!isDead)
         {
+            if (isDead)
+                yield break;
             //가운데 부제 다섯번 소환 
             StartCoroutine(ShootSpriteEffect());
 
@@ -217,11 +220,15 @@ public class Stage2_Boss : MonoBehaviour
     }
     IEnumerator ShootSpriteEffect()
     {
+        if (isDead)
+            yield break;
         if (sr == null || shootSprite == null)
             yield break;
 
         sr.sprite = shootSprite;
         yield return new WaitForSeconds(1f);
+        if (isDead)
+            yield break;
         sr.sprite = normalSprite;
     }
     void Move()
@@ -253,6 +260,9 @@ public class Stage2_Boss : MonoBehaviour
     }
     IEnumerator DieRoutine()
     {
+      
+        canMove = false;
+
         if (sr != null && deadSprite != null)
         {
             sr.color = Color.white;
@@ -263,15 +273,22 @@ public class Stage2_Boss : MonoBehaviour
         if (col != null)
             col.enabled = false;
 
-        moveSpeed = 0f;
+        //moveSpeed = 0f;float timer = 0f;
+        float timer = 0f;
+        while (timer < DeadSprite)
+        {
+            transform.position += Vector3.down * deadSpeed * Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null;
+
+        }
+
+            yield return new WaitForSeconds(DeadSprite);
 
 
-        yield return new WaitForSeconds(DeadSprite);
-
-        StopAllCoroutines();
-
-        Destroy(gameObject);
+            Destroy(gameObject);
     }
+        
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -298,6 +315,7 @@ public class Stage2_Boss : MonoBehaviour
     }
     public void Die()
     {
+       
         if (isDead)
             return;
         isDead = true;

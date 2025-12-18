@@ -8,7 +8,7 @@ public class Stage3_Elite : MonoBehaviour
     public GameObject[] dropItems;
     private Collider2D col;
     private SpriteRenderer sr;
-    private float DeadSprite = 0.3f;
+    private float DeadSprite = 2f;
 
     [Header("Hit Flash")]
     public Sprite deadSprite;
@@ -33,6 +33,7 @@ public class Stage3_Elite : MonoBehaviour
     [SerializeField] private GameObject bodyPrefab;
     public Vector3 spawnPos = new Vector3(6f, -0.28f, 0f);
     private GameObject bodyInstance;
+    private Stage3_EliteBody body;
 
     void Start()
     {
@@ -40,12 +41,13 @@ public class Stage3_Elite : MonoBehaviour
         col = GetComponent<Collider2D>();
         fireBreath.SetActive(false);
         bodyInstance = Instantiate(bodyPrefab, spawnPos, Quaternion.identity);
+        body = bodyInstance.GetComponent<Stage3_EliteBody>();
         StartCoroutine(FireMovePattern());
 
     }
     IEnumerator FireMovePattern()
     {
-        while (true)
+        while (!isDead)
         {
             yield return StartCoroutine(MoveAndFire(bottomPoint));
          
@@ -109,11 +111,9 @@ public class Stage3_Elite : MonoBehaviour
     {
         if (isDead)
             return;
-
         isDead = true;
-        Destroy(bodyInstance);
+        body?.ChangeToDead();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
-
         GameManager.Instance.OnEliteEnemyKilled();
         DropItem();
         if (hitFlashRoutine != null)
@@ -141,9 +141,6 @@ public class Stage3_Elite : MonoBehaviour
         if (col != null)
             col.enabled = false;
 
-     
-
-
         yield return new WaitForSeconds(DeadSprite);
 
         Destroy(gameObject);
@@ -157,8 +154,4 @@ public class Stage3_Elite : MonoBehaviour
         Instantiate(dropItems[idx], transform.position, Quaternion.identity);
     }
 
-    void Update()
-    {
-        
-    }
 }

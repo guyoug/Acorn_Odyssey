@@ -377,8 +377,8 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator killboss()
     {
+        yield return new WaitForSeconds(2f);
         Time.timeScale = 0f;
-
         ShowGameUI(false);
         HideStageCanvas();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.stageClearSFX);
