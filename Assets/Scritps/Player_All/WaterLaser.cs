@@ -53,19 +53,17 @@ public class WaterLaser : MonoBehaviour
             if (stage1_Elite != null)
                 stage1_Elite.TakeDamage(5);
 
-            }
-
             Stage2_Elite stage2_Elite = collision.GetComponent<Stage2_Elite>();
             if (stage2_Elite != null)
                 stage2_Elite.TakeDamage(5);
 
 
-        Stage3_Elite stage3_Elite = collision.GetComponent<Stage3_Elite>();
-        if (stage3_Elite != null)
-            stage3_Elite.TakeDamage(5);
+            Stage3_Elite stage3_Elite = collision.GetComponent<Stage3_Elite>();
+            if (stage3_Elite != null)
+                stage3_Elite.TakeDamage(5);
 
+        }
 
-    
 
         if (collision.CompareTag("Boss"))
         {
