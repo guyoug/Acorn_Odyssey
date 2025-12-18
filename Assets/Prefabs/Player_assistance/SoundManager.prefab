@@ -52,6 +52,7 @@ MonoBehaviour:
   stage1BGM: {fileID: 8300000, guid: b30b50b3e8f7c8d4bbed7069854c0367, type: 3}
   stage2BGM: {fileID: 8300000, guid: ff315ebc48cee3d40b51ad994d9961b9, type: 3}
   stage3BGM: {fileID: 8300000, guid: 90fadc29d9c9b0d4fa5507745626b7cb, type: 3}
+  EndingBGM: {fileID: 8300000, guid: a9154e5f185d3654995ea2c548c604c3, type: 3}
   enemyDieSFX: {fileID: 8300000, guid: 17f30244e6f20fc41851f69d230b9778, type: 3}
   stageClearSFX: {fileID: 8300000, guid: 586dc05751171cb4b9c682ef9d0fd01d, type: 3}
   playerHitSFX: {fileID: 8300000, guid: efc0efc32eefef142a97417c89a2b4fe, type: 3}

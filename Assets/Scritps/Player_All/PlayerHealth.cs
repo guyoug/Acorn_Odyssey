@@ -52,11 +52,13 @@ public class PlayerHealth : MonoBehaviour
 
         if (scene.name == "Game_Start")
         {
-            Instance = null;  
-            Destroy(gameObject);
-           
+            gameObject.SetActive(false);
         }
-
+        else
+        {
+            gameObject.SetActive(true);
+        }
+    
         healthPanel = GameObject.Find("Health_Panel");
         if (healthPanel == null)
         {
@@ -81,6 +83,14 @@ public class PlayerHealth : MonoBehaviour
             isInvincible = !isInvincible;   // ← 핵심
             Debug.Log(isInvincible ? "무적 ON" : "무적 OFF");
         }
+    }
+    public IEnumerator SetInvincible(float duration)
+    {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(duration);
+
+        isInvincible = false;
     }
     void HideStageCanvas()
     {

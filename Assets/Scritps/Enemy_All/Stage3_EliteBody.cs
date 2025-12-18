@@ -7,6 +7,9 @@ public class Stage3_EliteBody : MonoBehaviour
     private SpriteRenderer sr;
     public Sprite deadSprite;
     private int destroyDelay = 2;
+    
+    private int deadSpeed = 3;
+
 
     private void Start()
     {
@@ -16,11 +19,23 @@ public class Stage3_EliteBody : MonoBehaviour
     {
         if (sr != null && deadSprite != null)
             sr.sprite = deadSprite;
+
+       
+
         StartCoroutine(DestroyRoutine());
     }
 
     IEnumerator DestroyRoutine()
     {
+        float timer = 0f;
+
+        while (timer <destroyDelay)
+        {
+            transform.position += Vector3.down * deadSpeed * Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null;
+
+        }
         yield return new WaitForSeconds(destroyDelay);
         Destroy(gameObject);
     }

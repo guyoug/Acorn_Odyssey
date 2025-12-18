@@ -250,7 +250,7 @@ public class Stage2_Elite : MonoBehaviour
 
         isDead = true;
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
-
+        PlayerHealth.Instance.StartCoroutine(PlayerHealth.Instance.SetInvincible(2f));
         gameManager.OnEliteEnemyKilled();
         DropItem();
         if (hitFlashRoutine != null)
@@ -263,7 +263,6 @@ public class Stage2_Elite : MonoBehaviour
         if (sr != null && deadSprite != null)
         {
             sr.color = Color.white;
-            //anim.enabled = false;
             sr.sprite = deadSprite;
         }
 

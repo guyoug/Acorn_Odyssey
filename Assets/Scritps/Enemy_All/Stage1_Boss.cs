@@ -146,6 +146,7 @@ public class Stage1_Boss : MonoBehaviour
         if (isDead) 
             return;
         isDead = true;
+        PlayerHealth.Instance.StartCoroutine(PlayerHealth.Instance.SetInvincible(2f));
         StopCoroutine(PattenLoop());
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
         GameManager.Instance.OnBossEnemyKilled();

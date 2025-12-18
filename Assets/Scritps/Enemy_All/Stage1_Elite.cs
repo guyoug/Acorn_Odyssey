@@ -139,6 +139,7 @@ public class Stage1_Elite : MonoBehaviour
         if (isDead)
            return;
         isDead = true;
+        PlayerHealth.Instance.StartCoroutine(PlayerHealth.Instance.SetInvincible(2f));
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
         GameManager.Instance.OnEliteEnemyKilled();
         DropItem();

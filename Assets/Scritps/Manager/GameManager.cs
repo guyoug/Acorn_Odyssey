@@ -60,7 +60,14 @@ public class GameManager : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        currentEliteSpawnPoint = null;
+        currentBossSpawnPoint = null;
+
+        DetectStage();
+        AutoBindSpawnPoints();
+
         Debug.Log("씬 로드됨 : " + scene.name);
+
         if (scene.name.StartsWith("Game_Play"))
         {
             ShowGameUI(true);
@@ -97,7 +104,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartWave(currentWave);
-        DetectStage();
+
 
     }
     void DetectStage()
@@ -153,6 +160,10 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha9))
         {
             SpawnElite3();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            OnNormalEnemyKilled();
         }
     }
     void StageWaveLogic()
@@ -252,16 +263,31 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnElite() // 엘리트 스폰
     {
+        if (currentStage != 1)
+        {
+            Debug.LogWarning("SpawnElite 차단됨");
+            return;
+        }
         Instantiate(elitePrefabs, currentEliteSpawnPoint.transform.position, currentEliteSpawnPoint.transform.rotation);
         spawnedCount++;
     }
     public void SpawnElite2()
     {
+        if (currentStage != 2)
+        {
+            Debug.LogWarning("SpawnElite 차단됨");
+            return;
+        }
         Instantiate(elite2Prefabs, currentEliteSpawnPoint.transform.position, currentEliteSpawnPoint.transform.rotation);
         spawnedCount++;
     }
     public void SpawnElite3()
     {
+        if (currentStage != 3)
+        {
+            Debug.LogWarning("SpawnElite 차단됨");
+            return;
+        }
         Instantiate(elite3Prefabs, currentEliteSpawnPoint.transform.position, currentEliteSpawnPoint.transform.rotation);
         spawnedCount++;
     }
@@ -375,12 +401,26 @@ public class GameManager : MonoBehaviour
    
         gameObject.SetActive(false);
     }
+    void AutoBindSpawnPoints()
+    {
+        currentEliteSpawnPoint =
+            GameObject.FindGameObjectWithTag("EliteSpawnPoint")?.transform;
+
+        currentBossSpawnPoint =
+            GameObject.FindGameObjectWithTag("BossSpawnPoint")?.transform;
+
+        if (currentEliteSpawnPoint == null || currentBossSpawnPoint == null)
+        {
+            Debug.LogError($"Stage {currentStage} SpawnPoint 바인딩 실패");
+        }
+    }
     IEnumerator killboss()
     {
         yield return new WaitForSeconds(2f);
         Time.timeScale = 0f;
         ShowGameUI(false);
         HideStageCanvas();
+        SoundManager.Instance.bgmSource.Stop();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.stageClearSFX);
         if (stageClearPanel != null)
             stageClearPanel.SetActive(true);

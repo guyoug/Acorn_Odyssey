@@ -4,8 +4,10 @@ public class StageSpawnBinder: MonoBehaviour
 
     public Transform eliteSpawn;
     public Transform bossSpawn;
-    void Start()
+  
+    private void Awake()
     {
         GameManager.Instance.BindSpawnPoints(eliteSpawn, bossSpawn);
+
     }
 }

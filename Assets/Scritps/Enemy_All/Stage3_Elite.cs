@@ -20,6 +20,7 @@ public class Stage3_Elite : MonoBehaviour
     [Header("Move Points")]
     public Transform bottomPoint;
     public Transform topPoint;
+    private int deadSpeed = 3;
 
     [Header("Movement")]
     public float moveSpeed = 15f;
@@ -112,8 +113,10 @@ public class Stage3_Elite : MonoBehaviour
         if (isDead)
             return;
         isDead = true;
+        
         body?.ChangeToDead();
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
+        PlayerHealth.Instance.StartCoroutine(PlayerHealth.Instance.SetInvincible(2f));
         GameManager.Instance.OnEliteEnemyKilled();
         DropItem();
         if (hitFlashRoutine != null)
@@ -140,6 +143,15 @@ public class Stage3_Elite : MonoBehaviour
 
         if (col != null)
             col.enabled = false;
+
+        float timer = 0f;
+        while (timer < DeadSprite)
+        {
+            transform.position += Vector3.down * deadSpeed * Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null;
+
+        }
 
         yield return new WaitForSeconds(DeadSprite);
 

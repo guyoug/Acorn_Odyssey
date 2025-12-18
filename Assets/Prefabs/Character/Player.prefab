@@ -222,14 +222,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  isInvincible: 1
+  isInvincible: 0
   Player_HP:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  gameOverPanel: {fileID: 0}
   hitFlashTime: 0.1
-  uiRoot: {fileID: 0}
+  gameOverPanel: {fileID: 0}
 --- !u!114 &8493676421140268695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +256,8 @@ MonoBehaviour:
   attrUI1: {fileID: 0}
   attrUI2: {fileID: 0}
   attrUI3: {fileID: 0}
+  coneStormDuration: 2
+  coneInterval: 0.2
 --- !u!114 &4150402077341415789
 MonoBehaviour:
   m_ObjectHideFlags: 0

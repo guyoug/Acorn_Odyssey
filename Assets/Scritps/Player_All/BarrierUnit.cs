@@ -7,7 +7,7 @@ public class BarrierUnit : MonoBehaviour
     private int hp = 12;
 
     [Header("Rotation Settings")]
-    public float radius = 3.0f; 
+    public float radius = 2.0f; 
 
     [Header("References")]
     private Transform player;
@@ -64,7 +64,7 @@ public class BarrierUnit : MonoBehaviour
                 hitBarrier();
             }
 
-            Stage2_Elite stage2_Elite = collision.GetComponent<Stage2_Elite>();
+            Stage2_Elite stage2_Elite = collision.GetComponent<Stage2_Elite>(); 
             if (stage2_Elite != null)
             {
                 stage2_Elite.TakeDamage(1);

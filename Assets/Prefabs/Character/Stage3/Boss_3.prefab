@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9023273576215119333}
   m_Layer: 0
   m_Name: Stage3_Boss_Attack_image
-  m_TagString: EnemyBullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

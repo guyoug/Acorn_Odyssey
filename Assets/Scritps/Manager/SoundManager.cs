@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip stage1BGM;
     public AudioClip stage2BGM;
     public AudioClip stage3BGM;
+    public AudioClip EndingBGM;
 
     [Header("SFX Clips")]
     public AudioClip enemyDieSFX;
@@ -83,6 +84,9 @@ public class SoundManager : MonoBehaviour
                 PlayBGM(stage3BGM);
                 break;
 
+            case "EndingScene":
+                PlayBGM(EndingBGM);
+                break;
             default:
                 break;
         }

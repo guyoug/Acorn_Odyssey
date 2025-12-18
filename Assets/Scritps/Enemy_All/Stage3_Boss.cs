@@ -81,17 +81,17 @@ public class Stage3_Boss : MonoBehaviour
             yield return StartCoroutine(ThrowRocks()); // 돌을 두 번 랜덤한 위치에 던진다.
             yield return new WaitForSeconds(attackDelay);
 
-
-            yield return new WaitForSeconds(attackDelay);
              if (anim != null)
-            prevAnimEnabled = anim.enabled;
-            anim.enabled = false;
+            {
+                prevAnimEnabled = anim.enabled;
+                anim.enabled = false;
+            }
             sr.sprite = HitSprite;
             yield return new WaitForSeconds(0.2f);
+            sr.sprite = normalSprite;
             whip.SetActive(true);
             yield return new WaitForSeconds(whipActiveTime);
             whip.SetActive(false);
-             sr.sprite = normalSprite;
     
             yield return StartCoroutine(MoveAndHit(point2));
             yield return StartCoroutine(MoveAndHit(point1));
@@ -126,10 +126,11 @@ public class Stage3_Boss : MonoBehaviour
         }
         sr.sprite = HitSprite;
         yield return new WaitForSeconds(0.2f);
+        sr.sprite = normalSprite;
         whip.SetActive(true);
         yield return new WaitForSeconds(whipActiveTime);
         whip.SetActive(false);
-        sr.sprite = normalSprite;
+        
     }
     IEnumerator ShootArrows()
     {
@@ -177,9 +178,8 @@ public class Stage3_Boss : MonoBehaviour
             return;
         isDead = true;
         SoundManager.Instance.PlaySFX(SoundManager.Instance.enemyDieSFX);
-
-        if (GameManager.Instance != null)
-            GameManager.Instance.OnBossEnemyKilled();
+        PlayerHealth.Instance.StartCoroutine(PlayerHealth.Instance.SetInvincible(2f));
+        GameManager.Instance.OnBossEnemyKilled();
         if (hitFlashRoutine != null)
             StopCoroutine(hitFlashRoutine);
 
